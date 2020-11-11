@@ -1,0 +1,57 @@
+
+
+.tab-wrapper {
+  margin: 5px auto;
+  width: 98%;
+  max-width:400px;
+}
+
+.tab-menu li {
+  position:relative;
+  background-color:#072f4b;
+  color:#bcbcbc;
+  display: inline-block;
+  padding: 9px 15px;
+  opacity: 0.8;
+  font-size:1.2em;
+  cursor:pointer;
+  z-index:0;
+}
+
+.tab-menu li:hover {
+  color:#464646;
+}
+
+.tab-menu li.active {
+  color:#fff;
+  opacity: 1;
+}
+
+.tab-menu li.active:hover {
+  color:#464646;
+}
+.tab-content{
+  width:23vw;
+  height:22vh;
+  border-top-color:#59ebe8;
+  border-left:none ;
+  border-right:none ;
+  border-bottom:none ;
+}
+.tab-content>div {
+  color:#fff;
+  width: 100%;
+ 
+ 
+}
+
+.line {
+  position:absolute;
+  width: 0;
+  height: 7px;
+  background-color: aqua;
+  top: 0;
+  left: 0;
+}
+
+

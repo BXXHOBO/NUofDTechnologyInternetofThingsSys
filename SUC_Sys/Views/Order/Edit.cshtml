@@ -1,0 +1,644 @@
+﻿@model SUC_EntityBLL.OrderModel
+
+@{
+    ViewBag.Title = "任务管理详情页面";
+}
+@section Styles{
+    <link href="~/assets/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/webflow.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/videositepro.webflow.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/js/img/webuploader.css" rel="stylesheet" type="text/css">
+    <style>
+        .order_info {
+            margin:auto;
+        }
+        .order_info td {
+            padding: 10px;
+        }
+        .td_title{
+            width:130px;
+        }
+        /*#w-node-fdcdeb5e5d10-cc3965bd {
+            width:400px;
+        }*/
+    </style>
+}
+<div class="main-content">
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="menu-icon fa fa-pencil-square-o"></i>
+                <a href="#">任务管理</a>
+            </li>
+            @*<li class="active">任务作业</li>*@
+        </ul><!-- /.breadcrumb -->
+
+        @*<div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="ace-icon fa fa-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div>*@
+        <!-- /.nav-search -->
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                任务作业详情
+            </h1>
+        </div><!-- /.page-header -->
+        <div class="row">
+            <div id="fuelux-wizard-container">
+                <div class="col-xs-12">
+                    @*<div class="_w-div">
+                            <div class="i-div">
+                                <div class="m-i1"></div>
+                                <div class="b-r"></div>
+                            </div>
+                            <div class="i-div">
+                                <div class="b-l"></div>
+                                <div class="m-i1"></div>
+                                <div class="b-r"></div>
+                            </div>
+                            <div class="i-div">
+                                <div class="b-l"></div>
+                                <div class="m-i1"></div>
+                            </div>
+                        </div>
+                        <div class="_w-div wd">
+                            <div class="i-div">
+                                <div class="a">
+                                    <div class="t">创建工单</div>
+                                </div>
+                                <div class="b-r none"></div>
+                            </div>
+                            <div class="i-div">
+                                <div class="b-l none"></div>
+                                <div class="a">
+                                    <div class="t">分配工单</div>
+                                </div>
+                                <div class="b-r none"></div>
+                            </div>
+                            <div class="i-div">
+                                <div class="b-l none"></div>
+                                <div class="a">
+                                    <div class="t">完成工单</div>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div>
+                        <!-- #section:plugins/fuelux.wizard.steps -->
+                        <ul class="steps">
+                            <li data-step="1" class="active">
+                                <span class="step">1</span>
+                                <span class="title">任务派发</span>
+                            </li>
+                            @{
+                                if (Model.Order.OrderStatus == 1)
+                                {
+                                    <li data-step="2" class="active">
+                                        <span class="step">2</span>
+                                        <span class="title">任务接收</span>
+                                    </li>
+                                    <li data-step="3">
+                                        <span class="step">3</span>
+                                        <span class="title">任务分配</span>
+                                    </li>
+                                    <li data-step="4">
+                                        <span class="step">4</span>
+                                        <span class="title">任务审核</span>
+                                    </li>
+                                    <li data-step="5">
+                                        <span class="step">5</span>
+                                        <span class="title">任务反馈</span>
+                                    </li>
+                                    <li data-step="6">
+                                        <span class="step">6</span>
+                                        <span class="title">完成</span>
+                                    </li>
+                                }
+                                else if (Model.Order.OrderStatus == 2)
+                                {
+                                    <li data-step="2" class="active">
+                                        <span class="step">2</span>
+                                        <span class="title">任务接收</span>
+                                    </li>
+                                    <li data-step="3" class="active">
+                                        <span class="step">3</span>
+                                        <span class="title">任务分配</span>
+                                    </li>
+                                    <li data-step="4">
+                                        <span class="step">4</span>
+                                        <span class="title">任务审核</span>
+                                    </li>
+                                    <li data-step="5">
+                                        <span class="step">5</span>
+                                        <span class="title">任务反馈</span>
+                                    </li>
+                                    <li data-step="6">
+                                        <span class="step">6</span>
+                                        <span class="title">完成</span>
+                                    </li>
+                                }
+                                else if (Model.Order.OrderStatus == 3)
+                                {
+                                    <li data-step="2" class="active">
+                                        <span class="step">2</span>
+                                        <span class="title">任务接收</span>
+                                    </li>
+                                    <li data-step="3" class="active">
+                                        <span class="step">3</span>
+                                        <span class="title">任务分配</span>
+                                    </li>
+                                    <li data-step="4" class="active">
+                                        <span class="step">4</span>
+                                        <span class="title">任务审核</span>
+                                    </li>
+                                    <li data-step="5">
+                                        <span class="step">5</span>
+                                        <span class="title">任务反馈</span>
+                                    </li>
+                                    <li data-step="6">
+                                        <span class="step">6</span>
+                                        <span class="title">完成</span>
+                                    </li>
+                                }
+                                else if (Model.Order.OrderStatus == 4)
+                                {
+                                    <li data-step="2" class="active">
+                                        <span class="step">2</span>
+                                        <span class="title">任务接收</span>
+                                    </li>
+                                    <li data-step="3" class="active">
+                                        <span class="step">3</span>
+                                        <span class="title">任务分配</span>
+                                    </li>
+                                    <li data-step="4" class="active">
+                                        <span class="step">4</span>
+                                        <span class="title">任务审核</span>
+                                    </li>
+                                    <li data-step="5" class="active">
+                                        <span class="step">5</span>
+                                        <span class="title">任务反馈</span>
+                                    </li>
+                                    <li data-step="6">
+                                        <span class="step">6</span>
+                                        <span class="title">完成</span>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li data-step="2" class="active">
+                                        <span class="step">2</span>
+                                        <span class="title">任务接收</span>
+                                    </li>
+                                    <li data-step="3" class="active">
+                                        <span class="step">3</span>
+                                        <span class="title">任务分配</span>
+                                    </li>
+                                    <li data-step="4" class="active">
+                                        <span class="step">4</span>
+                                        <span class="title">任务审核</span>
+                                    </li>
+                                    <li data-step="5" class="active">
+                                        <span class="step">5</span>
+                                        <span class="title">任务反馈</span>
+                                    </li>
+                                    <li data-step="6" class="active">
+                                        <span class="step">6</span>
+                                        <span class="title">完成</span>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        <!-- /section:plugins/fuelux.wizard.steps -->
+                    </div>
+                    <div class="div-block-3">
+                        <h3>设备巡检单（周）</h3>
+                    </div>
+                    <div class="title">
+                        <div class="div-block"></div>
+                        <div class="text-block">工单信息</div>
+                    </div>
+
+                    <div class="div-block-2">
+                        <table class="order_info">
+                            <tr>
+                                <td class="hh td_title">工单号：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.OrderCode)
+                                </td>
+                                <td class="hh td_title">站点：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.SiteName)
+                                </td>
+
+                                <td class="hh td_title">工单状态：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.OrderStatusStr)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="hh td_title">计划完成时间：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.FinishTimeStr)
+                                </td>
+
+                                <td class="hh td_title">工单类型：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.OrderTypeStr)
+                                </td>
+                                <td class="hh td_title">工单标题：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.OrderName)
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="hh">是否补录：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.IsSupplementStr)
+                                </td>
+                                <td class="hh">是否正常：</td>
+                                <td class="hh">
+                                    @Html.DisplayFor(c => c.Order.IsNormalStr)
+                                </td>
+
+                                <td class="hh">工单内容：</td>
+                                <td id="w-node-fdcdeb5e5d10-cc3965bd" class="hh">
+                                    @Html.DisplayFor(c => c.Order.Remark)
+                                </td>
+                            </tr>
+
+                        </table><!--w-layout-grid grid-->
+                    </div>
+
+
+
+
+                    <div class="title">
+                        <div class="div-block"></div>
+                        <div class="text-block">检查列表</div>
+                    </div>
+
+                    <div class="div-block-2">
+                        <input type="button" id="but" value="增加" />
+                        <input type="hidden" id="orderId" name="orderId" value="@ViewData["orderId"]" />
+                        <table id="tab" class="ui-jqgrid-htable ui-common-table " style="width: 100%;" role="presentation" aria-labelledby="gbox_grid-table">
+                            <tr class="jqgrow ui-row-ltr ui-widget-content ui-priority-secondary" align='center'>
+                                <td>序号</td>
+                                <td>项目名称</td>
+                                <td>项目值</td>
+                                <td>状态</td>
+                                <td>照片</td>
+                                <td>说明</td>
+                                <td>操作</td>
+                            </tr>
+
+                            @for (int i = 0; i < Model.Details.Count; i++)
+                            {
+                                <tr id="@i" class="jqgrow ui-row-ltr ui-widget-content ui-priority-secondary" align='center'>
+                                    <td>
+                                        @(i + 1)
+                                    </td>
+                                    <td>
+                                        <select id='projectName' name='projectName'>
+                                            @foreach (SelectListItem item in (List<SelectListItem>)ViewData["projects"])
+                                            {
+                                                if (item.Value.Equals(Model.Details[i].projectName))
+                                                {
+                                                    <option value='@item.Value' selected="selected">@item.Text</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value='@item.Value'>@item.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(d => Model.Details[i].projectValue)
+                                    </td>
+                                    <td>
+                                        <select id='Statu' name='Statu'>
+                                            @foreach (SelectListItem item1 in (List<SelectListItem>)ViewData["detailstatus"])
+                                            {
+                                                if (item1.Text == (Model.Details[i].Statu == 0 ? "有效" : "无效"))
+                                                {
+                                                    <option value='@item1.Value' selected="selected">@item1.Text</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value='@item1.Value'>@item1.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="file" class='ajax_file_upload' onchange="uploadimag(@i+1)" /><img src="@Model.Details[i].image" id="image" width="100">
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(d => Model.Details[i].Remark)
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="deltr('@i')">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+
+
+
+                    @*<div>
+                            <input type="file" class="ajax_file_upload" />
+                        </div>
+                        <div>
+                            <img src="" id="image" >
+                        </div>*@
+
+                    <div class="title">
+                        <div class="div-block"></div>
+                        <div class="text-block">日志列表</div>
+                    </div>
+
+                    <div class="div-block-2">
+                        <table class="ui-jqgrid-htable ui-common-table " style="width: 100%;" role="presentation" aria-labelledby="gbox_grid-table">
+                            <tr class="jqgrow ui-row-ltr ui-widget-content ui-priority-secondary" align='center'>
+                                <td>序号</td>
+                                <td>说明</td>
+                                <td>处理人姓名</td>
+                                <td>超时状态</td>
+                                <td>完成时间</td>
+                            </tr>
+                            @foreach (var log in Model.Logs)
+                            {
+                                <tr class="jqgrow ui-row-ltr ui-widget-content ui-priority-secondary" align='center'>
+                                    <td>@log.RowNo</td>
+                                    <td>@log.Remark</td>
+                                    <td>@log.InspectorName</td>
+                                    <td>@log.OrderLogStatusStr</td>
+                                    <td>@log.ModifyByStr</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+
+                    <div class="wizard-actions" style="margin-top:10px;">
+                        <!-- #section:plugins/fuelux.wizard.buttons -->
+                        @{
+                            if (Model.Order.OrderStatus == 4)
+                            {
+                                <button class="btn btn-prev" onclick="commit('save')">
+                                    保存
+                                </button>
+                                <button class="btn btn-success btn-next" onclick="commit('submit')">
+                                    提交
+                                </button>
+                            }
+                            @*else if (Model.Order.OrderStatus == 2)
+                            {
+                                <button class="btn btn-success btn-next" onclick="commit('submit')">
+                                    审核
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-success btn-next" onclick="back()">
+                                    返回
+                                </button>
+                            }*@
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- main-content -->
+
+@section Scripts{
+    <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/js/jquery.jqGrid.min.js"></script>
+    <script src="~/assets/js/grid.locale-en.js"></script>
+    <script src="~/assets/js/ace-elements.min.js"></script>
+    <script type="text/javascript" src="~/incubator-echarts-4.6.0/dist/echarts.min.js"></script>
+    <script src="~/assets/js/jquery-2.1.4.min.js"></script>
+    <script src="~/assets/js/tabletojson/tabletojson.js"></script>
+    <script src="~/assets/js/tabletojson/tabletojson-cell.js"></script>
+    <script src="~/assets/js/tabletojson/tabletojson-row.js"></script>
+
+    <script type="text/javascript">
+        var applicationPath = window.applicationPath === "" ? "" : window.applicationPath || "../../";
+        $(function () {
+            //$('table tr:not(:first)').remove();
+            var len = $('#tab tr').length;
+            for (var i = 1; i < len; i++) {
+                $('table tr:eq(' + i + ') td:first').text(i);
+            };
+
+            //    $("body").on("change", ".ajax_file_upload", function () {
+            //    var data_ajax = "/Order/UpImages";
+            //    var formdata = new FormData();//用form 表单直接 构造formData 对象;
+            //        formdata.append("upfile", $(this)[0].files[0]);
+            //    $.ajax({
+            //        url: data_ajax,
+            //        type: 'POST',
+            //        //cache: false,
+            //        async: false,
+            //        data: formdata,
+            //        processData: false,
+            //        contentType: false,
+            //        dataType: "json"
+            //    }).done(function (data) {
+            //        if (data.error == 0) {
+            //            console.log($(this).children().eq(4));
+            //           //成功
+            //            alert("上传成功！");
+            //            $("#image").attr('src',data.url);
+            //        } else {
+            //            //失败
+            //            alert("上传失败："+data.message);
+            //        }
+            //    }).fail(function (res) {
+            //    });
+            //});
+            
+            //获取url地址orderStatus参数
+            var orderStatus = getQueryVariable("orderStatus");
+            var orderStatusName = "";
+            var orderStatusUrl = "";
+            switch (orderStatus) {
+                case "0":
+                    orderStatusName = "任务派发";
+                    orderStatusUrl = "/Order/PublishOrderList";
+                    break;
+                case "1":
+                    orderStatusName = "任务接收";
+                    orderStatusUrl = "/Order/AcceptOrderList";
+                    break;
+                case "2":
+                    orderStatusName = "任务分配";
+                    orderStatusUrl = "/Order/AllotOrderList";
+                    break;
+                case "3":
+                    orderStatusName = "任务审核";
+                    orderStatusUrl = "/Order/CheckOrderList";
+                    break;
+                case "4":
+                    orderStatusName = "任务反馈";
+                    orderStatusUrl = "/Order/FeelBackOrderList";
+                case "5":
+                    orderStatusName = "任务列表";
+                    orderStatusUrl = "/Order/List";
+                    break;
+                default:
+            }
+            //添加面包屑导航
+            $('.breadcrumb').append('<li><a href="' + orderStatusUrl + '">' + orderStatusName + '</a></li><li class="active">任务详情</li>');
+        });
+
+
+
+        $(document).ready(function () {
+            //<tr/>居中
+            $("#tab tr").attr("align", "center");
+            //增加<tr/>
+            $("#but").click(function () {
+                var _len = $("#tab tr").length;
+                $("#tab").append("<tr id=" + _len + " class='jqgrow ui-row-ltr ui-widget-content ui-priority-secondary' align='center'>"
+                    + "<td>" + _len + "</td>"
+                    + "<td><select id='projectName' name='projectName'><option value=''>请选择类型</option> <option value='NO2'>NO2</option> <option value='SO2'>SO2</option> <option value='CO'>CO</option><option value='O3'>O3</option> <option value='PM_25'>PM_25</option> <option value='PM10'>PM10</option></select></td>"
+                    + "<td><input type='text' name='projectValue' id='projectValue' /></td>"
+                    + "<td><select id='Statu' name ='Statu' ><option value=''>请选择类型</option><option value='1'>有效</option> <option value='0'>无效</option></td>"
+                    + "<td><input type='file' class='ajax_file_upload' onchange=\'uploadimag(" + _len + ")\' /><img src='' id='image' width='100px'></td>"
+                    + "<td><input type='text' name='Remark' id='Remark' /></td>"
+                    + "<td><a href=\'#\' onclick=\'deltr(" + _len + ")\'>删除</a></td>"
+                    + "</tr>");
+            });
+            $("#imag").click(function () {
+                alert(111);
+                window.open("www.baidu.com", "_blank", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+            });
+        });
+
+        //删除<tr/>
+        var deltr = function (index) {
+            var _len = $("#tab tr").length;
+            $("tr[id='" + index + "']").remove();//删除当前行
+            for (var i = index + 1, j = _len; i < j; i++) {
+                var nextTxtVal = $("#desc" + i).val();
+                $("tr[id=\'" + i + "\']")
+                    .replaceWith("<tr id=" + (i - 1) + " align='center'>"
+                        + "<td>" + (i - 1) + "</td>"
+                        + "<td><select id='projectName' name='projectName'><option value=''>请选择类型</option> <option value='NO2'>NO2</option> <option value='SO2'>SO2</option> <option value='CO'>CO</option><option value='O3'>O3</option> <option value='PM_25'>PM_25</option> <option value='PM10'>PM10</option></select></td>"
+                        + "<td><input type='text' name='projectValue' id='projectValue' /></td>"
+                        + "<td><select id='Statu' name='Statu'><option value=''>请选择类型</option><option value='1'>有效</option> <option value='0'>无效</option></td>"
+                        + "<td><input type='file' class='ajax_file_upload' onchange=\'uploadimag(" + (i - 1) + ")\' /><img src='' id='image' width='100px'></td>"
+                        + "<td><input type='text' name='Remark' id='Remark' /></td>"
+                        + "<td><a href=\'#\' onclick=\'deltr(" + (i - 1) + ")\'>删除</a></td>"
+                        + "</tr>");
+            }
+
+        }
+
+        function commit(a) {
+            var r = confirm("您确定提交任务吗？")
+            if (r == true) {
+                var datas = [];
+                var tb = document.getElementById('tab');    // table 的 id
+                var rows = document.getElementById('tab').rows;                           // 获取表格所有行
+                for (var i = 1; i < rows.length; i++) {
+                    var projectName = rows[i].cells[1].getElementsByTagName("Select")[0].value;
+                    var projectValue = rows[i].cells[2].getElementsByTagName("INPUT")[0].value;
+                    var statu = rows[i].cells[3].getElementsByTagName("Select")[0].value;
+                    var img = rows[i].cells[4].getElementsByTagName("IMG")[0].src;
+                    var remark = rows[i].cells[5].getElementsByTagName("INPUT")[0].value;
+                    var d = {
+                        "projectName": projectName,
+                        "projectValue": projectValue,
+                        "Statu": statu,
+                        "Remark": remark,
+                        "image": img
+                    };
+                    datas.push(d);
+                }
+                console.log(datas);
+                console.log(JSON.stringify(datas));
+                //var isEdit = $("#editFlag").val();
+                var orderId = $("#orderId").val();
+                $.ajax({
+                    url: "/Order/SubmitDetails?editFlag=" + a + "&orderId=" + orderId,
+                    data: { params: JSON.stringify(datas) },
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            var msg = a == "submit" ? "操作成功" : "保存成功";
+                            alert(msg);
+                            if (a == "submit") {
+                                window.location = "/Order/FeelBackOrderList";
+                            }
+                        } else {
+                            alert(data.Msg);
+                        }
+                    }
+                });
+            } else {
+                return;
+            }
+            
+        }
+
+        function back() {
+            window.location = "/Order/List";
+        }
+
+        function uploadimag(i) {
+            var data_ajax = "/Order/UpImages";
+            var formdata = new FormData();//用form 表单直接 构造formData 对象;
+            var flie = document.getElementById('tab').rows[i].cells[4].getElementsByTagName("INPUT")[0].files[0];
+            //files[i];
+            console.log(flie);
+            formdata.append("upfile", flie);
+            $.ajax({
+                url: data_ajax,
+                type: 'POST',
+                //cache: false,
+                async: false,
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: "json"
+            }).done(function (data) {
+                if (data.error == 0) {
+                    console.log($(this).children().eq(4));
+                    //成功
+                    //alert("上传成功！");
+                    //$("#image").attr('src',data.url);
+                    document.getElementById('tab').rows[i].cells[4].getElementsByTagName("IMG")[0].src = data.url;
+                } else {
+                    //失败
+                    alert("上传失败：" + data.message);
+                }
+            }).fail(function (res) {
+            });
+        }
+
+        //获取url参数
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return "";
+        }
+
+    </script>
+}

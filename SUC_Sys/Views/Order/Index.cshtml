@@ -1,0 +1,348 @@
+﻿
+@{
+    ViewBag.Title = "任务查询";
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="menu-icon fa fa-pencil-square-o"></i>
+                    <a href="#">任务管理</a>
+                </li>
+                <li class="active">任务管理查询</li>
+            </ul><!-- /.breadcrumb -->
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div><!-- /.nav-search -->
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>任务管理查询</h1>
+            </div><!-- /.page-header -->
+            <div class="row" style="margin-bottom:10px;">
+                <div class="form-group">
+                    <!--<label class="col-sm-2 control-label no-padding-right" for="form-field-1">统计类型</label>-->
+                    <div class="col-sm-3">
+                        <label>工单号</label>
+                        <input id="orderCode" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>处理人</label>
+                        <input id="createBy" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>创建时间</label>
+                        <input id="txtDate" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd' });" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;" />
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="button" value="查询" onclick="selectClick()" />
+                    </div>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <table id="order-table"></table>
+
+                    <div id="order-pager"></div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+            <div class="row">
+                <div id="chart_AQI" style="width: 60%;height:300px;"></div>
+            </div>
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+@section Scripts{
+    <!-- page specific plugin scripts -->
+    <script src="assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/jquery.jqGrid.min.js"></script>
+    <script src="assets/js/grid.locale-en.js"></script>
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script type="text/javascript" src="~/incubator-echarts-4.6.0/dist/echarts.min.js"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('.date-picker').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            })
+                .next().on(ace.click_event, function () {
+                    $(this).prev().focus();
+                });
+        });
+
+        function loadSiteDataList(data) {
+            //var orderCodeId = $("#orderCode option:selected").val();
+            //var createBy = $("#createBy option:selected").val();
+            var orderCodeId = $("#orderCode").val();
+            var createBy = $("#createBy").val();
+            var txtDate = $("#txtDate").val();
+
+            var pageIndex = $("#order-table").getGridParam('page');//当前页
+            var pageSize = $("#order-table").getGridParam('rowNum');//页数
+            var postData = { "orderCodeId": orderCodeId, "createBy": createBy, "txtDate": txtDate, "pageIndex": pageIndex == undefined ? 1 : pageIndex, "pageSize": pageSize == undefined ? 10 : pageSize };
+            $("#order-table").jqGrid('setGridParam', {
+                datatype: 'json',
+                postData: postData, //发送数据
+                page: 1
+            }).trigger("reloadGrid"); //重新载入
+
+
+        };
+
+        jQuery(function ($) {
+            var grid_selector = "#order-table";
+            var pager_selector = "#order-pager";
+            var parent_column = $(grid_selector).closest('[class*="col-"]');
+            //resize to fit page size
+            $(window).on('resize.jqGrid', function () {
+                $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+            })
+
+            //resize on sidebar collapse/expand
+            $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+                if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
+                    //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                    setTimeout(function () {
+                        $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+                    }, 20);
+                }
+            })
+
+            jQuery(grid_selector).jqGrid({
+                type: 'Get',
+                url: '/Order/GetOrderList',
+                data: [],
+                datatype: "json",
+                caption: "任务列表查询",
+                height: "100%",
+                colNames: ["序号", "工单号", "处理人", "创建时间", "工单状态", "操作"],
+                colModel: [//hidden: true
+                    { name: 'RowNo', index: 'RowNo', width: 50 },
+                    { name: 'OrderCode', index: 'OrderCode', width: 90, sortable: true, editable: false },
+                    { name: 'CreateBy', index: 'CreateBy', width: 120, sortable: true, editable: false },
+                    { name: 'ReleaseDate', index: 'ReleaseDate', width: 90, editable: true, sortable: true },
+                    { name: 'OrderStatus', index: 'OrderStatus', width: 90, editable: true, sortable: true },
+                    {
+                        name: 'myac', index: '', width: 120, fixed: true, sortable: false, resize: false,
+                        formatter: function (value, grid, rows, state) {
+                            e = "<a id=\"order_edit" + grid.rowId + "\" href=\"/Order/Edit?OrderCode="+rows.OrderCode+"\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-pencil blue\"></a>";
+                            d = "<a id=\"order_del" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-trash-o red\"   onclick=\"DeleteUserById(" + rows.OrderCode + ")\"></a>";
+                            a = "<a id=\"order_add" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-check green\"  onclick=\"SaveUserById(" + grid.OrderCode + ")\"></a>";
+                            c = "<a id=\"order_cancel" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-times red\"   onclick=\"CancelUserById(" + grid.OrderCode + ")\"></a>";
+                            return e + d + a + c;
+                        }
+                    }
+                ],
+                //rownumbers: true,//在最左边是否显示序列号,自增长的
+                viewrecords: true,//是否显示总记录数
+                sortname: "RowNo", //默认的排序字段
+                sortorder: "asc",
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                recordtext: "从{0}到{1} 条，共 {2}条记录",
+                pgtext: "第{0} 页，共 {1} 页",
+                emptyrecords: "没有数据",
+                loadtext: "加载中...",
+                jsonReader: {
+                    root: "rows",
+                    repeatitems: false,
+                    page: "page",
+                    total: "pageCount",
+                    records: "total"
+                },
+                pager: pager_selector,
+                altRows: true,
+                //toppager: true,
+                multiselect: false,
+                //multikey: "ctrlKey",
+                multiboxonly: true,
+                //editurl: "./dummy.php",//nothing is saved
+                loadComplete: function () {
+                    var table = this;
+                    setTimeout(function () {
+                        updatePagerIcons(table);
+                        enableTooltips(table);
+                    }, 0);
+                },
+                onSelectRow: function (id) {
+                    //if (parseFloat(chooseLevel) > 1) { //可选择地址
+                    //$("#divAddress").show();
+                    //$("#divContact").hide();
+                    //var result = $("#tbCustomerList").jqGrid("getRowData", id);
+                    //loadCustomerAddress(result.CustomerID);
+                    //}
+                }
+            });
+
+            function imgClick(rowid,type)
+            {
+                if(rowid=="")
+                    return;
+                AjaxJson("//Vehicle/Vehicle/ChangeState", { id:rowid,type:type}, function (Data) {
+                    if (Data.Success == true) {
+
+                        $("#gridTable").setCell(rowid, 'flag', Data.entity.FLAG);
+
+                        tipDialog(Data.Message, 2, 'success');
+                    }
+                    else
+                    {
+                        tipDialog(Data.Message, 2, 'warning');
+                    }
+
+                });
+
+            }
+
+            //明细
+            function btn_detail(id) {
+                var KeyValue = GetJqGridRowValue("#gridTable", "clid");
+                if (id!=null) {
+                    KeyValue=id;
+                }
+                if (IsChecked(KeyValue)) {
+                    var url = "/Vehicle/Vehicle/Detail?KeyValue=" + KeyValue;
+                    Dialog(url, "Detail", "车辆详情", 750, 300, function (iframe) {
+                        top.frames[iframe].AcceptClick();
+                    });
+                }
+            }
+
+            $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+            jQuery(grid_selector)
+                .navGrid(pager_selector, { edit: false, add: false, del: false, search: false });
+
+
+            //replace icons with FontAwesome icons like above
+            function updatePagerIcons(table) {
+                var replacement =
+                {
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
+                };
+                $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+                    var icon = $(this);
+                    var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+                    if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+                })
+            }
+
+            function enableTooltips(table) {
+                $('.navtable .ui-pg-button').tooltip({ container: 'body' });
+                $(table).find('.ui-pg-div').tooltip({ container: 'body' });
+            }
+
+            //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $.jgrid.gridDestroy(grid_selector);
+                $('.ui-jqdialog').remove();
+            });
+        });
+
+        function selectClick() {
+            loadSiteDataList();
+        }
+    </script>
+
+    <script type="text/javascript">
+        function EditUserById(id) {
+            jQuery("#grid-table").editRow(id, true);
+            $("#user_edit" + id).css("display", "none");
+            $("#user_del" + id).css("display", "none");
+            $("#user_add" + id).css("display", "inline-block");
+            $("#user_cancel" + id).css("display", "inline-block");
+        }
+        function DeleteUserById(id) {
+            if (confirm('确定要删除这条数据吗?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/User/DeleteUserById/' + id,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            alert('删除成功！');
+                            loadUserList();
+                        } else {
+                            alert(data.Msg);
+                        }
+                    }
+                });
+            }
+        }
+        function SaveUserById(id) {
+            jQuery("#grid-table").saveRow(id);
+            var user_data = jQuery("#grid-table").jqGrid('getRowData', id);
+            if (user_data.UserCode == null || user_data.UserCode == "") {
+                alert('用户编号不能为空！');
+                jQuery("#grid-table").editRow(id, true);
+                return;
+            }
+            if (user_data.UserName == null || user_data.UserName == "") {
+                alert('用户名称不能为空！');
+                jQuery("#grid-table").editRow(id, true);
+                return;
+            }
+            if (user_data.RoleName == null || user_data.RoleName == "") {
+                alert('角色名称不能为空！');
+                jQuery("#grid-table").editRow(id, true);
+                return;
+            }
+            var userID = user_data.ID;
+            $.ajax({
+                type: "POST",
+                url: "/User/ModifyUser/" + id,
+                dataType: "json",
+                data: { "ID": user_data.ID, "UserCode": user_data.UserCode, "UserName": user_data.UserName, "UserRoles": user_data.RoleName, "HireDate": user_data.HireDate, "Email": user_data.Email, "Addr": user_data.Addr, "opType": userID == "" ? "Add" : "modify" },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        if (userID == "") {
+                            alert("添加成功！");
+                        } else {
+                            alert("修改成功！");
+                        }
+                        //loadRolesList();
+                    } else {
+                        alert(data.Msg);
+                    }
+                }
+            });
+            $("#user_edit" + id).css("display", "inline-block");
+            $("#user_del" + id).css("display", "inline-block");
+            $("#user_add" + id).css("display", "none");
+            $("#user_cancel" + id).css("display", "none");
+        };
+        function CancelUserById(id) {
+            if (jQuery("#grid-table").jqGrid('getRowData', id).ID == "") {
+                jQuery("#grid-table").delRowData(id);
+            } else {
+                jQuery("#grid-table").restoreRow(id);
+            }
+            $("#user_edit" + id).css("display", "inline-block");
+            $("#user_del" + id).css("display", "inline-block");
+            $("#user_add" + id).css("display", "none");
+            $("#user_cancel" + id).css("display", "none");
+        };
+    </script>
+}

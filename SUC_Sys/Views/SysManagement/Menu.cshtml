@@ -1,0 +1,53 @@
+﻿@model List<SUC_DataEntity.t_menu>
+
+@{
+    ViewBag.Title = "Menu";
+}
+
+<ul class="nav nav-list">
+    @{
+        if (Model != null && Model.Count > 0)
+        {
+            foreach (SUC_DataEntity.t_menu item in Model.Where(o => o.ParentNo == "0"))
+            {
+                var subMenu = Model.Where(c => c.ParentNo == item.MenuCode).ToList();
+                string classStr = "";
+                <li @classStr>
+                    <a href="@item.LinkUrl" class="@(subMenu.Count > 0?"dropdown-toggle":"")">
+                        <i class="@item.Icon"></i>
+                        <span class="menu-text"> @item.MenuName </span>
+                        @if (subMenu.Count > 0)
+                        {
+                            <b class="arrow fa fa-angle-down"></b>
+                        }
+                    </a>
+                    <b class="arrow"></b>
+
+                    @if (subMenu.Count > 0)
+                    {
+                        <ul class="submenu">
+                            @foreach (var item2 in subMenu)
+                            {
+                                string classStr2 = "";
+                                if (Convert.ToString(Session["MenuID"]) == item2.MenuCode.ToString())
+                                {
+                                    classStr = "class=active open";
+                                    classStr2 = "class=active ";
+                                }
+                                <li @classStr2>
+                                    <a href="@item2.LinkUrl">
+                                        <i class="menu-icon fa fa-caret-right"></i>
+                                        @item2.MenuName
+                                    </a>
+                                    <b class="arrow"></b>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        }
+    }
+</ul>
+
+

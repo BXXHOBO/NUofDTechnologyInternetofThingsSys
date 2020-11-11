@@ -1,0 +1,390 @@
+﻿@{
+    Layout = null;
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <script src="~/js/echarts.min.js"></script>
+   
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        <div>
+            <div id="main" style="width: 600px;height:400px;"></div>
+        </div>
+
+
+    </form>
+
+    <script src="~/js/jquery-1.11.0.js"></script>
+    <script>
+        //var myChart = echarts.init(document.getElementById('main'));
+        //// 指定图表的配置项和数据 json
+        //var option = {
+        //    backgroundColor: '#2c343c',
+
+        //    title: {
+        //        text: '设备库存报表',
+        //        left: 'center',
+        //        top: 20,
+        //        textStyle: {
+        //            color: '#ccc'
+        //        }
+        //    },
+
+        //    tooltip: {
+        //        trigger: 'item',
+        //        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        //    },
+
+        //    visualMap: {
+        //        show: false,
+        //        min: 80,
+        //        max: 600,
+        //        inRange: {
+        //            colorLightness: [0, 1]
+        //        }
+        //    },
+        //    series: [
+        //        {
+        //            name: '设备类型比例',
+        //            type: 'pie',
+        //            radius: '55%',
+        //            center: ['50%', '50%'],
+        //            data: [
+
+        //            ].sort(function (a, b) { return a.value - b.value; }),
+        //            roseType: 'radius',
+        //            label: {
+        //                normal: {
+        //                    textStyle: {
+        //                        color: 'rgba(255, 255, 255, 0.3)'
+        //                    }
+        //                }
+        //            },
+        //            labelLine: {
+        //                normal: {
+        //                    lineStyle: {
+        //                        color: 'rgba(255, 255, 255, 0.3)'
+        //                    },
+        //                    smooth: 0.2,
+        //                    length: 10,
+        //                    length2: 20
+        //                }
+        //            },
+        //            itemStyle: {
+        //                normal: {
+        //                    color: '#c23531',
+        //                    shadowBlur: 200,
+        //                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+        //                }
+        //            },
+
+        //            animationType: 'scale',
+        //            animationEasing: 'elasticOut',
+        //            animationDelay: function (idx) {
+        //                return Math.random() * 200;
+        //            }
+        //        }
+        //    ]
+        //};
+
+        //myChart.setOption(option);
+        //function getajaxdata() {
+        //    $.ajax({
+        //        type: "post",
+        //        url: "Ajax.ashx",
+        //        data: { w: "GetDeviceTypeInfoForPie"},
+        //        timeout: 5000,
+        //        dataType: "json",
+        //        async: true,//默认设置为true，所有请求均为异步请求
+        //        //cache：true,//默认为true（当dataType为script时，默认为false）设置为false将不会从浏览器缓存中加载请求信息。
+        //        success: function (data) {
+
+        //           var optionhasvalue = {
+        //                backgroundColor: '#2c343c',
+
+        //                title: {
+        //                    text:'设备类型比例报表',
+        //                    left: 'center',
+        //                    top: 20,
+        //                    textStyle: {
+        //                        color: '#ccc'
+        //                    }
+        //                },
+
+        //                tooltip: {
+        //                    trigger: 'item',
+        //                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+        //                },
+        //                legend: {
+        //                    orient: 'vertical',
+        //                    left: 'left',
+        //                    data: ['光射线', '贝塔射线']
+        //                },
+        //                visualMap: {
+        //                    show: false,
+        //                    min: 80,
+        //                    max: 600,
+        //                    inRange: {
+        //                        colorLightness: [0, 1]
+        //                    }
+        //                },
+        //                series: [
+        //                    {
+        //                        name: '类型比例',
+        //                        type: 'pie',
+        //                        radius: '55%',
+        //                        center: ['50%', '50%'],
+        //                        data:  data.dataitems.sort(function (a, b) { return a.value - b.value; }),
+        //                        roseType: 'radius',
+        //                        label: {
+        //                            normal: {
+        //                                textStyle: {
+        //                                    color: 'rgba(255, 255, 255, 0.3)'
+        //                                }
+        //                            }
+        //                        },
+        //                        labelLine: {
+        //                            normal: {
+        //                                lineStyle: {
+        //                                    color: 'rgba(255, 255, 255, 0.3)'
+        //                                },
+        //                                smooth: 0.2,
+        //                                length: 10,
+        //                                length2: 20
+        //                            }
+        //                        },
+        //                        itemStyle: {
+        //                            normal: {
+        //                                color: '#c23531',
+        //                                shadowBlur: 200,
+        //                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+        //                            }
+        //                        },
+
+        //                        animationType: 'scale',
+        //                        animationEasing: 'elasticOut',
+        //                        animationDelay: function (idx) {
+        //                            return Math.random() * 200;
+        //                        }
+        //                    }
+        //                ]
+        //            };
+
+        //            //optionhasvalue结束
+        //            myChart.setOption(optionhasvalue);
+
+        //        }
+        //    });
+
+        //}
+        //getajaxdata();
+        
+
+        //var myChart = echarts.init(document.getElementById('main'));
+        //// 指定图表的配置项和数据 json
+
+
+        //var option = {
+        //    tooltip: {
+        //        trigger: 'item',
+        //        formatter: "{a} <br/>{b}: {c} ({d}%)"
+        //    },
+        //    legend: {
+        //        orient: 'vertical',
+        //        x: 'left',
+        //        data: []
+        //    },
+        //    series: [
+        //        {
+        //            name: '销量比例',
+        //            type: 'pie',
+        //            radius: ['50%', '70%'],
+        //            avoidLabelOverlap: false,
+        //            label: {
+        //                normal: {
+        //                    show: false,
+        //                    position: 'center'
+        //                },
+        //                emphasis: {
+        //                    show: true,
+        //                    textStyle: {
+        //                        fontSize: '30',
+        //                        fontWeight: 'bold'
+        //                    }
+        //                }
+        //            },
+        //            labelLine: {
+        //                normal: {
+        //                    show: false
+        //                }
+        //            },
+        //            data: [
+
+        //            ]
+        //        }
+        //    ]
+        //};
+
+        //myChart.setOption(option);
+        //function getajaxdata() {
+        //    myChart.showLoading();
+        //    $.ajax({
+        //        type: "post",
+        //        url: "Ajax.ashx",
+        //        data: { w: "GetDeviceTypeInfoForPie" },
+        //        timeout: 5000,
+        //        dataType: "json",
+        //        async: true,//默认设置为true，所有请求均为异步请求
+        //        //cache：true,//默认为true（当dataType为script时，默认为false）设置为false将不会从浏览器缓存中加载请求信息。
+        //        success: function (data) {
+        //            myChart.hideLoading();
+        //            var optionhasvalue = {
+        //                tooltip: {
+        //                    trigger: 'item',
+        //                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+        //                },
+        //                legend: {
+        //                    orient: 'vertical',
+        //                    x: 'left',
+        //                    data: data.dataproname
+        //                },
+        //                series: [
+        //                    {
+        //                        name: '设备比例',
+        //                        type: 'pie',
+        //                        radius: ['50%', '70%'],
+        //                        avoidLabelOverlap: false,
+        //                        label: {
+        //                            normal: {
+        //                                show: false,
+        //                                position: 'center'
+        //                            },
+        //                            emphasis: {
+        //                                show: true,
+        //                                textStyle: {
+        //                                    fontSize: '30',
+        //                                    fontWeight: 'bold'
+        //                                }
+        //                            }
+        //                        },
+        //                        labelLine: {
+        //                            normal: {
+        //                                show: false
+        //                            }
+        //                        },
+        //                        data: data.dataitems
+        //                    }
+        //                ]
+        //            };
+        //            //optionhasvalue结束
+        //            myChart.setOption(optionhasvalue);
+
+        //        }
+        //    });
+
+        //}
+        //getajaxdata();
+
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据 json
+        var option = {
+            title: {
+                text: '设备库存比例表',
+               
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['0-光射线', '1-贝塔射线']
+            },
+            series: [
+                {
+                    name: '设备比例',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: [
+                       
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+        function getajaxdata() {
+            $.ajax({
+                type: "post",
+                url: "Ajax.ashx",
+                data: { w: "GetDeviceTypeInfoForPie" },
+                timeout: 5000,
+                dataType: "json",
+                async: true,//默认设置为true，所有请求均为异步请求
+                //cache：true,//默认为true（当dataType为script时，默认为false）设置为false将不会从浏览器缓存中加载请求信息。
+                success: function (data) {
+
+                    var optionhasvalue = {
+                        //backgroundColor: '#2c343c',
+
+                        title: {
+                            text: '设备库存比例表',
+
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{a} <br/>{b} : {c} ({d}%)'
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            x: 'left',
+                            data: data.dataproname
+                        },
+                        series: [
+                            {
+                                name: '设备比例',
+                                type: 'pie',
+                                radius: '55%',
+                                center: ['50%', '60%'],
+                                data: 
+                                    data.dataitems.sort(function (a, b) { return a.value - b.value; })
+                                ,
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }
+                        ]
+                    };
+
+                    //optionhasvalue结束
+                    myChart.setOption(optionhasvalue);
+
+                }
+            });
+
+        }
+        getajaxdata();
+
+    </script>
+</body>
+</html>

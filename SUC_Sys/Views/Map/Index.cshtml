@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "地图展示";
+}
+@section Styles{
+    <style>
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: "微软雅黑";
+        }
+
+        .content_flex {
+            padding: 0 12px;
+            display: flex;
+        }
+
+            .content_flex div {
+                margin-right: 10px;
+            }
+
+        .fill_width {
+            width: 100%;
+        }
+        .anchorBL {
+            display: none;
+        }
+        .BMap_cpyCtrl {
+            display: none;
+        }
+    </style>
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    @*menu-icon fa fa-location-arrow*@
+                    <i class="ace-icon fa fa-location-arrow"></i>
+                    <a href="#">地图展示</a>
+                </li>
+                <li class="active">地图展示</li>
+            </ul>
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div>
+        </div>
+
+        <div class="page-content" style="width:100%;height:550px;margin:0;padding:0;">
+            <div id="allmap"></div>
+        </div>
+        <div id="consoleDlg" style="width:100%;height:100%;background:#ff00ff"></div>
+    </div>
+</div>
+@section Scripts{
+
+    <!-- page specific plugin scripts -->
+    <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/js/jquery.jqGrid.min.js"></script>
+    <script src="~/assets/js/grid.locale-en.js"></script>
+    <script src="~/assets/js/ace-elements.min.js"></script>
+    <script src="~/layui-v2.5.6/layui/layui.js"></script>
+    @*<script type="text/javascript">
+            if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+        </script>*@
+    <script>
+        // 百度地图API功能
+        var enableScrollWheelZoom = true;
+        var map = null;
+        var zoom = 15;
+        var mapPoint = null;
+        var enableKeyboard = true;
+        var enableContinuousZoom = true;
+        var enableInertialDragging = true;
+        var CommunityList = [];//坐标数据集合
+        var MarkerList = [];
+
+        function initCommunityList(data) {
+            CommunityList.length = 0;
+            if ($.trim(data) != "") {
+                var strCommunityList = data.split(";");
+                console.log(strCommunityList);
+                $.each(strCommunityList, function (i, item) {
+                    if ($.trim(item) != "") {
+                        var instance = item.split(",");
+                        var community = new Object();
+                        community.CenterLng = instance[0];//横坐标
+                        community.CenterLat = instance[1];//竖坐标
+                        community.Zoom = instance[2];     //比列尺
+                        //如果没有坐标，则不加入标注数据
+                        if (community.CenterLat != -1000 && community.CenterLng != -1000) {
+                            CommunityList[CommunityList.length] = community;
+                        }
+                    }
+                });
+            }
+        }
+
+        // 编写自定义函数,创建标注
+        function addMarker(commuinity) {
+            var marker = _createNormalMarker(commuinity);
+            map.addOverlay(marker);
+            MarkerList[MarkerList.length] = marker;
+        }
+
+        //刷新地图标注,以及地图定位
+        function RefreshMarker() {
+            ClearMarker();
+            if (CommunityList.length > 0) {
+                for (var index = 0; index < CommunityList.length; index++) {
+                    var community = CommunityList[index];
+                    addMarker(community);
+                }
+                var commuinty = CommunityList[0];
+                var firstpoint = new BMap.Point(commuinty.CenterLng, commuinty.CenterLat);
+                map.centerAndZoom(firstpoint, Number(community.Zoom));
+            } else {
+                map.centerAndZoom(mapPoint, zoom);                 // 初始化地图，设置中心点坐标和地图级别
+            }
+        }
+
+        //清除历史标注
+        function ClearMarker() {
+            if (MarkerList.length > 0) {
+                map.clearOverlays();
+                for (i in MarkerList) {
+                    MarkerList[i] = null;
+                }
+                MarkerList.length = 0;
+            }
+        }
+
+        //创建详细标注
+        function _createNormalMarker(commuinity) {
+            var point = new BMap.Point(commuinity.CenterLng, commuinity.CenterLat);
+            var marker = new BMap.Marker(point, { offset: new BMap.Size(0, 13) });
+            marker.addEventListener("click", function (e) {
+                var opts = {
+                    width: 300,
+                    height: 200,
+                    title: "<h3>标题</h3>"
+                }
+                var infoWindow = null;
+                var content = "点击标注，成功显示纯文本信息窗口!!!";
+                infoWindow = new BMap.InfoWindow(content, opts);
+                map.openInfoWindow(infoWindow, e.point);
+
+            });
+            marker.tag = commuinity;
+            map.addOverlay(marker);
+            //marker.setAnimation(BMAP_ANIMATION_BOUNCE);         //跳动的动画
+            return marker;
+        }
+
+        window.onload = function () {
+            try {
+                mapPoint = new BMap.Point(108.2849540, 22.86568101);
+                if (map == null)
+                    map = new BMap.Map("allmap", { mapType: BMAP_HYBRID_MAP });
+                map.centerAndZoom(mapPoint, zoom);  // 初始化地图，设置中心点坐标和地图级别
+                if (enableScrollWheelZoom)
+                    map.enableScrollWheelZoom();  // 开启鼠标滚轮缩放
+                if (enableKeyboard)
+                    map.enableKeyboard();         // 开启键盘控制
+                if (enableContinuousZoom)
+                    map.enableContinuousZoom();   // 开启连续缩放效果
+                if (enableInertialDragging)
+                    map.enableInertialDragging(); // 开启惯性拖拽效果
+
+                var strUrl = "/Map/SearchMap";
+                //默认加载标注数据
+                $.getJSON(strUrl, null,
+                    function (data) {
+                        console.log(data)
+                        initCommunityList(data);
+                        RefreshMarker();
+                    });
+                //map.addEventListener('tilesloaded', function () {
+                //    alert('地图加载完成！');
+                //});
+            }
+            catch (err) {
+                alert("百度地图加载失败,请确保你的电脑能访问百度地图!!");
+            }
+
+        }
+    </script>
+
+
+
+}

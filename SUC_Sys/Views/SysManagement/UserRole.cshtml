@@ -1,0 +1,141 @@
+﻿@model List<SUC_DataEntity.t_menu>
+
+@{
+    ViewBag.Title = "UserRole";
+}
+@section Styles{
+    <style type="text/css">
+    </style>
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="#">系统管理</a>
+                </li>
+                <li class="active">权限配置</li>
+            </ul><!-- /.breadcrumb -->
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    权限配置
+                    <!--<small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Draggabble Widget Boxes with Persistent Position and State
+                    </small>-->
+                </h1>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <form class="form-horizontal" method="post" action="/SysManagement/SaveUserRole">
+                        <input type="hidden" name="RoleNo" value="@ViewData["No"]" />
+                        <table class="table table-bordered table-striped">
+                            <thead class="thin-border-bottom">
+                                <tr>
+                                    <th style="width:40%">
+                                        栏目名称
+                                    </th>
+                                    <th style="width:40%">
+                                        权限
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tbody">
+                                @{
+                                    if (Model != null && Model.Count > 0)
+                                    {
+                                        var menuChecked = (string[])ViewData["MenuChecked"];
+                                        foreach (SUC_DataEntity.t_menu item in Model.Where(o => o.ParentNo == "0"))
+                                        {
+                                            var subMenu = Model.Where(c => c.ParentNo == item.MenuCode).ToList();
+                                            var checkedStr = menuChecked != null && menuChecked.Contains(item.MenuCode.ToString()) ? "checked='checked'" : "";
+                                            <tr>
+                                                <td><input type="checkbox" name="selectid" value="@item.MenuCode" @checkedStr />@item.MenuName</td>
+                                                <td></td>
+                                            </tr>
+                                            foreach (var item2 in subMenu)
+                                            {
+                                                var checkedStr2 = menuChecked != null && menuChecked.Contains(item2.MenuCode.ToString()) ? "checked='checked'" : "";
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="selectid" value="@item2.MenuCode" @checkedStr2 />@item2.MenuName</td>
+                                                    <td>
+                                                        @{
+                                                            var qc = Model.Where(a => a.ParentNo == item2.MenuCode && a.IsWebPub == "0").ToList();
+                                                            foreach (var ch in qc)
+                                                            {
+                                                                var checkedStr3 = menuChecked != null && menuChecked.Contains(ch.MenuCode.ToString()) ? "checked='checked'" : "";
+                                                                <input type="checkbox" name="selectid" value="@ch.MenuCode" checkedStr3 />
+                                                            }
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <button class="btn btn-gebo" type="submit">
+                            保存
+                        </button>
+                        <button class="btn" id="goback" type="reset">
+                            取消
+                        </button>
+                    </form>
+                    @*<form class="form-horizontal" method="post" action="/SysManagement/SaveUserRole">
+                            <fieldset>
+                                <input type="hidden" name="RoleNo" value="@ViewData[" No"]" />
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                栏目名称
+                                            </th>
+                                            <td>
+                                                权限
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @ViewData["MenuList"]
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-gebo" type="submit">
+                                    保存
+                                </button>
+                                <button class="btn" type="reset">
+                                    取消
+                                </button>
+                            </fieldset>
+                        </form>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#goback").click(function () {
+                window.location = "/Roles";
+            })
+        })
+    </script>
+}
+
+

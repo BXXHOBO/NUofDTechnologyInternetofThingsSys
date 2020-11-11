@@ -1,0 +1,175 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title></title>
+    <script src="My97DatePicker/WdatePicker.js"></script>
+    <script src="~/js/echarts.min.js"></script>
+    <link href="~/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/js/jquery-ui.min.js"></script>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #reportbox {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tblist {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+            .tblist tr:nth-child(2n+1) {
+                background-color: #eee;
+            }
+
+            .tblist td {
+                border: solid 1px #ccc;
+                height: 30px;
+                text-align: center;
+            }
+
+        h3 {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .search {
+            padding-bottom: 10px;
+        }
+
+        #btnSearch {
+            width: 80px;
+            text-align: center;
+            height: 22px;
+            background-color: #ff6600;
+            color: white;
+            border: 0;
+        }
+
+        .pager {
+            height: 35px;
+            line-height: 35px;
+            color: #333;
+            text-align: right;
+        }
+
+            .pager a {
+                color: #333;
+                text-decoration: none;
+            }
+    </style>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        年份选择： 
+        <div class="search" >
+            <table>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <input id="txt_keyword" type="text" class="form-control" placeholder="年份" style="height:33px;width: 200px;">
+                            <span class="input-group-btn">
+                                <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="main" style="width: 600px;height:400px;"></div>
+    </form>
+
+
+
+    <script src="~/js/jquery-1.11.0.js"></script>
+    
+    <script>
+
+
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据 json
+        var option = {
+            title: {
+                text: '2019年设备库存报表'
+            },
+            tooltip: {},
+            legend: {
+                data: ['设备数量'],
+                x: '338px',
+                y: "30px"
+            },
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: [{
+                name: '设备数量',
+                type: 'bar',
+                data: []
+          
+            }]
+        };
+        myChart.setOption(option);
+        function getajaxdata(objyear) {
+            $.ajax({
+                type: "post",
+                url: "Ajax.ashx",
+                data: { w: "GetDeviceTypeInfoByMonth" ,year:objyear},
+                timeout: 5000,
+                dataType: "json",
+                async: true,//默认设置为true，所有请求均为异步请求
+                //cache：true,//默认为true（当dataType为script时，默认为false）设置为false将不会从浏览器缓存中加载请求信息。
+                success: function (data) {
+                    console.log(data.datamonths);
+                    console.log(data.dataitems);
+                    
+                    var optionhasvalue = {
+                        title: {
+                            text: ''+objyear+'年设备库存报表',
+                        },
+                        tooltip: {},
+                        legend: {
+                            data: ['设备数量'],
+
+                        },
+                        xAxis: {
+                            data: data.datamonths
+                        },
+                        yAxis: {},
+                        series: [{
+                            name: '设备数量',
+                            type: 'bar',
+                            data: data.dataitems
+                        }
+                        ]
+                    };
+                    myChart.setOption(optionhasvalue);
+                }
+            });
+
+        }
+        getajaxdata(2019);
+        $("#btn_search").click(function () {
+            var keyword = $("#txt_keyword").val();
+            getajaxdata(keyword);
+        });
+
+
+    </script>
+
+
+</body>
+</html>

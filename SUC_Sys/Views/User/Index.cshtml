@@ -1,0 +1,573 @@
+﻿
+@{
+    ViewBag.Title = "用户管理";
+}
+@section Styles{
+    <style>
+        .content_flex {
+            padding: 0 12px;
+            display: flex;
+        }
+
+        .content_flex div {
+            margin-right: 10px;
+        }
+
+        .fill_width {
+            width: 100%;
+        }
+    </style>
+    <link href="~/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui_ext/dtree/dtree.css" rel="stylesheet" />
+    <link href="~/layui_ext/dtree/font/dtreefont.css" rel="stylesheet" />
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-file-o"></i>
+                    <a href="#">系统管理</a>
+                </li>
+                <li class="active">用户管理</li>
+            </ul><!-- /.breadcrumb -->
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div><!-- /.nav-search -->
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>用户列表</h1>
+            </div><!-- /.page-header -->
+
+            <div class="row content_flex" style="margin-bottom:10px;">
+                <div>
+                    <input id="search" name="searchbox" placeholder="可搜索账号或姓名" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;" />
+                    <button class="btn btn-primary btn-sm" onclick="selectClick()" style="margin-bottom:3px;">查询</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <table id="grid-table"></table>
+
+                    <div id="grid-pager"></div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+        <div id="consoleDlg"></div>
+    </div>
+</div><!-- /.main-content -->
+<!-- 模态框 -->
+<div hidden="hidden" id="myModel">
+
+
+    <div class="container">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-fluid">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>权限配置</legend>
+                    <input type="text" id="Code" hidden="hidden" />
+                    <button type="button" id="UpdateTree" class="layui-btn layui-btn-normal">修改</button>
+                    <div class="layui-field-box">
+                        <div class="layui-row layui-col-space10" style="margin-top: 10px;">
+                            <div class="layui-col-xs12">
+                                <div id="toolbarDiv" style="overflow: auto">
+                                    <ul id="demoTree" class="dtree" data-id="0"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+@section Scripts{
+
+    <!-- page specific plugin scripts -->
+    <script src="assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/jquery.jqGrid.min.js"></script>
+    <script src="assets/js/grid.locale-en.js"></script>
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="~/layui-v2.5.6/layui/layui.js"></script>
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script type="text/javascript">
+        function selectClick() {
+            loadSiteDataList();
+        }
+
+        //条件查询 刷新表格
+        function loadSiteDataList() {
+            var search = $("#search").val().trim();
+            if (search.length != 0) {
+                $.ajax({
+                    type: 'get',
+                    url: '/User/NewGetUsers',
+                    data: { "search": search },
+                    dataType: 'json',
+                    success: function (data) {
+                        var len = data.length;
+                        if (len != 0) {
+                            $("#grid-table").jqGrid("clearGridData");
+                            var localData = { page: 1, total: Math.ceil(parseInt(len) / 20), records: len, rows: data };
+                            var reader = {
+                                root: function (obj) {
+                                    return localData.rows;
+                                },
+                                page: function (obj) {
+                                    return localData.page;
+                                },
+                                total: function (obj) {
+                                    return localData.total;
+                                },
+                                records: function (obj) {
+                                    return localData.records;
+                                }, repeatitems: false
+                            };
+                            //通过setGridParam进行重载表格
+                            $("#grid-table").setGridParam({ data: localData.rows, reader: reader }).trigger('reloadGrid');
+                        } else {
+                            alert("查询不到你输入的账号或姓名")
+                        }
+                        console.log(data)
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    }
+                });
+            }
+            else {
+                loadUserList()
+            }
+        };
+
+        function loadUserList() {
+            $.ajax({
+                type: 'Get', //可选get
+                url: '/User/GetUserList',
+                dataType: 'json',
+                success: function (data) {
+                    $("#grid-table").jqGrid("clearGridData");
+                    var len = data.length;
+                    var localData = { page: 1, total: Math.ceil(parseInt(len) / 20), records: len, rows: data };
+                    var reader = {
+                        root: function (obj) {
+                            return localData.rows;
+                        },
+                        page: function (obj) {
+                            return localData.page;
+                        },
+                        total: function (obj) {
+                            return localData.total;
+                        },
+                        records: function (obj) {
+                            return localData.records;
+                        }, repeatitems: false
+                    };
+                    //通过setGridParam进行重载表格
+                    $("#grid-table").setGridParam({ data: localData.rows, reader: reader }).trigger('reloadGrid');
+                }
+            });
+        };
+        loadUserList();
+
+        jQuery(function ($) {
+            var grid_selector = "#grid-table";
+            var pager_selector = "#grid-pager";
+            var parent_column = $(grid_selector).closest('[class*="col-"]');
+            //resize to fit page size
+            $(window).on('resize.jqGrid', function () {
+                $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+            })
+
+            //resize on sidebar collapse/expand
+            $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+                if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
+                    //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                    setTimeout(function () {
+                        $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+                    }, 20);
+                }
+            })
+
+            jQuery(grid_selector).jqGrid({
+                data: [],
+                datatype: "local",
+                caption: "用户列表",
+                height: "100%",
+                colNames: ['ID', '用户编号', '用户名称', '角色', '入职时间', '手机', 'Email', '地址', '操作'],
+                colModel: [//hidden: true
+                    { name: 'UserId', index: 'UserId', width: 30, sorttype: "int", hidden: true },
+                    { name: 'UserCode', index: 'UserCode', width: 100, editable: true, sortable: true },
+                    { name: 'UserName', index: 'UserName', width: 120, editable: true, sortable: true, editoptions: { size: "20", maxlength: "30" } },
+                    { name: 'RoleName', index: 'RoleName', width: 150, editable: true, sortable: true, edittype: "select", editoptions: { value: getRolesList() } },
+                    { name: 'HireDate', index: 'HireDate', width: 120, editable: true, sortable: true, sorttype: "date", unformat: pickDate, formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' } },
+                    { name: 'Telephone', index: 'Telephone', width: 120, editable: true },
+                    { name: 'Email', index: 'Email', width: 120, editable: true },
+                    { name: 'Addr', index: 'Addr', width: 200, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "30" } },
+                    {
+                        name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
+                        formatter: function (value, grid, rows, state) {
+                            //e = "<a id=\"user_edit" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-pencil blue\"  onclick=\"EditUserById(" + grid.rowId + ")\"></a>";
+                            console.log(rows);
+                            e = "<a id=\"user_edit" + grid.rowId + "\" href=\"/User/Edit/" + rows.UserCode + "?isEdit=1\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-pencil blue\"></a>";
+                            d = "<a id=\"user_del" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-trash-o red\"   onclick=\"DeleteUserById(" + rows.UserId + ")\"></a>";
+                            a = "<a id=\"user_add" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-check green\"  onclick=\"SaveUserById(" + grid.rowId + ")\"></a>";
+                            c = "<a id=\"user_cancel" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-times red\"   onclick=\"CancelUserById(" + grid.rowId + ")\"></a>";
+                            f = "<a id=\"roles_filespower" + grid.rowId + "\" name='zzc' href=\"#\"  style=\"margin:5px;\" class=\"ace-icon fa fa-file-powerpoint-o\" onclick=\"PowerModel('" + rows.UserCode + "')\" title=\"文件夹权限设置\" ></a>";
+                            return e + d + a + c + f;
+                        }
+                    }
+                ],
+                viewrecords: true,
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: pager_selector,
+                recordtext: "从{0}到{1} 条，共 {2}条记录",
+                pgtext: "第{0} 页，共 {1} 页",
+                altRows: true,
+                //toppager: true,
+                multiselect: true,
+                //multikey: "ctrlKey",
+                multiboxonly: true,
+                editurl: "./dummy.php",//nothing is saved
+                loadComplete: function () {
+                    var table = this;
+                    setTimeout(function () {
+                        //styleCheckbox(table);
+                        //updateActionIcons(table);
+                        updatePagerIcons(table);
+                        enableTooltips(table);
+                    }, 0);
+                }
+            });
+
+
+            $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+            function aceSwitch(cellvalue, options, cell) {
+                setTimeout(function () {
+                    $(cell).find('input[type=checkbox]')
+                        .addClass('ace ace-switch ace-switch-5')
+                        .after('<span class="lbl"></span>');
+                }, 0);
+            }
+            //enable datepicker
+            function pickDate(cellvalue, options, cell) {
+                setTimeout(function () {
+                    $(cell).find('input[type=text]')
+                        .datepicker({ format: 'yyyy-mm-dd', autoclose: true });
+                }, 0);
+            }
+
+            function getRolesList() {
+                var roleVal = "";
+                var i = 0;
+                $.ajax({
+                    type: "GET",
+                    async: false,
+                    url: "/User/GetRolesList",
+                    success: function (data) {
+                        for (i; i < data.length; i++) {
+                            if (i != data.length - 1) {
+                                roleVal += data[i].RoleCode + ":" + data[i].RoleName + ";";
+                            } else {
+                                roleVal += data[i].RoleCode + ":" + data[i].RoleName;
+                            }
+                        }
+                    }
+                });
+                return roleVal;
+            }
+            //navButtons
+            //jQuery(grid_selector).jqGrid('navGrid', pager_selector,
+            //    {
+            //        edit: false,
+            //        editicon: 'ace-icon fa fa-pencil blue',
+            //        add: true,
+            //        addicon: 'ace-icon fa fa-plus-circle purple',
+            //        del: true,
+            //        delicon: 'ace-icon fa fa-trash-o red',
+            //        delfunc: openDialog4Deleting,  // (3) 点击删除按钮，则调用openDialog4Deleting方法
+            //        search: false,
+            //        searchicon: 'ace-icon fa fa-search orange',
+            //        refresh: true,
+            //        refreshicon: 'ace-icon fa fa-refresh green',
+            //        view: false,
+            //        viewicon: 'ace-icon fa fa-search-plus grey',
+            //        alerttext: "请选择需要操作的数据行!"  // (4) 当未选中任何行而点击编辑、删除、查看按钮时，弹出的提示信息
+            //    }
+            //);
+            
+
+
+            jQuery(grid_selector)
+                .navGrid(pager_selector, { edit: false, add: false, del: false, search: false })
+                .navButtonAdd(pager_selector, {
+                    caption: "",
+                    buttonicon: "ace-icon fa fa-plus-circle purple",
+                    onClickButton: function () {
+                        //var dataRow = { ID: "", UserCode: "", UserName: "", Name: "", HireDate: "", Email: "", Addr: "" };
+                        //var maxRowId = Math.max.apply(Math, jQuery("#grid-table").jqGrid('getDataIDs'))
+                        //jQuery("#grid-table").jqGrid("addRowData", maxRowId + 1, dataRow, "first");
+                        //EditUserById(maxRowId + 1);
+                        window.location = '/User/Edit?isEdit=0';
+                    },
+                    position: ""
+                })
+                .navButtonAdd(pager_selector, {
+                    caption: "",
+                    buttonicon: "ace-icon fa fa-trash-o red",
+                    onClickButton: function () {
+                        var ids = [];
+                        var sel_rows = jQuery(grid_selector).jqGrid('getGridParam', 'selarrrow');
+                        if (sel_rows.length == 0) {
+                            alert("请选择你要删除的数据！");
+                            return;
+                        }
+                        else if (sel_rows.length == 1) {
+                            ids = jQuery(grid_selector).jqGrid('getRowData', sel_rows[0]).UserId;
+                        } else {
+                            for (var i = 0; i < sel_rows.length; i++) {
+                                ids.push(jQuery(grid_selector).jqGrid('getRowData', sel_rows[i]).UserId);
+                            }
+                            ids = ids.join(',');
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            url: '/User/DeleteUserById',
+                            dataType: 'json',
+                            data: { "ids": ids },
+                            success: function (data) {
+                                if (data.IsSuccess) {
+                                    alert('删除成功！');
+                                    loadUserList();
+                                } else {
+                                    alert(data.Msg);
+                                }
+                            }
+                        });
+                    },
+
+                    position: ""
+                });
+
+
+            //replace icons with FontAwesome icons like above
+            function updatePagerIcons(table) {
+                var replacement =
+                {
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
+                };
+                $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+                    var icon = $(this);
+                    var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+                    if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+                })
+            }
+
+            function enableTooltips(table) {
+                $('.navtable .ui-pg-button').tooltip({ container: 'body' });
+                $(table).find('.ui-pg-div').tooltip({ container: 'body' });
+            }
+
+            //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $.jgrid.gridDestroy(grid_selector);
+                $('.ui-jqdialog').remove();
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        function EditUserById(id) {
+            jQuery("#grid-table").editRow(id, true);
+            $("#user_edit" + id).css("display", "none");
+            $("#user_del" + id).css("display", "none");
+            $("#user_add" + id).css("display", "inline-block");
+            $("#user_cancel" + id).css("display", "inline-block");
+        }
+        function DeleteUserById(id) {
+            if (confirm('确定要删除这条数据吗?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/User/DeleteUserById/' + id,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            alert('删除成功！');
+                            loadUserList();
+                        } else {
+                            alert(data.Msg);
+                        }
+                    }
+                });
+            }
+        }
+        function SaveUserById(id) {
+            jQuery("#grid-table").saveRow(id);
+            var user_data = jQuery("#grid-table").jqGrid('getRowData', id);
+            if (user_data.UserCode == null || user_data.UserCode == "") {
+                alert('用户编号不能为空！');
+                jQuery("#grid-table").editRow(id, true);
+                return;
+            }
+            if (user_data.UserName == null || user_data.UserName == "") {
+                alert('用户名称不能为空！');
+                jQuery("#grid-table").editRow(id, true);
+                return;
+            }
+            if (user_data.RoleName == null || user_data.RoleName == "") {
+                alert('角色名称不能为空！');
+                jQuery("#grid-table").editRow(id, true);
+                return;
+            }
+            var userID = user_data.ID;
+            $.ajax({
+                type: "POST",
+                url: "/User/ModifyUser/" + id,
+                dataType: "json",
+                data: { "ID": user_data.ID, "UserCode": user_data.UserCode, "UserName": user_data.UserName, "UserRoles": user_data.RoleName, "HireDate": user_data.HireDate, "Email": user_data.Email, "Addr": user_data.Addr, "opType": userID == "" ? "Add" : "modify" },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        if (userID == "") {
+                            alert("添加成功！");
+                        } else {
+                            alert("修改成功！");
+                        }
+                        //loadRolesList();
+                    } else {
+                        alert(data.Msg);
+                    }
+                }
+            });
+            $("#user_edit" + id).css("display", "inline-block");
+            $("#user_del" + id).css("display", "inline-block");
+            $("#user_add" + id).css("display", "none");
+            $("#user_cancel" + id).css("display", "none");
+        };
+        function CancelUserById(id) {
+            if (jQuery("#grid-table").jqGrid('getRowData', id).ID == "") {
+                jQuery("#grid-table").delRowData(id);
+            } else {
+                jQuery("#grid-table").restoreRow(id);
+            }
+            $("#user_edit" + id).css("display", "inline-block");
+            $("#user_del" + id).css("display", "inline-block");
+            $("#user_add" + id).css("display", "none");
+            $("#user_cancel" + id).css("display", "none");
+        };
+        //2020 - 10 - 28 - 16: 23
+    </script>
+    <script>
+        //树文件夹权限配置
+        layui.extend({
+            dtree: '{/}../layui_ext/dtree/dtree'
+        }).use(['element', 'layer', 'table', 'code', 'util', 'dtree', 'form'], function () {
+            var element = layui.element, layer = layui.layer, table = layui.table, util = layui.util, dtree = layui.dtree, form = layui.form, $ = layui.$;
+            //加载树形控件
+            PowerModel = function (UserCode) {
+                $("#Code").val(UserCode);//保存编号
+                //开始演示
+                layer.load(1, {//加载
+                    shade: [0.1, '#fff'] //0.1透明度的白色背景
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/User/SelectTree",
+                    dataType: "json",
+                    data: {
+                        UserCode: UserCode
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        var DTree = dtree.render({
+                            elem: "#demoTree",
+                            data: data,
+                            checkbar: true
+                        });
+
+
+                        //此处演示关闭
+                        setTimeout(function () {
+                            layer.closeAll('loading');
+                        });
+
+                        //页面层
+                        layer.open({
+                            title: '导出课件',
+                            type: 1,
+                            // skin: 'layui-layer-rim', //加上边框
+                            area: ['820px', '440px'], //宽高
+                            content: $('#myModel')
+                        });
+                    }
+                });
+
+            }
+                    //点击此处修改权限
+            $("#UpdateTree").click(function () {
+                    var Code= $("#Code").val();
+                    var params = dtree.getCheckbarNodesParam("demoTree");
+                    var q="";
+                    for (var i = 0; i < params.length; i++) {
+                        var t = params[i].nodeId.split(",");
+                        q += t[1];
+                        q += ",";
+                    }
+                    //console.log(params);
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/UpdatePower",
+                        data: {
+                            codeId: q,
+                            Code: Code
+                        },
+                        success: function (data) {
+
+                            layer.closeAll();
+                            layer.msg(data);
+                        }
+                    });
+                });
+        });
+        $(function () {
+            PowerJudge();
+        });
+        //判断是否是管理员
+        PowerJudge = function () {
+            $.ajax({
+                type: "POST",
+                url: "/Roles/BoolPower1",
+                //  dataType: "json",
+                data: {},
+                success: function (data) {
+                    if (data != "1") {
+                        // $("#roles_filespower").hide();
+                        $('a[name="zzc"]').hide();
+                    }
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,459 @@
+﻿@{
+    Layout = null;
+}
+@{
+    ViewBag.Title = "蜂群无人机集群作战系统";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>蜂群无人机集群作战系统</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-3.3.7-dist/css/style.css" />
+    <style>
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            background-image: url(../../image/bj02.png);
+            background-size: cover;
+        }
+
+        .roboinfo {
+            width: 99%;
+            height: 98%;
+            margin: 0 auto;
+            margin: 0.5% auto;
+            background-size: 100% 100%;
+        }
+
+        #setting {
+            border: 1px solid #00F5FC;
+            border-radius: 10px;
+            background: rgba(0, 231, 231, 0.6);
+        }
+        /*滚动条*/
+        .box_scroll::-webkit-scrollbar-button {
+            color: #05B7DE;
+            border: none;
+            background: url(../../image/down.png) !important;
+        }
+
+            .box_scroll::-webkit-scrollbar-button:vertical:increment {
+                background: url(../../image/up.png) !important;
+            }
+    </style>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div id="#app">
+        <div class="row nav">
+            <div class="col-xs-3" style="height: 105px;" onclick="skip()">
+                <img src="~/image/8998994.png" alt="Alternate Text" />
+            </div>
+            <div class="col-xs-6" style="height: 105px;">
+                <div class="col-xs-offset-3 col-xs-7" style="height:70px;line-height:70px;margin:20px 140px;text-align:center;display:flex">
+                    <div class="box_title col-xs-1" style="height: 70px;border-right: none;left:0;padding:0;position:absolute">
+                    </div>
+                    <div class="col-xs-10" style="width:100%;height: 60px;background: none;text-align:center">
+                        <span class="" style="font-size: 28px;">蜂群无人机集群作战系统</span>
+                    </div>
+                    <div class="box_title col-xs-1" style="height: 70px;border-left: none;right:0;position:absolute">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3" style="height: 105px;">
+                <span id="dateTime" class="col-xs-offset-1" style="font-size:20px;line-height:110px;"></span>
+                <a href="" class=" btn btn-danger col-xs-offset-1 " id="logout" style="">退出系统</a>
+                <a href="#" id="setting" class="btn col-xs-offset-1" onclick="tosetting()" style="">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
+        </div>
+        <div style="width: 100%;height: 8px;background: linear-gradient(to right,#050F2A,#00F5FC,#050F2A);"></div>
+        <div class="" style="width:98%;height:500px;margin:10px auto;">
+            @*左侧导航栏*@
+            <div class="box_title" style="width:22.5%;height:100%;float:left;">
+                <div class="box_scroll" style="">
+                    @*这里开始循环*@
+                    
+                    @*这里结束循环*@
+                </div>
+            </div>
+            @*右侧信息栏*@
+            <div class="box_title" style="width:77%;height:100%;float:right;">
+                <div class="roboinfo" style="background-image: url(../../image/robotInfo/warcraft02.jpg);">
+                    <div class="box_title box_content" style="">
+                        <div class="" style="width:96%;margin:9px auto;height:70px;display:flex">
+                            <div class="box_title" style="width:60px;height:100%;line-height:60px;text-align:center">
+                                <span id="num" style="font-size:28px">01</span>
+                            </div>
+                            <div class="robotype" style="width: 130px;margin-left: 12px;">
+                                <div class="box_title" style="height: 30px;line-height:30px;">
+                                    <span style="font-size:16px">发动机状态</span>
+                                </div>
+                                <div id="engstate" class="" style="">
+                                    <span id="p_engstate">完好</span>
+                                </div>
+                            </div>
+                            <div class="robotype">
+                                <div class="box_title" style="height: 30px;">
+                                    <span>电量</span>
+                                </div>
+                                <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                                    <div class="skills quantity" style=""></div>
+                                    <div style="">
+                                        <span id="p_quantity">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="robotype">
+                                <div class="box_title" style="height: 30px;">
+                                    <span>结构完好度</span>
+                                </div>
+                                <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                                    <div class="skills commence"></div>
+                                    <div style="">
+                                        <span id="p_commence">70%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="robotype">
+                                <div class="box_title" style="height: 30px;">
+                                    <span>截弹量</span>
+                                </div>
+                                <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                                    <div class="skills cutcap"></div>
+                                    <div style="">
+                                        <span id="p_cutcap">70%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="robotype">
+                                <div class="box_title" style="height: 30px;">
+                                    <span>刀浆可用性</span>
+                                </div>
+                                <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                                    <div class="skills availability" style=""></div>
+                                    <div style="">
+                                        <span id="p_availability">70%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="robotype">
+                                <div class="box_title" style="height: 30px;">
+                                    <span>综合评估建设</span>
+                                </div>
+                                <div id="assess" class="" style="">
+                                    <span id="p_assess">继续作战</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Content/bootstrap-3.3.7-dist/js/jquery-3.5.1.min.js"></script>
+    <script src="~/Content/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+    window.onload = function () {
+        //获取时间
+        formatDate();
+        //展示
+        decideintact();
+        showinfo(1);
+        rendering();
+    }
+
+    //获取日期
+    function formatDate() {
+        let date = new Date();
+        let year = date.getFullYear(); // 年
+        let month = date.getMonth() + 1; // 月
+        let day = date.getDate(); // 日
+        var dateTime = document.getElementById('dateTime');
+        dateTime.innerHTML = year + "/" + month + "/" + day;
+    }
+
+    //判断是否完好 附上背景颜色
+    function decideintact() {
+        let engstate = document.getElementById('engstate')
+        let assess = document.getElementById('assess')
+        if (engstate.children[0].innerHTML == "完好") {
+            engstate.className = "intact";
+        } else if (engstate.children[0].innerHTML == "故障") {
+            engstate.className = "unintact";
+        }
+        if (assess.children[0].innerHTML == "继续作战") {
+            assess.className = "intact";
+        } else if (assess.children[0].innerHTML == "建议返航") {
+            assess.className = "unintact";
+        }
+    }
+
+    //LOGO跳转
+    function skip() {
+        window.location = "/Home/Contact";
+    }
+    function tosetting() {
+        window.location = "/Map/Index";
+    }
+    //点击图片后显示指定序号机器
+    function showinfo(res) {
+        let i = Number(res) - 1;
+        var roboinfo = document.getElementsByClassName('roboinfo')
+        var num = document.getElementById('num');
+        var p_engstate = document.getElementById('p_engstate');             //发动机状态
+        var p_quantity = document.getElementById('p_quantity');             //电量
+        var quantity = document.getElementsByClassName('quantity');
+        var p_commence = document.getElementById('p_commence');             //结构完好度
+        var commence = document.getElementsByClassName('commence');
+        var p_cutcap = document.getElementById('p_cutcap');                 //截弹量
+        var cutcap = document.getElementsByClassName('cutcap');
+        var p_availability = document.getElementById('p_availability');     //刀浆可用性
+        var availability = document.getElementsByClassName('availability');
+        var p_assess = document.getElementById('p_assess');                 //综合评估建设
+        roboinfo[0].style.backgroundImage = "url('../../image/robotInfo/" + sidenav[i].machinetype + "')"
+        num.innerHTML = sidenav[i].num
+        p_engstate.innerHTML = sidenav[i].engstate
+        p_quantity.innerHTML = sidenav[i].quantity + "%"
+        p_commence.innerHTML = sidenav[i].commence + "%"
+        p_cutcap.innerHTML = sidenav[i].cutcap + "%"
+        p_availability.innerHTML = sidenav[i].availability + "%"
+        p_assess.innerHTML = sidenav[i].assess
+        quantity[0].style.width = sidenav[i].quantity + "%"
+        commence[0].style.width = sidenav[i].commence + "%"
+        cutcap[0].style.width = sidenav[i].cutcap + "%"
+        availability[0].style.width = sidenav[i].availability + "%"
+        decideintact();
+    }
+
+    function rendering() {
+        var orderBody = '';
+        let tab = sidenav;
+        $.each(tab, function (index, val) {
+            {
+                orderBody += '<div onclick="showinfo(' + val.num + ')" style="background-image:url(../../image/robotInfo/' + val.machinetype +') !important;">\
+                    <div style = "height:25px" ></div >\
+                        <div class="box_ra" style="width:50px;height:50px;">\
+                            <span style="font-size:28px">' + val.num + '</span>\
+                        </div>\
+                    </div >'
+            }
+        });
+        $('.box_scroll').append(orderBody);
+    }
+</script>
+<script>
+    var sidenav = [
+        {
+            num: '01',
+            machinetype: 'warcraft01.jpg',
+            engstate: '完好',
+            quantity: '80',
+            commence: '70',
+            cutcap: '70',
+            availability: '70',
+            assess: '继续作战',
+        },
+        {
+            num: '02',
+            machinetype: 'warcraft02.jpg',
+            engstate: '故障',
+            quantity: '70',
+            commence: '80',
+            cutcap: '90',
+            availability: '50',
+            assess: '建议返航',
+        },
+        {
+            num: '03',
+            machinetype: 'warcraft03.jpg',
+            engstate: '完好',
+            quantity: '60',
+            commence: '70',
+            cutcap: '80',
+            availability: '70',
+            assess: '继续作战',
+        },
+        {
+            num: '04',
+            machinetype: 'warcraft04.jpg',
+            engstate: '故障',
+            quantity: '50',
+            commence: '80',
+            cutcap: '70',
+            availability: '70',
+            assess: '建议返航',
+        },
+        {
+            num: '05',
+            machinetype: 'warcraft05.jpg',
+            engstate: '完好',
+            quantity: '40',
+            commence: '70',
+            cutcap: '80',
+            availability: '70',
+            assess: '继续作战',
+        },
+        {
+            num: '06',
+            machinetype: 'warcraft06.jpg',
+            engstate: '故障',
+            quantity: '80',
+            commence: '70',
+            cutcap: '70',
+            availability: '70',
+            assess: '建议返航',
+        },
+        {
+            num: '07',
+            machinetype: 'warcraft07.jpg',
+            engstate: '完好',
+            quantity: '80',
+            commence: '40',
+            cutcap: '70',
+            availability: '40',
+            assess: '继续作战',
+        },
+        {
+            num: '08',
+            machinetype: 'warcraft08.jpg',
+            engstate: '故障',
+            quantity: '40',
+            commence: '70',
+            cutcap: '40',
+            availability: '70',
+            assess: '建议返航',
+        },
+        {
+            num: '09',
+            machinetype: 'warcraft09.jpg',
+            engstate: '完好',
+            quantity: '60',
+            commence: '70',
+            cutcap: '50',
+            availability: '70',
+            assess: '继续作战',
+        },
+        {
+            num: '10',
+            machinetype: 'warcraft10.jpg',
+            engstate: '故障',
+            quantity: '80',
+            commence: '60',
+            cutcap: '70',
+            availability: '80',
+            assess: '建议返航',
+        },
+        {
+            num: '11',
+            machinetype: 'warcraft11.jpg',
+            engstate: '完好',
+            quantity: '80',
+            commence: '70',
+            cutcap: '70',
+            availability: '70',
+            assess: '继续作战',
+        },
+        {
+            num: '12',
+            machinetype: 'warcraft12.jpg',
+            engstate: '故障',
+            quantity: '70',
+            commence: '40',
+            cutcap: '70',
+            availability: '20',
+            assess: '建议返航',
+        },
+        {
+            num: '13',
+            machinetype: 'warcraft12.jpg',
+            engstate: '故障',
+            quantity: '60',
+            commence: '50',
+            cutcap: '60',
+            availability: '40',
+            assess: '建议返航',
+        },
+        {
+            num: '14',
+            machinetype: 'warcraft12.jpg',
+            engstate: '故障',
+            quantity: '90',
+            commence: '80',
+            cutcap: '70',
+            availability: '50',
+            assess: '建议返航',
+        },
+        {
+            num: '15',
+            machinetype: 'warcraft05.jpg',
+            engstate: '完好',
+            quantity: '40',
+            commence: '70',
+            cutcap: '80',
+            availability: '70',
+            assess: '继续作战',
+        },
+        {
+            num: '16',
+            machinetype: 'warcraft06.jpg',
+            engstate: '故障',
+            quantity: '80',
+            commence: '70',
+            cutcap: '70',
+            availability: '70',
+            assess: '建议返航',
+        },
+        {
+            num: '17',
+            machinetype: 'warcraft07.jpg',
+            engstate: '完好',
+            quantity: '80',
+            commence: '40',
+            cutcap: '70',
+            availability: '40',
+            assess: '继续作战',
+        },
+        {
+            num: '18',
+            machinetype: 'warcraft08.jpg',
+            engstate: '故障',
+            quantity: '47',
+            commence: '88',
+            cutcap: '40',
+            availability: '99',
+            assess: '建议返航',
+        },
+        {
+            num: '19',
+            machinetype: 'warcraft09.jpg',
+            engstate: '完好',
+            quantity: '60',
+            commence: '70',
+            cutcap: '50',
+            availability: '70',
+            assess: '继续作战',
+        },
+        {
+            num: '20',
+            machinetype: 'warcraft10.jpg',
+            engstate: '故障',
+            quantity: '80',
+            commence: '60',
+            cutcap: '70',
+            availability: '80',
+            assess: '建议返航',
+        }
+    ]
+</script>

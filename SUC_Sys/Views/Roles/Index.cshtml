@@ -1,0 +1,409 @@
+﻿
+@{
+    ViewBag.Title = "用户角色管理";
+}
+
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-file-o"></i>
+                    <a href="#">系统管理</a>
+                </li>
+                <li class="active">用户角色管理</li>
+            </ul>
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>角色列表</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <table id="roles-grid"></table>
+
+                    <div id="roles-grid-pager"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/js/jquery.jqGrid.min.js"></script>
+    <script src="~/assets/js/grid.locale-en.js"></script>
+    
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script type="text/javascript">
+
+        function loadRolesList() {
+            $.ajax({
+                type: "Get",
+                url: "/Roles/GetRolesList",
+                dataType: "json",
+                success: function (data) {
+                    $("#roles-grid").jqGrid("clearGridData");
+                    var len = data.length;
+                    var localData = { page: 1, total: Math.ceil(parseInt(len) / 20), records: len, rows: data };
+                    var reader = {
+                        root: function (obj) {
+                            return localData.rows;
+                        },
+                        page: function (obj) {
+                            return localData.page;
+                        },
+                        total: function (obj) {
+                            return localData.total;
+                        },
+                        records: function (obj) {
+                            return localData.records;
+                        }, repeatitems: false
+                    };
+
+                    //通过setGridParam进行重载表格
+                    $("#roles-grid").setGridParam({ data: localData.rows, reader: reader }).trigger('reloadGrid');
+
+                }
+            });
+        };
+        loadRolesList();
+
+        jQuery(function ($) {
+            var grid_selector = "#roles-grid";
+            var pager_selector = "#roles-grid-pager";
+            var parent_column = $(grid_selector).closest('[class*="col-"]');
+            $(window).on('resize.jqGrid', function () {
+                $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+            })
+
+            $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+                if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
+                    //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                    setTimeout(function () {
+                        $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+                    }, 20);
+                }
+            })
+
+            jQuery(grid_selector).jqGrid({
+                data: [],
+                datatype: "local",
+                caption: "角色列表",
+                height: "100%",
+                colNames: ['ID', '编号', '角色名称', '操作'],
+                colModel: [
+                    { name: 'RoleId', index: 'RoleId', width: 90, hidden: true },
+                    { name: 'RoleCode', index: 'RoleCode', width: 90, editable: false, sortable: true },
+                    { name: 'RoleName', index: 'RoleName', width: 90, editable: true, sortable: true },
+                    {
+                        name: 'myac', index: '', width: 200, fixed: true, sortable: false, resize: false,
+                        formatter: function (value, grid, rows, state) {
+                            
+                            e = "<a id=\"roles_edit" + grid.rowId + "\"  href=\"#\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-pencil blue\"  onclick=\"EditRolesById(" + grid.rowId + ")\"></a>";
+                            d = "<a id=\"roles_del" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-trash-o red\"   onclick=\"DeleteRolesById(" + rows.RoleId + ")\"></a>";
+                            a = "<a id=\"roles_add" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-check green\"  onclick=\"SaveRolesById(" + grid.rowId + ")\"></a>";
+                            c = "<a id=\"roles_cancel" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-times red\"   onclick=\"CancelRolesById(" + grid.rowId + ")\"></a>";
+                            p = "<a id=\"roles_power" + grid.rowId + "\" href=\"/SysManagement/UserRole?no=" + rows.RoleCode + "\"  style=\"margin:5px;\" class=\"ace-icon fa fa-user\" title=\"权限设置\" ></a>";
+                            return e + d + a + c + p;
+                        }
+                    }
+                ],
+                viewrecords: true,
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: pager_selector,
+                recordtext: "从{0}到{1} 条，共 {2}条记录",
+                pgtext: "第{0} 页，共 {1} 页",
+                emptyrecords: "没有数据",
+                loadtext: "加载中...",
+                altRows: true,
+                multiselect: true,
+                //multikey: "ctrlKey",
+                multiboxonly: true,
+                //editurl: "./dummy.php",//nothing is saved
+                loadComplete: function () {
+                    var table = this;
+                    setTimeout(function () {
+                        updatePagerIcons(table);
+                        enableTooltips(table);
+                    }, 0);
+                }
+            });
+
+
+            $(window).triggerHandler('resize.jqGrid');
+
+            jQuery(grid_selector)
+                .navGrid(pager_selector, { edit: false, add: false, del: false, search: false })
+                .navButtonAdd(pager_selector, {
+                    caption: "",
+                    buttonicon: "ace-icon fa fa-plus-circle purple",
+                    onClickButton: function () {
+                        $.ajax({
+                            type: 'Get',
+                            url: '/Roles/GetRolesNo',
+                            dataType: 'json',
+                            success: function (data) {
+                                var dataRow = { RoleCode: data.ResultValue, RoleName: "" };
+                                var maxRowId = Math.max.apply(Math, jQuery("#roles-grid").jqGrid('getDataIDs'))
+                                jQuery("#roles-grid").jqGrid("addRowData", maxRowId + 1, dataRow, "first");
+                                EditRolesById(maxRowId + 1);
+                            }
+                        });
+
+                    },
+                    position: ""
+                })
+                .navButtonAdd(pager_selector, {
+                    caption: "",
+                    buttonicon: "ace-icon fa fa-trash-o red",
+                    onClickButton: function () {
+                        var ids = [];
+                        var sel_rows = jQuery(grid_selector).jqGrid('getGridParam', 'selarrrow');
+                        if (sel_rows.length == 0) {
+                            alert("请选择你要删除的数据！");
+                            return;
+                        }
+                        else if (sel_rows.length == 1) {
+                            ids = jQuery(grid_selector).jqGrid('getRowData', sel_rows[0]).UserId;
+                        } else {
+                            for (var i = 0; i < sel_rows.length; i++) {
+                                ids.push(jQuery(grid_selector).jqGrid('getRowData', sel_rows[i]).UserId);
+                            }
+                            ids = ids.join(',');
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "/Roles/DeleteRolesById",
+                            dataType: "json",
+                            data: { "ids": ids },
+                            success: function (data) {
+                                if (data.IsSuccess) {
+                                    alert("删除成功！");
+                                    loadRolesList();
+                                } else {
+                                    alert(data.Msg);
+                                }
+                            }
+                        });
+                    },
+
+                    position: ""
+                });
+
+            function updatePagerIcons(table) {
+                var replacement =
+                {
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
+                };
+                $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+                    var icon = $(this);
+                    var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+                    if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+                })
+            }
+
+            function enableTooltips(table) {
+                $('.navtable .ui-pg-button').tooltip({ container: 'body' });
+                $(table).find('.ui-pg-div').tooltip({ container: 'body' });
+            }
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $.jgrid.gridDestroy(grid_selector);
+                $('.ui-jqdialog').remove();
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+
+        function EditRolesById(id) {
+            jQuery("#roles-grid").editRow(id, true);
+            $("#roles_edit" + id).css("display", "none");
+            $("#roles_del" + id).css("display", "none");
+            $("#roles_power" + id).css("display", "none");
+            $("#roles_add" + id).css("display", "inline-block");
+            $("#roles_cancel" + id).css("display", "inline-block");
+        }
+        function DeleteRolesById(id) {
+            if (confirm('确定要删除这条数据吗?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Roles/DeleteRolesById/' + id,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            alert('删除成功！');
+                            loadRolesList();
+                        } else {
+                            alert(data.Msg);
+                        }
+                    }
+                });
+            }
+        };
+        function SaveRolesById(id) {
+            jQuery("#roles-grid").saveRow(id);
+            var roles_data = jQuery("#roles-grid").jqGrid('getRowData', id);
+            if (roles_data.RoleName == null || roles_data.RoleName == "") {
+                alert('角色名称不能为空！');
+                jQuery("#roles-grid").editRow(id, true);
+                return;
+            }
+            var rolesID = roles_data.RoleId;
+            $.ajax({
+                type: 'POST',
+                url: '/Roles/ModifyRoles/' + id,
+                dataType: 'json',
+                data: { "RoleCode": roles_data.RoleCode, "RoleName": roles_data.RoleName, "opType": rolesID == "" ? "Add" : "modify" },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        if (rolesID == "") {
+                            alert('添加成功！');
+                        } else {
+                            alert('修改成功！');
+                        }
+                        loadRolesList();
+                    } else {
+                        alert(data.Msg);
+                    }
+                }
+            });
+            $("#roles_edit" + id).css("display", "inline-block");
+            $("#roles_del" + id).css("display", "inline-block");
+            $("#roles_power" + id).css("display", "inline-block");
+            $("#roles_add" + id).css("display", "none");
+            $("#roles_cancel" + id).css("display", "none");
+        };
+        function CancelRolesById(id) {
+            if (jQuery("#roles-grid").jqGrid('getRowData', id).ID == "") {
+                jQuery("#roles-grid").delRowData(id);
+            } else {
+                jQuery("#roles-grid").restoreRow(id);
+            }
+            $("#roles_edit" + id).css("display", "inline-block");
+            $("#roles_del" + id).css("display", "inline-block");
+            $("#roles_power" + id).css("display", "inline-block");
+            $("#roles_add" + id).css("display", "none");
+            $("#roles_cancel" + id).css("display", "none");
+        };
+
+        //layui.extend({
+        //    dtree: '{/}../layui_ext/dtree/dtree'
+        //}).use(['element', 'layer', 'table', 'code', 'util', 'dtree', 'form'], function () {
+        //    var element = layui.element, layer = layui.layer, table = layui.table, util = layui.util, dtree = layui.dtree, form = layui.form, $ = layui.$;
+
+        //    PowerModel = function (RoleCode) {
+        //        $("#Code").val(RoleCode);//保存编号
+        //        //开始演示
+        //        layer.load(1, {//加载
+        //            shade: [0.1, '#fff'] //0.1透明度的白色背景
+        //        });
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "/Roles/SelectTree",
+        //            dataType: "json",
+        //            data: {
+        //                RoleCode: RoleCode
+        //            },
+        //            success: function (data) {
+        //                console.log(data);
+        //                var DTree = dtree.render({
+        //                    elem: "#demoTree",
+        //                    data: data,
+        //                    checkbar: true
+                            
+                           
+        //                });
+                    
+
+        //                //此处演示关闭
+        //                setTimeout(function () {
+        //                    layer.closeAll('loading');
+        //                });
+        //            }
+        //        });
+        //        //点击此处修改权限
+        //        $("#UpdateTree").click(function () {
+        //            var Code= $("#Code").val();
+        //            var params = dtree.getCheckbarNodesParam("demoTree");
+        //            var q="";
+        //            for (var i = 0; i < params.length; i++) {
+        //                var t = params[i].nodeId.split(",");
+        //                q += t[1];
+        //                q += ",";
+        //            }
+        //            //console.log(params);
+        //            $.ajax({
+        //                type: "POST",
+        //                url: "/Roles/UpdatePower",
+        //                data: {
+        //                    codeId: q,
+        //                    Code: Code
+        //                },
+        //                success: function (data) {
+                               
+        //                    layer.closeAll();
+        //                    layer.msg(data);
+        //                }
+        //            });
+        //        });
+
+
+
+        //        //页面层
+        //        layer.open({
+        //            title: '导出课件',
+        //            type: 1,
+        //            // skin: 'layui-layer-rim', //加上边框
+        //            area: ['820px', '440px'], //宽高
+        //            content: $('#myModel')
+        //        });
+        //    }
+
+        //})
+
+        //$(function () {
+        //    PowerJudge();
+        //});
+        //判断是否是管理员
+        //PowerJudge = function () {
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/Roles/BoolPower1",
+        //      //  dataType: "json",
+        //        data: {},
+        //        success: function (data) {
+        //            if (data != "R00001") {
+        //               // $("#roles_filespower").hide();
+        //                $('a[name="zzc"]').hide();
+        //            }
+        //        }
+        //    });
+        //}
+    </script>
+}

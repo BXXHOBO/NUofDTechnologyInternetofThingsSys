@@ -1,0 +1,1584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EPS_GridDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SUC_AuditOffice">
+          <Key>
+            <PropertyRef Name="AuditOfficeId" />
+          </Key>
+          <Property Name="AuditOfficeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuditOfficeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Rec_CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rec_CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUC_ClassInfo">
+          <Key>
+            <PropertyRef Name="ClassInfoId" />
+          </Key>
+          <Property Name="ClassInfoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClassCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Rec_CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rec_CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUC_ClaTeaCurAssociative">
+          <Key>
+            <PropertyRef Name="ClaTeaCurAssociativeId" />
+          </Key>
+          <Property Name="ClaTeaCurAssociativeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClaTeaCurAssociativeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClassCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Rec_CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rec_CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUC_Course">
+          <Key>
+            <PropertyRef Name="MachineId" />
+          </Key>
+          <Property Name="MachineId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MachineTypeCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="MachineCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MachineName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EngineState" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SUC_CourseType">
+          <Key>
+            <PropertyRef Name="CourseTypeId" />
+          </Key>
+          <Property Name="CourseTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CourseTypeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Rec_CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rec_CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUC_Courseware">
+          <Key>
+            <PropertyRef Name="CoursewareId" />
+          </Key>
+          <Property Name="CoursewareId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CoursewareCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CoursewareName" Type="nvarchar" MaxLength="100" />
+          <Property Name="P_CoursewareCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsWebPub" Type="nvarchar" MaxLength="50" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortID" Type="int" />
+          <Property Name="CoursewarePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="State" Type="int" />
+          <Property Name="Checked" Type="int" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Rec_CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rec_CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUC_Machine">
+          <Key>
+            <PropertyRef Name="MachineId" />
+          </Key>
+          <Property Name="MachineId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="MachineName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MachineCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MachineTypeCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="EngineState" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ElectricQuantity" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StructureCommence" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CuttingCapacity" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PropellerAvailability" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OverallEvaluationBuild" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MachinePicture" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SUC_Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderStatus" Type="int" Nullable="false" />
+          <Property Name="OrderType" Type="int" Nullable="false" />
+          <Property Name="IsSupplement" Type="int" Nullable="false" />
+          <Property Name="DealUserId" Type="varchar" MaxLength="50" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SUC_OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailsId" />
+          </Key>
+          <Property Name="OrderDetailsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Statu" Type="int" />
+          <Property Name="image" Type="varchar" MaxLength="2000" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="400" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SUC_OrderLog">
+          <Key>
+            <PropertyRef Name="OrderLogId" />
+          </Key>
+          <Property Name="OrderLogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderLogStatus" Type="int" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="400" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SUC_CombatDB.dbo.SUC_Site”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="SUC_Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+            <PropertyRef Name="SiteCode" />
+            <PropertyRef Name="SiteName" />
+            <PropertyRef Name="DeviceCode" />
+            <PropertyRef Name="SiteTypeId" />
+            <PropertyRef Name="Disabled" />
+            <PropertyRef Name="CreateBy" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="SiteId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SiteCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SiteName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="10" Scale="7" />
+          <Property Name="Latitude" Type="decimal" Precision="10" Scale="7" />
+          <Property Name="Province" Type="varchar" MaxLength="20" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="DeviceCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SiteTypeId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="400" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SUC_UavData">
+          <Key>
+            <PropertyRef Name="UavDataId" />
+          </Key>
+          <Property Name="UavDataId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UavSerialNO" Type="varchar" MaxLength="50" />
+          <Property Name="WorkState" Type="varchar" MaxLength="50" />
+          <Property Name="ProductDate" Type="datetime" />
+          <Property Name="Remark" Type="varchar" MaxLength="3000" />
+          <Property Name="Disabled" Type="int" />
+          <Property Name="Rec_CreateTime" Type="datetime" />
+          <Property Name="Rec_CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SUC_UavInfo">
+          <Key>
+            <PropertyRef Name="UavInfoId" />
+          </Key>
+          <Property Name="UavInfoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UavSerialNO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OperationDate" Type="datetime" />
+          <Property Name="Sortie" Type="varchar" MaxLength="50" />
+          <Property Name="VideoAddr" Type="varchar" MaxLength="100" />
+          <Property Name="Longitude" Type="varchar" MaxLength="50" />
+          <Property Name="Latitude" Type="varchar" MaxLength="50" />
+          <Property Name="Altitude" Type="varchar" MaxLength="50" />
+          <Property Name="Temperature" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Humidity" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Speed" Type="varchar" MaxLength="50" />
+          <Property Name="AtmosPressure" Type="varchar" MaxLength="100" />
+          <Property Name="Remark" Type="varchar" MaxLength="3000" />
+          <Property Name="Disabled" Type="int" />
+          <Property Name="Rec_CreateTime" Type="datetime" />
+          <Property Name="Rec_CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SUC_UavSortieData">
+          <Key>
+            <PropertyRef Name="UavSortieId" />
+          </Key>
+          <Property Name="UavSortieId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UavSerialNO" Type="varchar" MaxLength="50" />
+          <Property Name="Sortie" Type="varchar" MaxLength="50" />
+          <Property Name="VideoAddr" Type="varchar" MaxLength="100" />
+          <Property Name="UavState" Type="varchar" MaxLength="50" />
+          <Property Name="HistoryAddr" Type="varchar" MaxLength="100" />
+          <Property Name="InitialOperTime" Type="datetime" />
+          <Property Name="OperationEndTime" Type="datetime" />
+          <Property Name="OperateAddr" Type="varchar" MaxLength="100" />
+          <Property Name="WorkContents" Type="varchar" MaxLength="100" />
+          <Property Name="Remark" Type="varchar" MaxLength="3000" />
+          <Property Name="Disabled" Type="int" />
+          <Property Name="Rec_CreateTime" Type="datetime" />
+          <Property Name="Rec_CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SUC_UploadAndAudit">
+          <Key>
+            <PropertyRef Name="UploadAndAuditId" />
+          </Key>
+          <Property Name="UploadAndAuditId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UploadAndAuditCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CoursewareCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="UploadStartTime" Type="datetime" Nullable="false" />
+          <Property Name="UploadEndTime" Type="datetime" Nullable="false" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Rec_CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rec_CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="t_code_rules">
+          <Key>
+            <PropertyRef Name="RuleId" />
+          </Key>
+          <Property Name="RuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RuleName" Type="nvarchar" MaxLength="540" Nullable="false" />
+          <Property Name="RuleOne" Type="nvarchar" MaxLength="50" />
+          <Property Name="RuleTwo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Disabled" Type="int" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LinkUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParentNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsWebPub" Type="nvarchar" MaxLength="50" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortID" Type="int" />
+          <Property Name="Target" Type="int" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_role_menu">
+          <Key>
+            <PropertyRef Name="RoleMenuId" />
+          </Key>
+          <Property Name="RoleMenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuCode" Type="text" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="CoursewareCode" Type="text" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="ExternalType" Type="int" />
+          <Property Name="HireDate" Type="datetime" />
+          <Property Name="DepNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsAdmin" Type="nvarchar" MaxLength="10" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Addr" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserRoles" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifyTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SUC_CombatDB.dbo.v_ClaTeaCurAssociative”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_ClaTeaCurAssociative">
+          <Key>
+            <PropertyRef Name="ClaTeaCurAssociativeId" />
+            <PropertyRef Name="ClaTeaCurAssociativeCode" />
+            <PropertyRef Name="SchoolSmester" />
+            <PropertyRef Name="CourseCode" />
+            <PropertyRef Name="CourseName" />
+            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ClassCode" />
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="AuditOfficeCode" />
+            <PropertyRef Name="AuditOfficeName" />
+            <PropertyRef Name="CourseTypeName" />
+            <PropertyRef Name="Disabled" />
+          </Key>
+          <Property Name="ClaTeaCurAssociativeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClaTeaCurAssociativeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SchoolSmester" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClassCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuditOfficeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseTypeCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="CourseTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SUC_CombatDB.dbo.V_SortiePatition”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_SortiePatition">
+          <Key>
+            <PropertyRef Name="UavInfoId" />
+            <PropertyRef Name="UavSerialNO" />
+          </Key>
+          <Property Name="UavInfoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UavSerialNO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sortie" Type="varchar" MaxLength="50" />
+          <Property Name="VideoAddr" Type="varchar" MaxLength="100" />
+          <Property Name="Rec_CreateTime" Type="datetime" />
+          <Property Name="CreatTimeMax" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SUC_CombatDB.dbo.v_SUC_Courseware”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_SUC_Courseware">
+          <Key>
+            <PropertyRef Name="CoursewareId" />
+            <PropertyRef Name="CoursewareCode" />
+            <PropertyRef Name="P_CoursewareCode" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="AuditOfficeCode" />
+            <PropertyRef Name="AuditOfficeName" />
+            <PropertyRef Name="Disabled" />
+            <PropertyRef Name="Rec_CreateTime" />
+            <PropertyRef Name="Rec_CreateBy" />
+          </Key>
+          <Property Name="CoursewareId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CoursewareCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CoursewareName" Type="nvarchar" MaxLength="100" />
+          <Property Name="P_CoursewareCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuditOfficeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsWebPub" Type="nvarchar" MaxLength="50" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortID" Type="int" />
+          <Property Name="CoursewarePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="State" Type="int" />
+          <Property Name="Checked" Type="int" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Rec_CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rec_CreateBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rec_ModifyTime" Type="datetime" />
+          <Property Name="Rec_ModifyBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SUC_CombatDB.dbo.v_user”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="PassWord" />
+            <PropertyRef Name="RoleName" />
+            <PropertyRef Name="AuditOfficeCode" />
+            <PropertyRef Name="AuditOfficeName" />
+            <PropertyRef Name="Disabled" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="HireDate" Type="datetime" />
+          <Property Name="IsAdmin" Type="nvarchar" MaxLength="10" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Addr" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserRoles" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuditOfficeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Disabled" Type="int" Nullable="false" />
+          <Property Name="Expr1" Type="nvarchar" MaxLength="100" />
+          <Property Name="ExternalType" Type="int" />
+        </EntityType>
+        <EntityContainer Name="EPS_GridDBModelStoreContainer">
+          <EntitySet Name="SUC_AuditOffice" EntityType="Self.SUC_AuditOffice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_ClassInfo" EntityType="Self.SUC_ClassInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_ClaTeaCurAssociative" EntityType="Self.SUC_ClaTeaCurAssociative" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_Course" EntityType="Self.SUC_Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_CourseType" EntityType="Self.SUC_CourseType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_Courseware" EntityType="Self.SUC_Courseware" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_Machine" EntityType="Self.SUC_Machine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_Order" EntityType="Self.SUC_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_OrderDetails" EntityType="Self.SUC_OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_OrderLog" EntityType="Self.SUC_OrderLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_UavData" EntityType="Self.SUC_UavData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_UavInfo" EntityType="Self.SUC_UavInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_UavSortieData" EntityType="Self.SUC_UavSortieData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_UploadAndAudit" EntityType="Self.SUC_UploadAndAudit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_code_rules" EntityType="Self.t_code_rules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_menu" EntityType="Self.t_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_role_menu" EntityType="Self.t_role_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_roles" EntityType="Self.t_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUC_Site" EntityType="Self.SUC_Site" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SUC_Site].[SiteId] AS [SiteId], 
+    [SUC_Site].[SiteCode] AS [SiteCode], 
+    [SUC_Site].[SiteName] AS [SiteName], 
+    [SUC_Site].[Longitude] AS [Longitude], 
+    [SUC_Site].[Latitude] AS [Latitude], 
+    [SUC_Site].[Province] AS [Province], 
+    [SUC_Site].[City] AS [City], 
+    [SUC_Site].[DeviceCode] AS [DeviceCode], 
+    [SUC_Site].[SiteTypeId] AS [SiteTypeId], 
+    [SUC_Site].[UserId] AS [UserId], 
+    [SUC_Site].[Disabled] AS [Disabled], 
+    [SUC_Site].[Remark] AS [Remark], 
+    [SUC_Site].[CreateBy] AS [CreateBy], 
+    [SUC_Site].[CreateTime] AS [CreateTime], 
+    [SUC_Site].[ModifyBy] AS [ModifyBy], 
+    [SUC_Site].[ModifyTime] AS [ModifyTime]
+    FROM [dbo].[SUC_Site] AS [SUC_Site]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_ClaTeaCurAssociative" EntityType="Self.v_ClaTeaCurAssociative" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_ClaTeaCurAssociative].[ClaTeaCurAssociativeId] AS [ClaTeaCurAssociativeId], 
+    [v_ClaTeaCurAssociative].[ClaTeaCurAssociativeCode] AS [ClaTeaCurAssociativeCode], 
+    [v_ClaTeaCurAssociative].[SchoolSmester] AS [SchoolSmester], 
+    [v_ClaTeaCurAssociative].[CourseCode] AS [CourseCode], 
+    [v_ClaTeaCurAssociative].[CourseName] AS [CourseName], 
+    [v_ClaTeaCurAssociative].[UserCode] AS [UserCode], 
+    [v_ClaTeaCurAssociative].[UserName] AS [UserName], 
+    [v_ClaTeaCurAssociative].[ClassCode] AS [ClassCode], 
+    [v_ClaTeaCurAssociative].[ClassName] AS [ClassName], 
+    [v_ClaTeaCurAssociative].[AuditOfficeCode] AS [AuditOfficeCode], 
+    [v_ClaTeaCurAssociative].[AuditOfficeName] AS [AuditOfficeName], 
+    [v_ClaTeaCurAssociative].[CourseTypeCode] AS [CourseTypeCode], 
+    [v_ClaTeaCurAssociative].[CourseTypeName] AS [CourseTypeName], 
+    [v_ClaTeaCurAssociative].[Disabled] AS [Disabled]
+    FROM [dbo].[v_ClaTeaCurAssociative] AS [v_ClaTeaCurAssociative]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_SortiePatition" EntityType="Self.V_SortiePatition" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_SortiePatition].[UavInfoId] AS [UavInfoId], 
+    [V_SortiePatition].[UavSerialNO] AS [UavSerialNO], 
+    [V_SortiePatition].[Sortie] AS [Sortie], 
+    [V_SortiePatition].[VideoAddr] AS [VideoAddr], 
+    [V_SortiePatition].[Rec_CreateTime] AS [Rec_CreateTime], 
+    [V_SortiePatition].[CreatTimeMax] AS [CreatTimeMax]
+    FROM [dbo].[V_SortiePatition] AS [V_SortiePatition]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_SUC_Courseware" EntityType="Self.v_SUC_Courseware" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_SUC_Courseware].[CoursewareId] AS [CoursewareId], 
+    [v_SUC_Courseware].[CoursewareCode] AS [CoursewareCode], 
+    [v_SUC_Courseware].[CoursewareName] AS [CoursewareName], 
+    [v_SUC_Courseware].[P_CoursewareCode] AS [P_CoursewareCode], 
+    [v_SUC_Courseware].[UserId] AS [UserId], 
+    [v_SUC_Courseware].[UserCode] AS [UserCode], 
+    [v_SUC_Courseware].[UserName] AS [UserName], 
+    [v_SUC_Courseware].[AuditOfficeCode] AS [AuditOfficeCode], 
+    [v_SUC_Courseware].[AuditOfficeName] AS [AuditOfficeName], 
+    [v_SUC_Courseware].[IsWebPub] AS [IsWebPub], 
+    [v_SUC_Courseware].[Icon] AS [Icon], 
+    [v_SUC_Courseware].[SortID] AS [SortID], 
+    [v_SUC_Courseware].[CoursewarePath] AS [CoursewarePath], 
+    [v_SUC_Courseware].[State] AS [State], 
+    [v_SUC_Courseware].[Checked] AS [Checked], 
+    [v_SUC_Courseware].[Disabled] AS [Disabled], 
+    [v_SUC_Courseware].[Remark] AS [Remark], 
+    [v_SUC_Courseware].[Rec_CreateTime] AS [Rec_CreateTime], 
+    [v_SUC_Courseware].[Rec_CreateBy] AS [Rec_CreateBy], 
+    [v_SUC_Courseware].[Rec_ModifyTime] AS [Rec_ModifyTime], 
+    [v_SUC_Courseware].[Rec_ModifyBy] AS [Rec_ModifyBy]
+    FROM [dbo].[v_SUC_Courseware] AS [v_SUC_Courseware]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_user" EntityType="Self.v_user" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_user].[UserId] AS [UserId], 
+    [v_user].[UserCode] AS [UserCode], 
+    [v_user].[UserName] AS [UserName], 
+    [v_user].[PassWord] AS [PassWord], 
+    [v_user].[Email] AS [Email], 
+    [v_user].[HireDate] AS [HireDate], 
+    [v_user].[IsAdmin] AS [IsAdmin], 
+    [v_user].[Sex] AS [Sex], 
+    [v_user].[Telephone] AS [Telephone], 
+    [v_user].[Addr] AS [Addr], 
+    [v_user].[Remark] AS [Remark], 
+    [v_user].[UserRoles] AS [UserRoles], 
+    [v_user].[RoleName] AS [RoleName], 
+    [v_user].[AuditOfficeCode] AS [AuditOfficeCode], 
+    [v_user].[AuditOfficeName] AS [AuditOfficeName], 
+    [v_user].[Disabled] AS [Disabled], 
+    [v_user].[Expr1] AS [Expr1], 
+    [v_user].[ExternalType] AS [ExternalType]
+    FROM [dbo].[v_user] AS [v_user]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EPS_GridDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EPS_SYSContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SUC_AuditOffice" EntityType="EPS_GridDBModel.SUC_AuditOffice" />
+          <EntitySet Name="SUC_ClassInfo" EntityType="EPS_GridDBModel.SUC_ClassInfo" />
+          <EntitySet Name="SUC_ClaTeaCurAssociative" EntityType="EPS_GridDBModel.SUC_ClaTeaCurAssociative" />
+          <EntitySet Name="SUC_Course" EntityType="EPS_GridDBModel.SUC_Course" />
+          <EntitySet Name="SUC_CourseType" EntityType="EPS_GridDBModel.SUC_CourseType" />
+          <EntitySet Name="SUC_Courseware" EntityType="EPS_GridDBModel.SUC_Courseware" />
+          <EntitySet Name="SUC_Machine" EntityType="EPS_GridDBModel.SUC_Machine" />
+          <EntitySet Name="SUC_Order" EntityType="EPS_GridDBModel.SUC_Order" />
+          <EntitySet Name="SUC_OrderDetails" EntityType="EPS_GridDBModel.SUC_OrderDetails" />
+          <EntitySet Name="SUC_OrderLog" EntityType="EPS_GridDBModel.SUC_OrderLog" />
+          <EntitySet Name="SUC_UavData" EntityType="EPS_GridDBModel.SUC_UavData" />
+          <EntitySet Name="SUC_UavInfo" EntityType="EPS_GridDBModel.SUC_UavInfo" />
+          <EntitySet Name="SUC_UavSortieData" EntityType="EPS_GridDBModel.SUC_UavSortieData" />
+          <EntitySet Name="SUC_UploadAndAudit" EntityType="EPS_GridDBModel.SUC_UploadAndAudit" />
+          <EntitySet Name="t_code_rules" EntityType="EPS_GridDBModel.t_code_rules" />
+          <EntitySet Name="t_menu" EntityType="EPS_GridDBModel.t_menu" />
+          <EntitySet Name="t_role_menu" EntityType="EPS_GridDBModel.t_role_menu" />
+          <EntitySet Name="t_roles" EntityType="EPS_GridDBModel.t_roles" />
+          <EntitySet Name="t_user" EntityType="EPS_GridDBModel.t_user" />
+          <EntitySet Name="SUC_Site" EntityType="EPS_GridDBModel.SUC_Site" />
+          <EntitySet Name="v_ClaTeaCurAssociative" EntityType="EPS_GridDBModel.v_ClaTeaCurAssociative" />
+          <EntitySet Name="v_SUC_Courseware" EntityType="EPS_GridDBModel.v_SUC_Courseware" />
+          <EntitySet Name="v_user" EntityType="EPS_GridDBModel.v_user" />
+          <EntitySet Name="V_SortiePatition" EntityType="EPS_GridDBModel.V_SortiePatition" />
+        </EntityContainer>
+        <EntityType Name="SUC_AuditOffice">
+          <Key>
+            <PropertyRef Name="AuditOfficeId" />
+          </Key>
+          <Property Name="AuditOfficeId" Type="Guid" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SUC_ClassInfo">
+          <Key>
+            <PropertyRef Name="ClassInfoId" />
+          </Key>
+          <Property Name="ClassInfoId" Type="Guid" Nullable="false" />
+          <Property Name="ClassCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SUC_ClaTeaCurAssociative">
+          <Key>
+            <PropertyRef Name="ClaTeaCurAssociativeId" />
+          </Key>
+          <Property Name="ClaTeaCurAssociativeId" Type="Guid" Nullable="false" />
+          <Property Name="ClaTeaCurAssociativeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClassCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CourseCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SUC_Course">
+          <Key>
+            <PropertyRef Name="MachineId" />
+          </Key>
+          <Property Name="MachineId" Type="Guid" Nullable="false" />
+          <Property Name="MachineTypeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MachineCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MachineName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EngineState" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SUC_CourseType">
+          <Key>
+            <PropertyRef Name="CourseTypeId" />
+          </Key>
+          <Property Name="CourseTypeId" Type="Guid" Nullable="false" />
+          <Property Name="CourseTypeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CourseTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SUC_Courseware">
+          <Key>
+            <PropertyRef Name="CoursewareId" />
+          </Key>
+          <Property Name="CoursewareId" Type="Guid" Nullable="false" />
+          <Property Name="CoursewareCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CoursewareName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="P_CoursewareCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsWebPub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortID" Type="Int32" />
+          <Property Name="CoursewarePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="Checked" Type="Int32" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SUC_Machine">
+          <Key>
+            <PropertyRef Name="MachineId" />
+          </Key>
+          <Property Name="MachineId" Type="Guid" Nullable="false" />
+          <Property Name="AuditOfficeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MachineName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MachineCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MachineTypeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EngineState" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ElectricQuantity" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StructureCommence" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CuttingCapacity" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PropellerAvailability" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OverallEvaluationBuild" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MachinePicture" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SUC_Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="OrderCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderStatus" Type="Int32" Nullable="false" />
+          <Property Name="OrderType" Type="Int32" Nullable="false" />
+          <Property Name="IsSupplement" Type="Int32" Nullable="false" />
+          <Property Name="DealUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SUC_OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailsId" />
+          </Key>
+          <Property Name="OrderDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="Statu" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SUC_OrderLog">
+          <Key>
+            <PropertyRef Name="OrderLogId" />
+          </Key>
+          <Property Name="OrderLogId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="OrderLogStatus" Type="Int32" Nullable="false" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SUC_UavData">
+          <Key>
+            <PropertyRef Name="UavDataId" />
+          </Key>
+          <Property Name="UavDataId" Type="Guid" Nullable="false" />
+          <Property Name="UavSerialNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductDate" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="Disabled" Type="Int32" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SUC_UavInfo">
+          <Key>
+            <PropertyRef Name="UavInfoId" />
+          </Key>
+          <Property Name="UavInfoId" Type="Guid" Nullable="false" />
+          <Property Name="UavSerialNO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OperationDate" Type="DateTime" Precision="3" />
+          <Property Name="Sortie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VideoAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Altitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Temperature" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Humidity" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Speed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AtmosPressure" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="Disabled" Type="Int32" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SUC_UavSortieData">
+          <Key>
+            <PropertyRef Name="UavSortieId" />
+          </Key>
+          <Property Name="UavSortieId" Type="Guid" Nullable="false" />
+          <Property Name="UavSerialNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sortie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VideoAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UavState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HistoryAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InitialOperTime" Type="DateTime" Precision="3" />
+          <Property Name="OperationEndTime" Type="DateTime" Precision="3" />
+          <Property Name="OperateAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WorkContents" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="Disabled" Type="Int32" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SUC_UploadAndAudit">
+          <Key>
+            <PropertyRef Name="UploadAndAuditId" />
+          </Key>
+          <Property Name="UploadAndAuditId" Type="Guid" Nullable="false" />
+          <Property Name="UploadAndAuditCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CoursewareCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UploadStartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UploadEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_code_rules">
+          <Key>
+            <PropertyRef Name="RuleId" />
+          </Key>
+          <Property Name="RuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RuleName" Type="String" Nullable="false" MaxLength="540" FixedLength="false" Unicode="true" />
+          <Property Name="RuleOne" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RuleTwo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsWebPub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortID" Type="Int32" />
+          <Property Name="Target" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_role_menu">
+          <Key>
+            <PropertyRef Name="RoleMenuId" />
+          </Key>
+          <Property Name="RoleMenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CoursewareCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExternalType" Type="Int32" />
+          <Property Name="HireDate" Type="DateTime" Precision="3" />
+          <Property Name="DepNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdmin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Addr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoles" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SUC_Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+            <PropertyRef Name="SiteCode" />
+            <PropertyRef Name="SiteName" />
+            <PropertyRef Name="DeviceCode" />
+            <PropertyRef Name="SiteTypeId" />
+            <PropertyRef Name="Disabled" />
+            <PropertyRef Name="CreateBy" />
+            <PropertyRef Name="CreateTime" />
+          </Key>
+          <Property Name="SiteId" Type="Guid" Nullable="false" />
+          <Property Name="SiteCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SiteName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="10" Scale="7" />
+          <Property Name="Latitude" Type="Decimal" Precision="10" Scale="7" />
+          <Property Name="Province" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SiteTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="v_ClaTeaCurAssociative">
+          <Key>
+            <PropertyRef Name="ClaTeaCurAssociativeId" />
+            <PropertyRef Name="ClaTeaCurAssociativeCode" />
+            <PropertyRef Name="SchoolSmester" />
+            <PropertyRef Name="CourseCode" />
+            <PropertyRef Name="CourseName" />
+            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ClassCode" />
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="AuditOfficeCode" />
+            <PropertyRef Name="AuditOfficeName" />
+            <PropertyRef Name="CourseTypeName" />
+            <PropertyRef Name="Disabled" />
+          </Key>
+          <Property Name="ClaTeaCurAssociativeId" Type="Guid" Nullable="false" />
+          <Property Name="ClaTeaCurAssociativeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolSmester" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CourseCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClassCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CourseTypeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CourseTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_SUC_Courseware">
+          <Key>
+            <PropertyRef Name="CoursewareId" />
+            <PropertyRef Name="CoursewareCode" />
+            <PropertyRef Name="P_CoursewareCode" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="AuditOfficeCode" />
+            <PropertyRef Name="AuditOfficeName" />
+            <PropertyRef Name="Disabled" />
+            <PropertyRef Name="Rec_CreateTime" />
+            <PropertyRef Name="Rec_CreateBy" />
+          </Key>
+          <Property Name="CoursewareId" Type="Guid" Nullable="false" />
+          <Property Name="CoursewareCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CoursewareName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="P_CoursewareCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsWebPub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortID" Type="Int32" />
+          <Property Name="CoursewarePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="Checked" Type="Int32" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rec_CreateBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rec_ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Rec_ModifyBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserCode" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="PassWord" />
+            <PropertyRef Name="RoleName" />
+            <PropertyRef Name="AuditOfficeCode" />
+            <PropertyRef Name="AuditOfficeName" />
+            <PropertyRef Name="Disabled" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HireDate" Type="DateTime" Precision="3" />
+          <Property Name="IsAdmin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Addr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoles" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuditOfficeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Int32" Nullable="false" />
+          <Property Name="Expr1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExternalType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="V_SortiePatition">
+          <Key>
+            <PropertyRef Name="UavInfoId" />
+            <PropertyRef Name="UavSerialNO" />
+          </Key>
+          <Property Name="UavInfoId" Type="Guid" Nullable="false" />
+          <Property Name="UavSerialNO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sortie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VideoAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Rec_CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatTimeMax" Type="DateTime" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EPS_GridDBModelStoreContainer" CdmEntityContainer="EPS_SYSContainer">
+          <EntitySetMapping Name="SUC_AuditOffice">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_AuditOffice">
+              <MappingFragment StoreEntitySet="SUC_AuditOffice">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="AuditOfficeId" ColumnName="AuditOfficeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_ClassInfo">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_ClassInfo">
+              <MappingFragment StoreEntitySet="SUC_ClassInfo">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+                <ScalarProperty Name="ClassInfoId" ColumnName="ClassInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_ClaTeaCurAssociative">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_ClaTeaCurAssociative">
+              <MappingFragment StoreEntitySet="SUC_ClaTeaCurAssociative">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+                <ScalarProperty Name="ClaTeaCurAssociativeCode" ColumnName="ClaTeaCurAssociativeCode" />
+                <ScalarProperty Name="ClaTeaCurAssociativeId" ColumnName="ClaTeaCurAssociativeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_Course">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Course">
+              <MappingFragment StoreEntitySet="SUC_Course">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="EngineState" ColumnName="EngineState" />
+                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="MachineCode" ColumnName="MachineCode" />
+                <ScalarProperty Name="MachineTypeCode" ColumnName="MachineTypeCode" />
+                <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_CourseType">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_CourseType">
+              <MappingFragment StoreEntitySet="SUC_CourseType">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="CourseTypeName" ColumnName="CourseTypeName" />
+                <ScalarProperty Name="CourseTypeCode" ColumnName="CourseTypeCode" />
+                <ScalarProperty Name="CourseTypeId" ColumnName="CourseTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_Courseware">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Courseware">
+              <MappingFragment StoreEntitySet="SUC_Courseware">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Checked" ColumnName="Checked" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CoursewarePath" ColumnName="CoursewarePath" />
+                <ScalarProperty Name="SortID" ColumnName="SortID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="IsWebPub" ColumnName="IsWebPub" />
+                <ScalarProperty Name="P_CoursewareCode" ColumnName="P_CoursewareCode" />
+                <ScalarProperty Name="CoursewareName" ColumnName="CoursewareName" />
+                <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+                <ScalarProperty Name="CoursewareId" ColumnName="CoursewareId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_Machine">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Machine">
+              <MappingFragment StoreEntitySet="SUC_Machine">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="MachinePicture" ColumnName="MachinePicture" />
+                <ScalarProperty Name="OverallEvaluationBuild" ColumnName="OverallEvaluationBuild" />
+                <ScalarProperty Name="PropellerAvailability" ColumnName="PropellerAvailability" />
+                <ScalarProperty Name="CuttingCapacity" ColumnName="CuttingCapacity" />
+                <ScalarProperty Name="StructureCommence" ColumnName="StructureCommence" />
+                <ScalarProperty Name="ElectricQuantity" ColumnName="ElectricQuantity" />
+                <ScalarProperty Name="EngineState" ColumnName="EngineState" />
+                <ScalarProperty Name="MachineTypeCode" ColumnName="MachineTypeCode" />
+                <ScalarProperty Name="MachineCode" ColumnName="MachineCode" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_Order">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Order">
+              <MappingFragment StoreEntitySet="SUC_Order">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="DealUserId" ColumnName="DealUserId" />
+                <ScalarProperty Name="IsSupplement" ColumnName="IsSupplement" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="OrderName" ColumnName="OrderName" />
+                <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_OrderDetails">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_OrderDetails">
+              <MappingFragment StoreEntitySet="SUC_OrderDetails">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Statu" ColumnName="Statu" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderDetailsId" ColumnName="OrderDetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_OrderLog">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_OrderLog">
+              <MappingFragment StoreEntitySet="SUC_OrderLog">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="OrderLogStatus" ColumnName="OrderLogStatus" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderLogId" ColumnName="OrderLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_UavData">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UavData">
+              <MappingFragment StoreEntitySet="SUC_UavData">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ProductDate" ColumnName="ProductDate" />
+                <ScalarProperty Name="WorkState" ColumnName="WorkState" />
+                <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+                <ScalarProperty Name="UavDataId" ColumnName="UavDataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_UavInfo">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UavInfo">
+              <MappingFragment StoreEntitySet="SUC_UavInfo">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AtmosPressure" ColumnName="AtmosPressure" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="Altitude" ColumnName="Altitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="VideoAddr" ColumnName="VideoAddr" />
+                <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+                <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+                <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+                <ScalarProperty Name="UavInfoId" ColumnName="UavInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_UavSortieData">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UavSortieData">
+              <MappingFragment StoreEntitySet="SUC_UavSortieData">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="WorkContents" ColumnName="WorkContents" />
+                <ScalarProperty Name="OperateAddr" ColumnName="OperateAddr" />
+                <ScalarProperty Name="OperationEndTime" ColumnName="OperationEndTime" />
+                <ScalarProperty Name="InitialOperTime" ColumnName="InitialOperTime" />
+                <ScalarProperty Name="HistoryAddr" ColumnName="HistoryAddr" />
+                <ScalarProperty Name="UavState" ColumnName="UavState" />
+                <ScalarProperty Name="VideoAddr" ColumnName="VideoAddr" />
+                <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+                <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+                <ScalarProperty Name="UavSortieId" ColumnName="UavSortieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_UploadAndAudit">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UploadAndAudit">
+              <MappingFragment StoreEntitySet="SUC_UploadAndAudit">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UploadEndTime" ColumnName="UploadEndTime" />
+                <ScalarProperty Name="UploadStartTime" ColumnName="UploadStartTime" />
+                <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+                <ScalarProperty Name="UploadAndAuditCode" ColumnName="UploadAndAuditCode" />
+                <ScalarProperty Name="UploadAndAuditId" ColumnName="UploadAndAuditId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_code_rules">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.t_code_rules">
+              <MappingFragment StoreEntitySet="t_code_rules">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="RuleTwo" ColumnName="RuleTwo" />
+                <ScalarProperty Name="RuleOne" ColumnName="RuleOne" />
+                <ScalarProperty Name="RuleName" ColumnName="RuleName" />
+                <ScalarProperty Name="RuleId" ColumnName="RuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_menu">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.t_menu">
+              <MappingFragment StoreEntitySet="t_menu">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Target" ColumnName="Target" />
+                <ScalarProperty Name="SortID" ColumnName="SortID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="IsWebPub" ColumnName="IsWebPub" />
+                <ScalarProperty Name="ParentNo" ColumnName="ParentNo" />
+                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_role_menu">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.t_role_menu">
+              <MappingFragment StoreEntitySet="t_role_menu">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="RoleMenuId" ColumnName="RoleMenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_roles">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.t_roles">
+              <MappingFragment StoreEntitySet="t_roles">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_user">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.t_user">
+              <MappingFragment StoreEntitySet="t_user">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserRoles" ColumnName="UserRoles" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DepNo" ColumnName="DepNo" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="ExternalType" ColumnName="ExternalType" />
+                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUC_Site">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Site">
+              <MappingFragment StoreEntitySet="SUC_Site">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SiteTypeId" ColumnName="SiteTypeId" />
+                <ScalarProperty Name="DeviceCode" ColumnName="DeviceCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="SiteCode" ColumnName="SiteCode" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_ClaTeaCurAssociative">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.v_ClaTeaCurAssociative">
+              <MappingFragment StoreEntitySet="v_ClaTeaCurAssociative">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="CourseTypeName" ColumnName="CourseTypeName" />
+                <ScalarProperty Name="CourseTypeCode" ColumnName="CourseTypeCode" />
+                <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="SchoolSmester" ColumnName="SchoolSmester" />
+                <ScalarProperty Name="ClaTeaCurAssociativeCode" ColumnName="ClaTeaCurAssociativeCode" />
+                <ScalarProperty Name="ClaTeaCurAssociativeId" ColumnName="ClaTeaCurAssociativeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_SUC_Courseware">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.v_SUC_Courseware">
+              <MappingFragment StoreEntitySet="v_SUC_Courseware">
+                <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+                <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+                <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Checked" ColumnName="Checked" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CoursewarePath" ColumnName="CoursewarePath" />
+                <ScalarProperty Name="SortID" ColumnName="SortID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="IsWebPub" ColumnName="IsWebPub" />
+                <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="P_CoursewareCode" ColumnName="P_CoursewareCode" />
+                <ScalarProperty Name="CoursewareName" ColumnName="CoursewareName" />
+                <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+                <ScalarProperty Name="CoursewareId" ColumnName="CoursewareId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_user">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.v_user">
+              <MappingFragment StoreEntitySet="v_user">
+                <ScalarProperty Name="ExternalType" ColumnName="ExternalType" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="UserRoles" ColumnName="UserRoles" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_SortiePatition">
+            <EntityTypeMapping TypeName="EPS_GridDBModel.V_SortiePatition">
+              <MappingFragment StoreEntitySet="V_SortiePatition">
+                <ScalarProperty Name="CreatTimeMax" ColumnName="CreatTimeMax" />
+                <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+                <ScalarProperty Name="VideoAddr" ColumnName="VideoAddr" />
+                <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+                <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+                <ScalarProperty Name="UavInfoId" ColumnName="UavInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

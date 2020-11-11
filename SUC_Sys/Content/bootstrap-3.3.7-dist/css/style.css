@@ -1,0 +1,221 @@
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    background-image: url(../../image/bj02.png);
+    background-size: cover;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    background: url(~/image/bj02.png);
+}
+
+span {
+    color: #ffffff;
+}
+
+.row div {
+    /*background:rgba(0,0,0,0.5);*/
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.box_title {
+    box-shadow: 0px 0px 20px rgba(96, 255, 242, 0.4) inset;
+    border: 2px solid rgba(96, 255, 242, 0.75);
+    background: rgba(0, 20, 20, 0.6);
+}
+
+#logout {
+    border-radius: 10px;
+    border: 1px solid #00F5FC;
+    background: rgba(0, 231, 231, 0.6);
+}
+
+.test {
+    height: 100%;
+    background: #08CDD3;
+}
+
+/*滚动条开始*/
+.box_scroll {
+    height: 100%;
+    width: 94%;
+    margin: 0 10px;
+    overflow-y: scroll
+}
+
+    .box_scroll div {
+        width: 95%;
+        height: 125px;
+        margin-bottom: 10px;
+        background-size: cover
+    }
+
+        .box_scroll div:first-child {
+            margin-top: 10px
+        }
+
+    .box_scroll::-webkit-scrollbar {
+        color: #0000FF;
+        border: 1px solid #05B7DE;
+        background-color: #152043;
+    }
+
+    .box_scroll::-webkit-scrollbar-track {
+        width: 10px;
+        border: 1px solid #05B7DE;
+        border-top: none;
+        border-bottom: none;
+        background-color: #152043;
+    }
+
+    .box_scroll::-webkit-scrollbar-thumb {
+        background-color: #09699E;
+        border: 1px solid #05B7DE;
+    }
+
+    .box_scroll::-webkit-scrollbar-track-piece {
+        /* background-color: #13CE66; */
+    }
+/*滚动条结束*/
+
+.box_ra {
+    border: 1px solid #00B6BC;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 25px;
+    margin: 0 auto;
+    background: rgba(0, 20, 20, 0.6);
+    /*position:absolute*/
+}
+
+
+.wrap2 {
+    position: absolute;
+    z-index: 500;
+    margin-left: 50px;
+    /* 设置层上下位置 */
+}
+
+.wrap3 {
+    background: #ccc;
+    position: absolute;
+    z-index: 100;
+    /* 设置层上下位置 */
+}
+
+.roboinfo {
+    width: 99%;
+    height: 98%;
+    margin: 0 auto;
+    background-image: url(../../Content/static/img/warcraft.31b0f82f.jpg);
+    /*background-repeat: unset;*/
+    margin: 0.5% auto;
+    background-size: 100% 100%;
+}
+
+.box_content {
+    width: 95%;
+    height: 90px;
+    margin: 0 auto;
+    position: relative;
+    top: 380px;
+    background: rgba(0, 20, 20, 0.6);
+}
+
+.robotype {
+    width: 130px;
+    margin-left: 12px;
+}
+
+    .robotype div {
+        font-size: 16px;
+        line-height: 30px;
+        text-align: center;
+        margin-bottom: 10px;
+        border-radius: unset;
+    }
+
+        .robotype div:first-child {
+            margin-bottom: 10px;
+        }
+
+#assess,
+#engstate {
+    height: 30px;
+    border: 1px solid rgba(96, 255, 242, 0.6);
+}
+
+.progress_detailt {
+    width: 190px;
+    border: 1px solid rgba(96, 255, 242, 0.6);
+    display: flex;
+    margin-left: 15px
+}
+
+    .progress_detailt div:nth-child(2) {
+        width: 190px;
+        text-align: center;
+        position: absolute;
+        line-height: 35px;
+        /*background: #ff0000*/
+    }
+
+.progress {
+    width: 130px;
+    border: 1px solid rgba(96, 255, 242, 0.6);
+    display: flex;
+}
+
+    .progress div:nth-child(2) {
+        width: 130px;
+        text-align: center;
+        position: absolute;
+        line-height: 30px;
+        /*background: #ff0000*/
+    }
+
+.skills {
+    text-align: center;
+    height: 100%;
+    /*line-height: 100%;*/
+    color: white;
+    background-color: #08CDD3;
+}
+
+.intact {
+    background-color: #08CDD3;
+}
+
+.unintact {
+    background-color: #AFA477;
+}
+
+.quantity {
+    width: 80%;
+    /*background-color: #08CDD3;*/
+}
+
+.commence {
+    width: 70%;
+    background-color: #08CDD3;
+}
+
+.cutcap {
+    width: 70%;
+    background-color: #08CDD3;
+}
+
+.availability {
+    background-color: #08CDD3;
+}

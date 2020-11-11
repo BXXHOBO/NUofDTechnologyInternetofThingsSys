@@ -1,0 +1,602 @@
+﻿@model SUC_DataEntity.t_user
+
+@{
+    ViewBag.Title = "Edit";
+}
+@section Styles{
+    <style>
+        .errtip {
+            margin-left: 1em;
+        }
+
+        #setpass {
+            display: none;
+            border-radius: 5px;
+            margin-left: 1em;
+        }
+
+        #External,
+        #setPassword {
+            display: none;
+        }
+
+        #UserCodetip {
+            line-height: 34px;
+            margin-left: 1em;
+        }
+    </style>
+}
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="#">系统管理</a>
+                </li>
+                <li class="active">用户管理</li>
+            </ul><!-- /.breadcrumb -->
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div><!-- /.nav-search -->
+        </div>
+
+        <div class="page-content">
+            <div class="ace-settings-container" id="ace-settings-container">
+                <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix" id="ace-settings-box">
+                    <div class="pull-left width-50">
+                        <div class="ace-settings-item">
+                            <div class="pull-left">
+                                <select id="skin-colorpicker" class="hide">
+                                    <option data-skin="no-skin" value="#438EB9">#438EB9</option>
+                                    <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                                    <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                                    <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                                </select>
+                            </div>
+                            <span>&nbsp; Choose Skin</span>
+                        </div>
+
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+                        </div>
+
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+                        </div>
+
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+                        </div>
+
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+                        </div>
+
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-add-container">
+                                Inside
+                                <b>.container</b>
+                            </label>
+                        </div>
+                    </div><!-- /.pull-left -->
+
+                    <div class="pull-left width-50">
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+                        </div>
+
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+                        </div>
+
+                        <div class="ace-settings-item">
+                            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
+                            <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+                        </div>
+                    </div><!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div><!-- /.ace-settings-container -->
+
+            <div class="page-header">
+                <h1>
+                    用户信息编辑
+                </h1>
+            </div><!-- /.page-header -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <form class="form-horizontal" role="form" action="/User/Edit" method="post">
+                        <input type="hidden" id="editFlag" name="editFlag" value="@ViewData["editFlag"]" />
+                        @Html.TextBoxFor(c => c.UserId, new { @class = "col-xs-10 col-sm-5", @style = "display:none" })
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">用户账号</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(c => c.UserCode, new { @class = "col-xs-10 col-sm-5" })
+                                <a class="btn btn-xs btn-danger" id="setpass" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    修改密码
+                                </a>
+                                <span class="control-label text-danger" id="UserCodetip"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="setPassword">
+                            <div class="collapse" id="collapseExample">
+                                <div class="well row" style="margin:0;padding:0;">
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">修改密码</label>
+                                    <div class="col-sm-9">
+                                        <span class="input-icon input-icon-right  col-xs-12 col-sm-5" style="margin:0;padding:0">
+                                            <input id="newpassword" type="password" class="form-control block" />
+                                            <i class="ace-icon fa fa-lock"></i>
+                                        </span>
+                                        <span class="control-label text-danger errtip" id="newpasswordtip"></span>
+                                    </div>
+                                    <div class="space-24"></div>
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">确认密码</label>
+                                    <div class="col-sm-9">
+                                        <span class="input-icon input-icon-right col-xs-10 col-sm-5" style="margin:0;padding:0">
+                                            <input id="agpassword" type="password" class="form-control col-xs-10 col-sm-5" />
+                                            <i class="ace-icon fa fa-lock"></i>
+                                        </span>
+                                        <span class="control-label text-danger errtip" id="agpasswordtip"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">用户名称</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(c => c.UserName, new { @class = "col-xs-10 col-sm-5" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">用户角色</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(c => c.UserRoles, (List<SelectListItem>)ViewData["RolesTypeList"], new { @class = "col-xs-10 col-sm-5" })
+                            </div>
+                        </div>
+                        <div class="form-group" id="External">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">是否外聘教师</label>
+                            <div class="radio">
+                                <label style="margin-left: 20px;margin-right: 10px;">
+                                    @{
+                                        bool ExternalFlag = false;
+                                        if (string.IsNullOrEmpty(Model.ExternalType.ToString()))
+                                        {
+                                            ExternalFlag = true;
+                                        }
+                                        else
+                                        {
+                                            if (Model.ExternalType.ToString().Equals("0"))
+                                            {
+                                                ExternalFlag = true;
+                                            }
+                                            else
+                                            {
+                                                ExternalFlag = false;
+                                            }
+                                        }
+                                    }
+                                    @Html.RadioButton("ExternalType", "0", ExternalFlag, new { id = "e_unsure" })
+                                    否
+                                </label>
+                                <label style="margin-left: 0 !important;margin-right: 10px;">
+                                    @Html.RadioButton("ExternalType", "1", !ExternalFlag, new { id = "e_sure" })
+                                    是
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">所属教研室</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(c => c.AuditOfficeCode, (List<SelectListItem>)ViewData["AuditOfficeList"], new { @class = "col-xs-10 col-sm-5" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">入职时间 </label>
+                            <div class="col-sm-9">
+                                <div class="col-xs-10 col-sm-5 input-group">
+                                    <!--@Html.TextBoxFor(c => c.HireDate, "{0:yyyy-MM-dd}",new { @class = "col-xs-10 col-sm-5 form-control date-picker"})-->
+                                    <input class="col-xs-10 col-sm-5 form-control date-picker" id="HireDate" type="text" data-date-format="yyyy-mm-dd" value="@(Model.HireDate)" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar bigger-110"></i>
+                                    </span>
+                                </div>
+                                @*@Html.TextBoxFor(c => c.HireDate, new { @class = "col-xs-10 col-sm-5", @onClick = "WdatePicker({ dateFmt: 'yyyy-MM-dd' });" })*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Email </label>
+
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(c => c.Email, new { @class = "col-xs-10 col-sm-5" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">手机 </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(c => c.Telephone, new { @class = "col-xs-10 col-sm-5" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">地址 </label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(c => c.Addr, new { @class = "col-xs-10 col-sm-5" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">性别 </label>
+                            <div class="radio">
+                                <label style="margin-left: 20px;margin-right: 10px;">
+                                    @{
+                                        bool maleFlag = false;
+                                        if (string.IsNullOrEmpty(Model.Sex))
+                                        {
+                                            maleFlag = true;
+                                        }
+                                        else
+                                        {
+                                            if (Model.Sex.Equals("0"))
+                                            {
+                                                maleFlag = true;
+                                            }
+                                            else
+                                            {
+                                                maleFlag = false;
+                                            }
+                                        }
+                                    }
+                                    @Html.RadioButton("Sex", "0", maleFlag, new { id = "s_male" })
+                                    男
+
+                                </label>
+                                <label style="margin-left: 0 !important;margin-right: 10px;">
+                                    @Html.RadioButton("Sex", "1", !maleFlag, new { id = "s_female" })
+                                    女
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">备注 </label>
+
+                            <div class="col-sm-9">
+                                <textarea class="col-xs-10 col-sm-5" name="ReMark" id="remark" placeholder="">@Model.Remark</textarea>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="button" onclick="editUserInfo();">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    保存
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset" onclick="goback();">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    返回
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+@section Scripts{
+    <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('.date-picker').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            })
+                .next().on(ace.click_event, function () {
+                    $(this).prev().focus();
+                });
+
+            $("#newpassword").blur(function () {
+                var newpassword = $("#newpassword").val().trim();
+
+                if (newpassword.length < 6 && newpassword.length > 0) {
+                    $("#newpasswordtip").text("新密码的长度至少为6个字符！")
+                } else {
+                    $("#newpasswordtip").text("")
+                }
+            });
+
+            $("#agpassword").blur(function () {
+                var newpassword = $("#newpassword").val().trim()
+                var agpassword = $("#agpassword").val().trim()
+                if (newpassword != agpassword) {
+                    $("#agpasswordtip").text("两次密码不一致，请检查！");
+                } else {
+                    $("#agpasswordtip").text("");
+                }
+            });
+
+            function unsure() {
+                var userRoles = $('#UserRoles').val();
+                if (userRoles == "R00015") {
+                    var UserCode = $("#UserCode").val().trim();
+                    if (UserCode.length != 10) {
+                        $("#UserCodetip").text("输入信息格式错误");
+                    } else if (UserCode.length == 10) {
+                        $("#UserCodetip").text("");
+                        var UserCodereg = /[0-9]{10}/;
+                        if (!UserCodereg.test(UserCode)) {
+                            $("#UserCodetip").text("输入信息格式错误");
+                        } else {
+                            $("#UserCodetip").text("");
+                        }
+                    }
+                }
+
+            };
+            function sure() {
+                var userRoles = $('#UserRoles').val();
+                if (userRoles == "R00015") {
+                    var UserCode = $("#UserCode").val().trim();
+                    if (UserCode.length == 7) {
+                        $("#UserCodetip").text("");
+                        var checkwp = UserCode.substring(2, 0);
+                        var checknum = UserCode.substring(7, 2);
+                        var UserCodereg = /[0-9]{5}/;
+                        if (checkwp != "WP" && !UserCodereg.test(checknum)) {
+                            $("#UserCodetip").text("输入信息格式错误");
+                        } else {
+                            $("#UserCodetip").text("");
+                        }
+                    } else if (UserCode.length != 7) {
+                        $("#UserCodetip").text("输入信息格式错误");
+                    }
+                } else {
+                    $("#UserCodetip").text("");
+                }
+
+            };
+
+            $("#UserRoles").on("change", function () {
+                var userRoles = $('#UserRoles').val();
+                console.log($('#UserRoles').val());
+                if (userRoles != "R00015") {
+                    $("#External").css("display", "none");
+                    $("#UserCodetip").text("");
+
+                } else if (userRoles == "R00015") {
+                    $("#External").css("display", "block");
+                    var ExternalType = $('input:radio[name="ExternalType"]:checked').val()
+                    if (ExternalType == 0) {
+                        unsure();
+                    } else {
+                        sure();
+                    }
+
+                }
+            });
+            $("#UserCode").blur(function () {
+                unsure();
+                sure();
+            });
+            $('input:radio[name="ExternalType"]').on("change", function () {
+                var ExternalType = $('input:radio[name="ExternalType"]:checked').val()
+                console.log($('input:radio[name="ExternalType"]:checked').val())
+                if (ExternalType == 0) {
+                    unsure();
+                    $("#UserCode").blur(function () {
+                        unsure();
+                    });
+                } else {
+                    sure();
+                    $("#UserCode").blur(function () {
+                        sure();
+                    });
+                }
+            });
+        });
+
+
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var userCode = jQuery.trim($("#UserCode").val());
+            
+            var isEdit = $("#editFlag").val();
+            if (isEdit == 0) {
+                sessionStorage["userCode"] = ""
+                console.log(sessionStorage["userCode"])
+                $("#setpass").css("display", "none");
+                $("#setPassword").css("display", "none");
+                $("#newpassword").val("");
+                $("#agpassword").val("");
+                //console.log($('input:radio[name="ExternalType"]:checked').val())
+            } else {
+                sessionStorage["userCode"] = userCode
+                console.log(sessionStorage["userCode"])
+                $("#setpass").css("display", "inline-block");
+                $("#setPassword").css("display", "block");
+                var selectval = $("#UserRoles").find("option:selected").text();
+                if (selectval == "普通教师") {
+                    $("#External").css("display", "block");
+                } else {
+                    $("#External").css("display", "none");
+                }
+            }
+
+        };
+
+        function goback() {
+            window.location = "/User";
+        }
+        function editUserInfo() {
+            var userId = $("#UserId").val();
+            var isEdit = $("#editFlag").val();                                      //添加、修改
+            var userCode = jQuery.trim($("#UserCode").val());
+            var newpassword = $("#newpassword").val().trim();
+            var agpassword = $("#agpassword").val().trim();
+            var userName = $("#UserName").val().trim();
+            var hireDate = $("#HireDate").val().trim();
+            var email = $("#Email").val().trim();
+            var telephone = $("#Telephone").val().trim();
+            var s_male = $('input:radio[name="Sex"]:checked').val();                //性别
+            var userRoles = $('#UserRoles').val();
+            var ExternalType = $('input:radio[name="ExternalType"]:checked').val()
+            var AuditOfficeCode = $('#AuditOfficeCode').val().trim();
+
+            if (AuditOfficeCode == null ||AuditOfficeCode == "" || AuditOfficeCode == undefined) {
+                alert("所属教研室不能为空！");
+                $("#AuditOfficeCode").focus();
+                return;
+            }
+
+            if (userCode == null || userCode == "" || userCode == undefined) {
+                alert("用户账号不能为空！");
+                $("#UserCode").focus();
+                return;
+            } else {
+                if (userCode.length > 10 || userCode.length < 3) {
+                    alert("用户账号长度不能大于10位，且不能小于3位！");
+                    $("#UserCode").focus();
+                    return;
+                }
+            }
+            if (isEdit == 1) {
+                oldUserCode = sessionStorage["userCode"]
+                var newC = oldUserCode + "+" + userCode
+                var a = newC.split('+')
+                console.log(a)
+                if (userCode != sessionStorage.getItem("userCode")) {
+                    if (newpassword.length == 0) {
+                        newpassword = userCode.substring(userCode.length - 6)
+                        agpassword = newpassword
+                    }
+                }
+                if (newpassword.length < 6 && newpassword.length > 0) {
+                    alert("用户密码必须大于6位数！");
+                    $("#newpassword").focus();
+                    return;
+                }
+                if (newpassword.length != 0) {
+                    if (newpassword != agpassword) {
+                        alert("两次密码必须一致");
+                        $("#agpassword").focus();
+                        return;
+                    }
+                }
+
+                if (userRoles != "R00015") {
+                    ExternalType = "0";
+                } else {
+                    ExternalType = $('input:radio[name="ExternalType"]:checked').val()
+                    if (ExternalType == 1) {
+                        if (userCode.length == 7) {
+                            var checkwp = userCode.substring(2, 0);
+                            var checknum = userCode.substring(7, 2);
+                            var UserCodereg = /[0-9]{5}/;
+                            if (checkwp != "WP" && !UserCodereg.test(checknum)) {
+                                alert("输入信息格式错误")
+                                return;
+                            }
+                        } else if (userCode.length != 7) {
+                            console.log(userCode.length)
+                            alert("输入信息格式错误")
+                            return;
+                        }
+                    }
+
+                }
+
+            } else {
+                newpassword = "";
+            }
+
+            if (userName == null || userName == "" || userName == undefined) {
+                alert("用户名称不能为空！");
+                $("#UserName").focus();
+                return;
+            }
+
+            if (userRoles == null || userRoles == "" || userRoles == undefined) {
+                alert("请选择用户角色！");
+                $("#UserRoles").focus();
+                return;
+            }
+
+            if (hireDate == null || hireDate == "" || hireDate == undefined) {
+                alert("入职时间不能为空！");
+                $("#HireDate").focus();
+                return;
+            }
+
+            if (email.length>0) {
+                //验证邮箱
+                var emailreg = /^[a-zA-Z0-9_-]+@("@")[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                if (!emailreg.test(email))
+                {
+                    alert("邮箱格式不对");
+                    return;
+                }
+            }
+
+            if (telephone.length > 0) {
+                phonereg = /^1[34578]\d{9}$/;
+                if (!phonereg.test(telephone)) {
+                    alert("手机格式不对");
+                    return;
+                }
+            }
+
+            var datas = {
+                "UserId": userId,
+                "UserCode": userCode,
+                "PassWord": newpassword,
+                "UserName": userName,
+                "HireDate": hireDate,
+                "Email": email,
+                "Sex": s_male,
+                "Telephone": telephone,
+                "Addr": $("#Addr").val(),
+                "Remark": $("#remark").val(),
+                "UserRoles": $("#UserRoles").val(),
+                "ExternalType": ExternalType,
+                "AuditOfficeCode": AuditOfficeCode
+            }
+            $.ajax({
+                url: "/User/EditByUserInfo?editFlag=" + isEdit,
+                data: datas,
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    console.log(data)
+                    if (data.IsSuccess) {
+                        var msg = isEdit == 1 ? "修改成功！" : "新增成功！";
+                        alert(msg);
+                        window.location = "/User";
+                    } else {
+                        alert(data.Msg);
+                    }
+                }
+            });
+        }
+    </script>
+}

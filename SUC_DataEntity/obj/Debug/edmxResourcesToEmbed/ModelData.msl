@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EPS_GridDBModelStoreContainer" CdmEntityContainer="EPS_SYSContainer">
+    <EntitySetMapping Name="SUC_AuditOffice">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_AuditOffice">
+        <MappingFragment StoreEntitySet="SUC_AuditOffice">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+          <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+          <ScalarProperty Name="AuditOfficeId" ColumnName="AuditOfficeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_ClassInfo">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_ClassInfo">
+        <MappingFragment StoreEntitySet="SUC_ClassInfo">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+          <ScalarProperty Name="ClassInfoId" ColumnName="ClassInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_ClaTeaCurAssociative">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_ClaTeaCurAssociative">
+        <MappingFragment StoreEntitySet="SUC_ClaTeaCurAssociative">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+          <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+          <ScalarProperty Name="ClaTeaCurAssociativeCode" ColumnName="ClaTeaCurAssociativeCode" />
+          <ScalarProperty Name="ClaTeaCurAssociativeId" ColumnName="ClaTeaCurAssociativeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_Course">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Course">
+        <MappingFragment StoreEntitySet="SUC_Course">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="EngineState" ColumnName="EngineState" />
+          <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="MachineCode" ColumnName="MachineCode" />
+          <ScalarProperty Name="MachineTypeCode" ColumnName="MachineTypeCode" />
+          <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_CourseType">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_CourseType">
+        <MappingFragment StoreEntitySet="SUC_CourseType">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="CourseTypeName" ColumnName="CourseTypeName" />
+          <ScalarProperty Name="CourseTypeCode" ColumnName="CourseTypeCode" />
+          <ScalarProperty Name="CourseTypeId" ColumnName="CourseTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_Courseware">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Courseware">
+        <MappingFragment StoreEntitySet="SUC_Courseware">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Checked" ColumnName="Checked" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="CoursewarePath" ColumnName="CoursewarePath" />
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="IsWebPub" ColumnName="IsWebPub" />
+          <ScalarProperty Name="P_CoursewareCode" ColumnName="P_CoursewareCode" />
+          <ScalarProperty Name="CoursewareName" ColumnName="CoursewareName" />
+          <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+          <ScalarProperty Name="CoursewareId" ColumnName="CoursewareId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_Machine">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Machine">
+        <MappingFragment StoreEntitySet="SUC_Machine">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="MachinePicture" ColumnName="MachinePicture" />
+          <ScalarProperty Name="OverallEvaluationBuild" ColumnName="OverallEvaluationBuild" />
+          <ScalarProperty Name="PropellerAvailability" ColumnName="PropellerAvailability" />
+          <ScalarProperty Name="CuttingCapacity" ColumnName="CuttingCapacity" />
+          <ScalarProperty Name="StructureCommence" ColumnName="StructureCommence" />
+          <ScalarProperty Name="ElectricQuantity" ColumnName="ElectricQuantity" />
+          <ScalarProperty Name="EngineState" ColumnName="EngineState" />
+          <ScalarProperty Name="MachineTypeCode" ColumnName="MachineTypeCode" />
+          <ScalarProperty Name="MachineCode" ColumnName="MachineCode" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+          <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_Order">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Order">
+        <MappingFragment StoreEntitySet="SUC_Order">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="DealUserId" ColumnName="DealUserId" />
+          <ScalarProperty Name="IsSupplement" ColumnName="IsSupplement" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="OrderName" ColumnName="OrderName" />
+          <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_OrderDetails">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_OrderDetails">
+        <MappingFragment StoreEntitySet="SUC_OrderDetails">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="Statu" ColumnName="Statu" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="OrderDetailsId" ColumnName="OrderDetailsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_OrderLog">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_OrderLog">
+        <MappingFragment StoreEntitySet="SUC_OrderLog">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="OrderLogStatus" ColumnName="OrderLogStatus" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="OrderLogId" ColumnName="OrderLogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_UavData">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UavData">
+        <MappingFragment StoreEntitySet="SUC_UavData">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ProductDate" ColumnName="ProductDate" />
+          <ScalarProperty Name="WorkState" ColumnName="WorkState" />
+          <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+          <ScalarProperty Name="UavDataId" ColumnName="UavDataId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_UavInfo">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UavInfo">
+        <MappingFragment StoreEntitySet="SUC_UavInfo">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AtmosPressure" ColumnName="AtmosPressure" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="Altitude" ColumnName="Altitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="VideoAddr" ColumnName="VideoAddr" />
+          <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+          <ScalarProperty Name="UavInfoId" ColumnName="UavInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_UavSortieData">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UavSortieData">
+        <MappingFragment StoreEntitySet="SUC_UavSortieData">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="WorkContents" ColumnName="WorkContents" />
+          <ScalarProperty Name="OperateAddr" ColumnName="OperateAddr" />
+          <ScalarProperty Name="OperationEndTime" ColumnName="OperationEndTime" />
+          <ScalarProperty Name="InitialOperTime" ColumnName="InitialOperTime" />
+          <ScalarProperty Name="HistoryAddr" ColumnName="HistoryAddr" />
+          <ScalarProperty Name="UavState" ColumnName="UavState" />
+          <ScalarProperty Name="VideoAddr" ColumnName="VideoAddr" />
+          <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+          <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+          <ScalarProperty Name="UavSortieId" ColumnName="UavSortieId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_UploadAndAudit">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_UploadAndAudit">
+        <MappingFragment StoreEntitySet="SUC_UploadAndAudit">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="UploadEndTime" ColumnName="UploadEndTime" />
+          <ScalarProperty Name="UploadStartTime" ColumnName="UploadStartTime" />
+          <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+          <ScalarProperty Name="UploadAndAuditCode" ColumnName="UploadAndAuditCode" />
+          <ScalarProperty Name="UploadAndAuditId" ColumnName="UploadAndAuditId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_code_rules">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.t_code_rules">
+        <MappingFragment StoreEntitySet="t_code_rules">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="RuleTwo" ColumnName="RuleTwo" />
+          <ScalarProperty Name="RuleOne" ColumnName="RuleOne" />
+          <ScalarProperty Name="RuleName" ColumnName="RuleName" />
+          <ScalarProperty Name="RuleId" ColumnName="RuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_menu">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.t_menu">
+        <MappingFragment StoreEntitySet="t_menu">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Target" ColumnName="Target" />
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="IsWebPub" ColumnName="IsWebPub" />
+          <ScalarProperty Name="ParentNo" ColumnName="ParentNo" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_role_menu">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.t_role_menu">
+        <MappingFragment StoreEntitySet="t_role_menu">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="RoleMenuId" ColumnName="RoleMenuId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_roles">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.t_roles">
+        <MappingFragment StoreEntitySet="t_roles">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_user">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.t_user">
+        <MappingFragment StoreEntitySet="t_user">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="UserRoles" ColumnName="UserRoles" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DepNo" ColumnName="DepNo" />
+          <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+          <ScalarProperty Name="ExternalType" ColumnName="ExternalType" />
+          <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUC_Site">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.SUC_Site">
+        <MappingFragment StoreEntitySet="SUC_Site">
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SiteTypeId" ColumnName="SiteTypeId" />
+          <ScalarProperty Name="DeviceCode" ColumnName="DeviceCode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="SiteCode" ColumnName="SiteCode" />
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_ClaTeaCurAssociative">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.v_ClaTeaCurAssociative">
+        <MappingFragment StoreEntitySet="v_ClaTeaCurAssociative">
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="CourseTypeName" ColumnName="CourseTypeName" />
+          <ScalarProperty Name="CourseTypeCode" ColumnName="CourseTypeCode" />
+          <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+          <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+          <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+          <ScalarProperty Name="SchoolSmester" ColumnName="SchoolSmester" />
+          <ScalarProperty Name="ClaTeaCurAssociativeCode" ColumnName="ClaTeaCurAssociativeCode" />
+          <ScalarProperty Name="ClaTeaCurAssociativeId" ColumnName="ClaTeaCurAssociativeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_SUC_Courseware">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.v_SUC_Courseware">
+        <MappingFragment StoreEntitySet="v_SUC_Courseware">
+          <ScalarProperty Name="Rec_ModifyBy" ColumnName="Rec_ModifyBy" />
+          <ScalarProperty Name="Rec_ModifyTime" ColumnName="Rec_ModifyTime" />
+          <ScalarProperty Name="Rec_CreateBy" ColumnName="Rec_CreateBy" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="Checked" ColumnName="Checked" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="CoursewarePath" ColumnName="CoursewarePath" />
+          <ScalarProperty Name="SortID" ColumnName="SortID" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="IsWebPub" ColumnName="IsWebPub" />
+          <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+          <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="P_CoursewareCode" ColumnName="P_CoursewareCode" />
+          <ScalarProperty Name="CoursewareName" ColumnName="CoursewareName" />
+          <ScalarProperty Name="CoursewareCode" ColumnName="CoursewareCode" />
+          <ScalarProperty Name="CoursewareId" ColumnName="CoursewareId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_user">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.v_user">
+        <MappingFragment StoreEntitySet="v_user">
+          <ScalarProperty Name="ExternalType" ColumnName="ExternalType" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+          <ScalarProperty Name="AuditOfficeName" ColumnName="AuditOfficeName" />
+          <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="UserRoles" ColumnName="UserRoles" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_SortiePatition">
+      <EntityTypeMapping TypeName="EPS_GridDBModel.V_SortiePatition">
+        <MappingFragment StoreEntitySet="V_SortiePatition">
+          <ScalarProperty Name="CreatTimeMax" ColumnName="CreatTimeMax" />
+          <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
+          <ScalarProperty Name="VideoAddr" ColumnName="VideoAddr" />
+          <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+          <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
+          <ScalarProperty Name="UavInfoId" ColumnName="UavInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,109 @@
+
+ul, li {
+    list-style: none;
+}
+a {
+    text-decoration: none;!important;
+    cursor: pointer;
+}
+/*清除浮动*/
+.clear-both:before, .clear-both:after {
+    display: table;
+    content: "";
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+}
+.clearfix {
+    *zoom: 1; /*IE/7/6*/
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+
+
+
+.header_nav>ul>li{
+    float: left;
+
+    margin-right: 3px;
+    position: relative;
+}
+.header_nav>ul>li>a{
+    display: block;
+    height: 80px;
+    padding:0 10px 0 30px;
+    line-height: 80px;
+    color:#fff;
+}
+.header_nav>ul>li>a:hover{
+    border-bottom: 4px solid #69cde9;
+}
+.header_nav>ul>li>img{
+    float: left;
+    position: absolute;
+    top: 33px;
+    left:10px;
+}
+.header_nav>ul>li>i{
+    float: left;
+    position: absolute;
+    top: 33px;
+    left:10px;
+    color:#fff;
+}
+.header_nav>ul>li>a.nav_current{
+    border-bottom: 4px solid #69cde9;
+}
+
+
+/*二级菜单 开始*/
+.header_nav>ul>li>ul>li>a{
+    display: block;
+    padding:8px 10px;
+    background-color: #030829;
+    color:#fff;
+   
+    font-size: 14px;
+}
+.header_nav>ul>li>ul{
+    display: none;
+    width: 150px;
+    position: absolute;
+    top:80px;
+    left: 0px;
+    z-index: 1000;
+}
+.header_nav>ul>li>ul>li>a:hover{
+    background-color: #69cde9;
+}
+.header_nav>ul>li>ul>li{
+    position: relative;
+    z-index: 1000;
+}
+.header_nav>ul>li>ul>li>ul{
+    display: none;
+    width: 100px;
+    position: absolute;
+    top:0;
+    left: 100px;
+}
+.header_nav>ul>li>ul>li>ul>li>a{
+    display: block;
+    padding:8px 10px;
+    background-color: #030829;
+    color:#fff;
+    font-size: 14px;
+}
+.header_nav>ul>li>ul>li>ul>li>a:hover{
+    background-color: #69cde9;
+}
+/*二级菜单 结束*/
+
+/*header结束*/
+
+

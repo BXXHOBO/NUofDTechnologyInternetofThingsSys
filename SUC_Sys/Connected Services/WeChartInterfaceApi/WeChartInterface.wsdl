@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebChartDataAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProjectCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProjectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserWebChartId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reccreateby" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebChartDataAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WebChartDataAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWebChartID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWebChartIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWebChartIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddWXUsedData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userWeChartId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="appTokenCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="topicId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reccreateby" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddWXUsedDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddWXUsedDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeChatPortInfor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeChatPortInforResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWeChatPortInforResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="WebChartDataAddSoapIn">
+    <wsdl:part name="parameters" element="tns:WebChartDataAdd" />
+  </wsdl:message>
+  <wsdl:message name="WebChartDataAddSoapOut">
+    <wsdl:part name="parameters" element="tns:WebChartDataAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWebChartIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWebChartID" />
+  </wsdl:message>
+  <wsdl:message name="GetWebChartIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWebChartIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddWXUsedDataSoapIn">
+    <wsdl:part name="parameters" element="tns:AddWXUsedData" />
+  </wsdl:message>
+  <wsdl:message name="AddWXUsedDataSoapOut">
+    <wsdl:part name="parameters" element="tns:AddWXUsedDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWeChatPortInforSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWeChatPortInfor" />
+  </wsdl:message>
+  <wsdl:message name="GetWeChatPortInforSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWeChatPortInforResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WeChartInterfaceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WebChartDataAdd">
+      <wsdl:input message="tns:WebChartDataAddSoapIn" />
+      <wsdl:output message="tns:WebChartDataAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWebChartID">
+      <wsdl:input message="tns:GetWebChartIDSoapIn" />
+      <wsdl:output message="tns:GetWebChartIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddWXUsedData">
+      <wsdl:input message="tns:AddWXUsedDataSoapIn" />
+      <wsdl:output message="tns:AddWXUsedDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWeChatPortInfor">
+      <wsdl:input message="tns:GetWeChatPortInforSoapIn" />
+      <wsdl:output message="tns:GetWeChatPortInforSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WeChartInterfaceSoap" type="tns:WeChartInterfaceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebChartDataAdd">
+      <soap:operation soapAction="http://tempuri.org/WebChartDataAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWebChartID">
+      <soap:operation soapAction="http://tempuri.org/GetWebChartID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddWXUsedData">
+      <soap:operation soapAction="http://tempuri.org/AddWXUsedData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeChatPortInfor">
+      <soap:operation soapAction="http://tempuri.org/GetWeChatPortInfor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WeChartInterfaceSoap12" type="tns:WeChartInterfaceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebChartDataAdd">
+      <soap12:operation soapAction="http://tempuri.org/WebChartDataAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWebChartID">
+      <soap12:operation soapAction="http://tempuri.org/GetWebChartID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddWXUsedData">
+      <soap12:operation soapAction="http://tempuri.org/AddWXUsedData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeChatPortInfor">
+      <soap12:operation soapAction="http://tempuri.org/GetWeChatPortInfor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WeChartInterface">
+    <wsdl:port name="WeChartInterfaceSoap" binding="tns:WeChartInterfaceSoap">
+      <soap:address location="http://58.247.122.34:91/WeChartInterface.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WeChartInterfaceSoap12" binding="tns:WeChartInterfaceSoap12">
+      <soap12:address location="http://58.247.122.34:91/WeChartInterface.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
