@@ -20,7 +20,7 @@ namespace SUC_Sys.Controllers
         {
             //默认有两个标注
             List<Map> mapList = new List<Map>() {
-                new Map(){ CenterLat=108.2849540M, CenterLng=22.86568101M, Zoom=1},
+                new Map(){ CenterLat=108.2849540M, CenterLng=22.86446101M, Zoom=1},
                 new Map(){ CenterLat=108.2143900M, CenterLng=22.8398250M, Zoom=2},
                 new Map(){ CenterLat=108.3389230M, CenterLng=22.7392360M, Zoom=2},
                 new Map(){ CenterLat=108.3942690M, CenterLng=22.8066730M, Zoom=3},
