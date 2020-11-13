@@ -3,23 +3,6 @@
     ViewBag.Title = "无人机设备信息管理";
 }
 
-@*<link href="~/assets/css/framework-ui.css" rel="stylesheet" />*@
-@*<style>
-        .popup {
-            width: auto;
-            height: 30px;
-            position: absolute;
-            margin-left: 30px;
-            margin-top: -30px;
-        }
-
-        .child {
-            /*width: 100px;*/
-            height: 400px;
-            display: none;
-        }
-    </style>*@
-@*<link href="~/assets/js/bootstrap/bootstrap.min.css" rel="stylesheet" />*@
 
 <div class="main-content">
     <div class="main-content-inner">
@@ -95,11 +78,28 @@
             //height: $(window).height() - 128,
             height: "100%",
             width: "100%",
-            colNames: ['主键', '无人机序列号', '工作状态', '出厂日期', '创建时间', '创建人', '更新时间', '更新人', '备注', '操作'],
+            colNames: ['主键', '无人机序列号', '工作状态','图片', '出厂日期', '创建时间', '创建人', '更新时间', '更新人', '备注', '操作'],
             colModel: [
                 { name: 'UavDataId', index: 'UavDataId', width: 55, hidden: true },
                 { name: 'UavSerialNO', index: 'UavSerialNO', width: 90, align: 'left' },
                 { name: 'WorkState', index: 'WorkState', width: 90, align: 'left', formatter: 'select', editoptions: { value: "0:巡检;1:空闲;2:故障" } },
+                {
+                    name: "ImgPath", index: "ImgPath", width: 280, editable: true, sortable: true
+                    , formatter: function (cellvalue, options, rowObject) {
+                        imgid = rowObject.ImgPath;
+                        if (cellvalue == null) {
+                            cellvalue = "";
+                        }
+                        else {
+                            cellvalue = cellvalue.replace("~/", "../../");
+                        }
+
+                       // var temp = " <img id='" + imgid + "' src='" + cellvalue + "' border='0' height='30px' onmouseover='imgPop(this)'   onmouseout='imgDispear(this)' />";
+                        var temp = " <img id='" + imgid + "' src='" + cellvalue + "' border='0' height='30px'  />";
+                        //temp = temp + "<div class='popup'><img src='" + cellvalue + "' id='" + imgid + "Child' class='child'></img></div>";
+                        return temp;
+                    }
+                },
                 {
                     name: 'ProductDate', index: 'ProductDate', width: 120,
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d H-i:s', newformat: 'Y-m-d H-i:s' }
@@ -121,6 +121,7 @@
 
                 }
             ],
+            
             altRows: true,
             rowList: [10, 20, 30],
             pager: "#gridPager",
@@ -149,7 +150,7 @@
     function btn_edit(id) {
         //var keyValue = $("#gridList").jqGridRowValue().UavDataId;
         var keyValue = id;
-        console.log(keyValue);
+        
         
         $.modalOpen({
             id: "Form",
@@ -198,7 +199,32 @@
     function uavrtc() {
         window.open("/UavRTCMonitor/Index");
     }
+    function imgPop(tag) {
+        var currentId = tag.id;
+        $("#" + tag.id + "Child").css("display", "block");
+    }
 
+    function imgDispear(tag) {
+        var currentId = tag.id;
+        $("#" + tag.id + "Child").css("display", "none");
+    }
+    function clacImgZoomParam(maxWidth, maxHeight, width, height) {
+        var param = { top: 0, left: 0, width: width, height: height };
+        if (width > maxWidth || height > maxHeight) {
+            rateWidth = width / maxWidth;
+            rateHeight = height / maxHeight;
+            if (rateWidth > rateHeight) {
+                param.width = maxWidth;
+                param.height = Math.round(height / rateWidth);
+            } else {
+                param.width = Math.round(width / rateHeight);
+                param.height = maxHeight;
+            }
+        }
+        param.left = Math.round((maxWidth - param.width) / 2);
+        param.top = Math.round((maxHeight - param.height) / 2);
+        return param;
+    }
 </script>
 
 @*<div class="topPanel">

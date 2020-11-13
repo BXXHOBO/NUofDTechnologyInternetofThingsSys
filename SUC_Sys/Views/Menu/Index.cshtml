@@ -592,13 +592,14 @@
             var MenuName = $("#MenuName").val();
             var LinkUrl = $("#LinkUrl").val();
             var SortID = $("#SortID").val();
+            var Icon = $("#Icon").val();
             var ParentNo = $("#ParentNo").val();
             
             $.ajax({
                 type: "POST",
                 url: "/Menu/Submit",
                 dataType: "json",
-                data: { "MenuId": MenuId, "MenuCode": MenuCode, "MenuName": MenuName, "LinkUrl": LinkUrl, "SortID": SortID, "ParentNo": ParentNo },
+                data: { "MenuId": MenuId, "MenuCode": MenuCode, "MenuName": MenuName, "LinkUrl": LinkUrl, "SortID": SortID, "Icon": Icon, "ParentNo": ParentNo },
                 success: function (data) {
                     if (data.IsSuccess) {
                         alert("操作成功！");

@@ -66,24 +66,6 @@
       <DependentUpon>ModelData.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SUC_AuditOffice.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SUC_ClassInfo.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SUC_ClaTeaCurAssociative.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SUC_Course.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SUC_CourseType.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SUC_Courseware.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
     <Compile Include="SUC_Machine.cs">
       <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
@@ -108,9 +90,6 @@
     <Compile Include="SUC_UavSortieData.cs">
       <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
-    <Compile Include="SUC_UploadAndAudit.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
     <Compile Include="t_code_rules.cs">
       <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
@@ -126,13 +105,7 @@
     <Compile Include="t_user.cs">
       <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
-    <Compile Include="v_ClaTeaCurAssociative.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
     <Compile Include="V_SortiePatition.cs">
-      <DependentUpon>ModelData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="v_SUC_Courseware.cs">
       <DependentUpon>ModelData.tt</DependentUpon>
     </Compile>
     <Compile Include="v_user.cs">

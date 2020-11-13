@@ -151,6 +151,7 @@ namespace SUC_EntityBLL
                     entity.MenuCode = menu.MenuCode;
                     entity.ParentNo = menu.ParentNo;
                     entity.SortID = menu.SortID;
+                    entity.Icon = menu.Icon;
                     entity.LinkUrl = menu.LinkUrl;
                     entity.ModifyBy = user.UserId;
                     entity.ModifyTime = DateTime.Now;
@@ -184,6 +185,7 @@ namespace SUC_EntityBLL
                         }
                         menu.MenuCode = codeStr;
                     }
+                    menu.IsWebPub= "1";
                     menu.CreateTime = DateTime.Now;
                     menu.CreateBy = user.UserId;
                     menu.ModifyTime = DateTime.Now;

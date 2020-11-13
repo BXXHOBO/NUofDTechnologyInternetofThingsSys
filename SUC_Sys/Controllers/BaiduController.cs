@@ -1,32 +1,32 @@
-﻿using SY_DataEntity;
-using SY_EntityBLL;
+﻿
+using SUC_DataEntity;
+using SUC_EntityBLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ZFine.Code;
-using ZFine.Domain.Entity.SystemManage;
 
-namespace ZFine.Web.Areas.SYManage.Controllers
+
+namespace SUC_Sys.Controllers
 {
-    public class BaiduController : ControllerBase
+    public class BaiduController : Controller
     {
         //
         // GET: /SYManage/Baidu/
         private BLL_UavInfo bll = new BLL_UavInfo();
         [HttpGet]
-        public override ActionResult Index()
+        public  ActionResult Index()
         {
            
-            Cld_UavInfo model = bll.GetLastMonitorData();
+            SUC_UavInfo model = bll.GetLastMonitorData();
             return View(model); 
 
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
         [HttpGet]
-        public override ActionResult Form()
+        public  ActionResult Form()
         {
 
             string UavSerialNO = Request.QueryString["canshu1"] ?? "";
@@ -36,9 +36,9 @@ namespace ZFine.Web.Areas.SYManage.Controllers
             ViewData["sortie"] = Request.QueryString["canshu2"] ?? "";
             Common.ResultRes res = new Common.ResultRes();
             //BLL_UavInfo bll = new BLL_UavInfo();
-            List<Cld_UavInfo> dt = bll.GetUavListByUandS(UavSerialNO,sortie);
-            SY_EntityBLL.BLL_UavInfo bllData = new SY_EntityBLL.BLL_UavInfo();
-            Cld_UavInfo model = bllData.GetInfoByUavSerialNOandSortie(UavSerialNO,sortie);
+            List<SUC_UavInfo> dt = bll.GetUavListByUandS(UavSerialNO,sortie);
+             BLL_UavInfo bllData = new BLL_UavInfo();
+            SUC_UavInfo model = bllData.GetInfoByUavSerialNOandSortie(UavSerialNO,sortie);
             ViewData["lastlongitude"] = model.Longitude;
             ViewData["lastlatitude"] = model.Latitude;
             if (dt != null)
@@ -58,7 +58,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
         }
         [AcceptVerbs(HttpVerbs.Get)]
         [HttpGet]
-        public override ActionResult Details()
+        public  ActionResult Details()
         {
 
             ViewData["uavSerialNO"] = Request.QueryString["canshu1"] ?? "";

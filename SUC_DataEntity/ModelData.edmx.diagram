@@ -5,30 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8586360e581d492abc8715c789c4fb3a" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_AuditOffice" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_ClassInfo" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_ClaTeaCurAssociative" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Course" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_CourseType" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Courseware" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Machine" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Order" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_OrderDetails" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_OrderLog" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_UavData" Width="1.5" PointX="8.75" PointY="4.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_UavInfo" Width="1.5" PointX="8.75" PointY="8.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_UavSortieData" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_UploadAndAudit" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.t_code_rules" Width="1.5" PointX="10.75" PointY="4.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.t_menu" Width="1.5" PointX="10.75" PointY="8.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.t_role_menu" Width="1.5" PointX="4.75" PointY="11.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.t_roles" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.t_user" Width="1.5" PointX="12.75" PointY="4.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Site" Width="1.5" PointX="12.75" PointY="10.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.v_ClaTeaCurAssociative" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.v_SUC_Courseware" Width="1.5" PointX="0.75" PointY="14.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.v_user" Width="1.5" PointX="14.75" PointY="5.75" />
-        <EntityTypeShape EntityType="EPS_GridDBModel.V_SortiePatition" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Machine" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Order" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_OrderDetails" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_OrderLog" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_UavData" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_UavInfo" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_UavSortieData" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.t_code_rules" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.t_menu" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.t_role_menu" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.t_roles" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.t_user" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.SUC_Site" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.V_SortiePatition" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EPS_GridDBModel.v_user" Width="1.5" PointX="10.75" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

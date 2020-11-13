@@ -1,0 +1,524 @@
+﻿@model SUC_DataEntity.SUC_UavSortieData
+
+@{
+    ViewBag.Title = "视频监控";
+
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>无人机历史数据监控</title>
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/UavCloudimg/logo.ico">
+    <link href="~/assets/css/app.css" rel="stylesheet" />
+    <link href="~/assets/css/mapstyle.css" rel="stylesheet" />
+
+    <style type="text/css">
+        @@media (min-width: 1200px) {
+            .col-lg-6 {
+                width: 60%;
+            }
+
+            .col-lg-3 {
+                width: 40%;
+            }
+        }
+
+        .video-js {
+            width: 100%;
+            height: 100%;
+        }
+
+        .dataTitle {
+            color: #FFFFFF;
+            /*color: #5dc2fe;*/
+            letter-spacing: 3px;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 4px 2.5px;
+            cursor: default;
+        }
+
+        .dataTitle1 {
+            color: #FFFFFF;
+            /*color: #5dc2fe;*/
+            letter-spacing: 3px;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 4px 2.5px;
+            cursor: default;
+        }
+
+        .dataTitle > span {
+            margin-left: 20px;
+        }
+
+
+
+        .instr {
+            background-image: url('/assets/images/UavCloudimg/back.png');
+            background-size: 100% 100%;
+            border-radius: 4px;
+            border: none;
+            background-position: 0 10px;
+            background-repeat: no-repeat;
+        }
+
+        em {
+            font-style: normal;
+            font-size: 20px;
+            color: white;
+        }
+
+        .xpanel-wrapper-1 {
+            height: 100%;
+        }
+
+        .fill-h {
+            height: 80%;
+            min-height: 100%;
+        }
+
+        #container label {
+            max-width: none;
+        }
+    </style>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=67jMQ5DmYTe1TLMBKFUTcZAR"></script>
+    <link href="https://unpkg.com/video.js@6.2.5/dist/video-js.min.css" rel="stylesheet">
+
+    <script src="~/assets/js/My97DatePicker/WdatePicker.js"></script>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+
+<body class="bg01">
+
+    <header class=" header">
+        <h3>无人机历史数据监控平台</h3>
+    </header>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row fill-h">
+
+
+                <div class="col-lg-6 fill-h">
+                    <div class="xpanel-wrapper xpanel-wrapper-1">
+                        <div class="xpanel">
+                            <div class="fill-h" id="scatterMap">
+                                <video id='my-video' class='video-js vjs-big-play-centered' preload="auto" data-setup='{"controls":true,"loop": true,"autoplay": true}'>
+                                  
+                                    <source src="@Model.HistoryAddr" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 fill-h">
+                    <div class="xpanel-wrapper xpanel-wrapper-2">
+                        <div class="xpanel">
+                          
+                            <div style="width:100%;height:100%;border:1px solid gray" id="container" class="container">
+                            </div>
+                            <div id="allmap">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="xpanel-wrapper xpanel-wrapper-2">
+                        <div class="xpanel">
+                            <div class="fill-h" id="cityMap">
+
+
+                                <input type="hidden" id="uavSerialNO" value="@Model.UavSerialNO" />
+                                <input type="hidden" id="sortie" value="@Model.Sortie" />
+                                <input type="hidden" id="createtime" value="@Model.Rec_CreateTime" />
+                                <input type="hidden" id="lastlongitude" value="@ViewData["lastlongitude"]" />
+                                <input type="hidden" id="lastlatitude" value="@ViewData["lastlatitude"]" />
+
+                                <div class="dataTitle1">操作人:<span>@Model.Rec_CreateBy</span>于<span>@Model.Rec_CreateTime</span>创建了<span>@Model.Sortie</span>架次</div>
+                                <div class="dataTitle"><em>序列号：</em><span>@Model.UavSerialNO</span></div>
+                                <table>
+                                    <tr>
+                                        <td id="didian" class="dataTitle"><em>作业地点:</em><span id="operateaddr"></span></td>
+                                        <td id="work" class="dataTitle"><em>工作内容:</em><span id="workcontents"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dataTitle"><em>架次：</em><span>@Model.Sortie</span></td>
+                                        <td id="shijian" class="dataTitle"><em>当前播放时间:</em><span id="currenttime"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="jingdu" class="dataTitle"><em>经度:</em><span id="longitudeone"></span></td>
+                                        <td id="weidu" class="dataTitle">
+                                            <em>纬度:</em>
+                                            <span id="latitudeone"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="gaodu" class="dataTitle">
+                                            <em>高度:</em>
+                                            <span id="heightone"></span>
+                                        </td>
+                                        <td id="wendu" class="dataTitle">
+                                            <em>温度:</em>
+                                            <span id="temperatureone"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="shidu" class="dataTitle">
+                                            <em>湿度:</em>
+                                            <span id="humidityone"></span>
+                                        </td>
+                                        @*<td id="sudu" class="dataTitle">
+                                                <em>速度:</em>
+                                                <span id="speed"></span>
+                                            </td>*@
+                                    </tr>
+                                   
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a style="float:right;" onclick='toggleFullScreen();' /><i class="icon ion-arrow-expand"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/assets/js/jquery-3.4.1.min.js"></script>
+    <script src="~/assets/js/UavCloudjs/echarts-3.8.5.min.js"></script>
+    <script src="~/assets/js/UavCloudjs/echarts-map-china.js"></script>
+    <script src="~/assets/js/UavCloudjs/echarts-map-world.js"></script>
+    <script src="~/assets/js/UavCloudjs/echarts-china-provinces/jiangsu.js"></script>
+    <script src="~/assets/js/UavCloudjs/echarts-china-counties/jiang1su1_su1zhou1_kun1shan1shi4.js"></script>
+    <script src="~/assets/js/UavCloudjs/echarts-china-cities/jiang1_su1_su1_zhou1.js"></script>
+
+    <script src="https://unpkg.com/video.js@6.2.5/dist/video.min.js"></script>
+    <script src="https://unpkg.com/videojs-flash@2.0.0/dist/videojs-flash.min.js"></script>
+    <script type="text/javascript" src="http://lbsyun.baidu.com/jsdemo/data/points-sample-data.js"></script>
+    <script type="text/javascript">
+        options = {
+            autoplay: true,
+            muted: true
+        };
+
+        function getFDate(date) {
+            var d = eval('new ' + date.substr(1, date.length - 2));
+            var ar_date = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+            var ar_time = [d.getHours(), d.getMinutes(), d.getSeconds()];
+            for (var i = 0; i < ar_date.length; i++) ar_date[i] = dFormat(ar_date[i]);
+            for (var i = 0; i < ar_time.length; i++) ar_time[i] = dFormat(ar_time[i]);
+            return ar_date.join('-') + ' ' + ar_time.join(':');
+        }
+        function dFormat(i) {
+            return i < 10 ? "0" + i.toString() : i;
+        }
+        var video = videojs('my-video', options);
+
+
+
+        //百度地图部分
+        var map = new BMap.Map("container", { mapType: BMAP_HYBRID_MAP });
+        map.centerAndZoom(new BMap.Point(108.286157, 25.865544), 12);
+        map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
+        map.addControl(new BMap.OverviewMapControl());// 缩略图控件
+        var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+        map.addControl(ctrl_nav);//添加标准地图控件(左上角的放大缩小左右拖拽控件)
+
+        map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+        map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard(); //启用键盘上下左右键移动地图
+        map.enableContinuousZoom();   // 开启连续缩放效果
+        map.enableInertialDragging(); // 开启惯性拖拽效果
+
+        //添加地图类型控件
+        map.addControl(new BMap.MapTypeControl({
+            mapTypes: [
+                BMAP_NORMAL_MAP,
+                BMAP_HYBRID_MAP
+            ]
+        }));
+
+
+        //实时显示地图坐标 strat
+        map.addEventListener("mousemove", GetlngAndlat);
+        var lastlongitude = $("#lastlongitude").val();
+        var lastlatitude = $("#lastlatitude").val();
+        var llPoint = new BMap.Point(lastlongitude, lastlatitude);
+        map.panTo(llPoint);
+
+
+
+        ////单击获取点击的经纬度
+        //map.addEventListener("click", function (e) {
+        //    alert(e.point.lng + "," + e.point.lat);
+        //});
+
+        function GetlngAndlat(e) {
+            if (e.point.lng != null) {
+                document.getElementById("mouselng").innerHTML = e.point.lng;
+                document.getElementById("mouselat").innerHTML = e.point.lat;
+            }
+        }
+        //实时显示地图坐标 end
+
+        //测量距离 strat
+        function openGetDistance() {
+            var myDis = new BMapLib.DistanceTool(map);//map为上面已经初始化好的地图实例
+            myDis.open();
+        }
+        //测量距离 end
+
+
+        //左右击鼠标给地图上放marker strat 放标注
+        var marker_num = 0;
+        var isAddListen = -1;
+        function PutInMarker() {
+            //右键标记
+            if (isAddListen == -1) {
+                //k添加右键点击的监听事件
+                map.addEventListener("rightclick", putmarker);
+                isAddListen = 0;
+            }
+        }
+
+        var g_rightP = new BMap.Point(0, 0);
+        function putmarker(e) {
+            //放标注
+            var p1 = new BMap.Point(e.point.lng, e.point.lat);
+            g_rightP = p1;
+            var myIcon = new BMap.Icon("/image/green.png", new BMap.Size(24, 24));
+            var marker = new BMap.Marker(p1, { icon: myIcon });  // 创建标注
+
+            map.addOverlay(marker);              // 将标注添加到地图中
+
+            marker_num++;//标注索引，这个是个全局变量
+            var whichCar = window.external.setWhichCar(marker_num);
+            var label = new BMap.Label(whichCar + "号-坐标" + marker_num + ":" +
+            "(" + e.point.lng + "," + e.point.lat + ")", { offset: new BMap.Size(20, -10) });
+            marker.setLabel(label);
+        }
+        //左右击鼠标给地图上放marker end
+
+
+        //清除所有标注 start
+        function ClearAllMarkers() {
+            map.clearOverlays();
+            marker_num = 0;
+            isAddListen = -1;
+        }
+        //清除所有标注 end
+
+
+
+        //关闭监听事件，恢复对地图的操作 start
+        function CloseListener() {
+            map.removeEventListener("rightclick", putmarker);
+        }
+        //关闭监听事件，恢复对地图的操作 end
+
+        //坐标反查 start
+        function FindPosition(CurLng, CurLat) {
+            //百度地图API功能，经度，纬度
+            var point = new BMap.Point(CurLng, CurLat);
+            map.centerAndZoom(point, 20);
+        }
+        //坐标反查 end
+        //海量点
+        //if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
+        //    var points = [];  // 添加海量点数据
+        //    for (var i = 0; i < data.data.length; i++) {
+        //        points.push(new BMap.Point(data.data[i][0], data.data[i][1]));
+        //    }
+        //    var options = {
+        //        size: BMAP_POINT_SIZE_SMALL,
+        //        shape: BMAP_POINT_SHAPE_STAR,
+        //        color: '#d340c3'
+        //    }
+        //    var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+        //    pointCollection.addEventListener('click', function (e) {
+        //        alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        //    });
+        //    map.addOverlay(pointCollection);  // 添加Overlay
+        //} else {
+        //    alert('请在chrome、safari、IE8+以上浏览器查看本示例');
+        //}
+
+
+        //获取测试坐标数组2 start
+        function GetTest2GPS() {
+            var text = '{"Point":[{"x":"116.380960","y":"39.913280"},{"x":"116.380961","y":"39.913281"},{"x":"116.380962","y":"39.913282"},{"x":"116.380963","y":"39.913283"}]}'
+            window.external.LocateInfo(text);
+            return text;
+        }
+
+
+
+
+        //根据架次信息获取经纬度信息
+        function theFlight() {
+            var Sortie = $("#sortie").val();
+            var UavSerialNO = $("#uavSerialNO").val();
+            var opts = {
+                width: 0, // 信息窗口宽度
+                height: 0, // 信息窗口高度
+                title: "飞行信息", // 信息窗口标题
+                enableMessage: true, //设置允许信息窗发送短息
+                message: ""
+            }
+
+            $.ajax({
+                url: "/Baidu/GetSortiePointData",
+                data: { UavSerialNO: UavSerialNO, Sortie: Sortie },
+                dataType: 'json',
+                type: "Get",
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        if (data.ResultValue != null) {
+
+                         //var chartData=[];
+
+                            $.each(data.ResultValue, function (index, element) {
+
+                                //chartData.push(new BMap.Point(element.Longitude, element.Latitude));
+                                var myIcon2 = new BMap.Icon("/assets/images/Baidu/RedPoint.png", new BMap.Size(18, 14));//这个是你要显示坐标的图片的相对路径
+                                var ggPoint = new BMap.Point(element.Longitude, element.Latitude);
+                                var marker2 = new BMap.Marker(ggPoint, { icon: myIcon2 });
+                                map.addOverlay(marker2);
+                                marker2.disableMassClear();//禁止清除操作
+                                //var infoWindow = new BMap.InfoWindow("速度:" + element.Speed + "<br>高度:" + element.Altitude + "<br>经度:" + element.Longitude + "<br>纬度:" + element.Latitude, opts); // 创建信息窗口对象
+                                var infoWindow = new BMap.InfoWindow("高度:" + element.Altitude + "<br>经度:" + element.Longitude + "<br>纬度:" + element.Latitude, opts); // 创建信息窗口对象
+                                map.openInfoWindow(infoWindow, ggPoint); //开启信息窗口
+
+
+                            });
+
+                      
+
+                        }
+                    }
+
+
+                }
+            });
+        }
+        theFlight();
+
+
+
+        setInterval(function () {
+
+            var currentTime = video.currentTime();
+
+            currentTime = Math.round(currentTime);//当前时间取整
+
+            $("#currenttime").html(currentTime + "秒");
+
+            var Sortie = $("#sortie").val();
+            var UavSerialNO = $("#uavSerialNO").val();
+            $.ajax({
+                url: "/UavVideoData/GetVideoTime",
+                dataType: 'json',
+                type: "POST",
+                data: { currentTime: currentTime, UavSerialNO: UavSerialNO, Sortie: Sortie, },
+                success: function (data) {
+
+                    $("#longitudeone").html(data.ResultValue.Longitude);
+                    $("#latitudeone").html(data.ResultValue.Latitude);
+
+                    map.clearOverlays();
+
+                    var myIcon = new BMap.Icon("/assets/images/Baidu/bd_03.png", new BMap.Size(10, 10));//这个是你要显示坐标的图片的相对路径
+                    var ggPoint = new BMap.Point(data.ResultValue.Longitude, data.ResultValue.Latitude);
+                    var marker = new BMap.Marker(ggPoint, { icon: myIcon });
+
+                    var label = new BMap.Label("高度:" + data.ResultValue.Altitude, { offset: new BMap.Size(30, -10) });
+                    label.setStyle({
+                        color: "black",
+                        fontSize: "15px",
+                        height: "20px",
+                        lineHeight: "20px",
+
+                        border:0,
+                        fontFamily: "SimHei"
+                    });
+                    map.addOverlay(marker);
+                    marker.setLabel(label);
+
+
+                    $("#heightone").html(data.ResultValue.Altitude);
+                    $("#temperatureone").html(data.ResultValue.Temperature);
+                    $("#humidityone").html(data.ResultValue.Humidity);
+                    //$("#speed").html(data.ResultValue.Speed);
+                    var dataInfo = getFDate(data.ResultValue.Rec_CreateTime)
+                    $("#createtimeone").html(dataInfo);
+                }
+            });
+
+        }, 2000);
+
+
+
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement && // alternative standard method
+                !document.mozFullScreenElement && !document.webkitFullscreenElement) {// current working methods
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+            }
+        }
+
+        function GettheAddr() {
+            var Sortie = $("#sortie").val();
+            var UavSerialNO = $("#uavSerialNO").val();
+            $.ajax({
+                url: "/UavSortieData/GetAddrInfo",
+                data: { UavSerialNO: UavSerialNO, Sortie: Sortie },
+                dataType: 'json',
+                type: "post",
+                success: function (data) {
+                    $("#operateaddr").html(data.ResultValue.OperateAddr);
+                    $("#workcontents").html(data.ResultValue.WorkContents);
+
+
+                }
+            });
+
+        }
+        GettheAddr();
+
+
+
+
+    </script>
+</body>
+
+</html>
+

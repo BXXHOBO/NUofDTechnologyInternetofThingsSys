@@ -25,12 +25,6 @@ namespace SUC_DataEntity
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<SUC_AuditOffice> SUC_AuditOffice { get; set; }
-        public virtual DbSet<SUC_ClassInfo> SUC_ClassInfo { get; set; }
-        public virtual DbSet<SUC_ClaTeaCurAssociative> SUC_ClaTeaCurAssociative { get; set; }
-        public virtual DbSet<SUC_Course> SUC_Course { get; set; }
-        public virtual DbSet<SUC_CourseType> SUC_CourseType { get; set; }
-        public virtual DbSet<SUC_Courseware> SUC_Courseware { get; set; }
         public virtual DbSet<SUC_Machine> SUC_Machine { get; set; }
         public virtual DbSet<SUC_Order> SUC_Order { get; set; }
         public virtual DbSet<SUC_OrderDetails> SUC_OrderDetails { get; set; }
@@ -38,16 +32,13 @@ namespace SUC_DataEntity
         public virtual DbSet<SUC_UavData> SUC_UavData { get; set; }
         public virtual DbSet<SUC_UavInfo> SUC_UavInfo { get; set; }
         public virtual DbSet<SUC_UavSortieData> SUC_UavSortieData { get; set; }
-        public virtual DbSet<SUC_UploadAndAudit> SUC_UploadAndAudit { get; set; }
         public virtual DbSet<t_code_rules> t_code_rules { get; set; }
         public virtual DbSet<t_menu> t_menu { get; set; }
         public virtual DbSet<t_role_menu> t_role_menu { get; set; }
         public virtual DbSet<t_roles> t_roles { get; set; }
         public virtual DbSet<t_user> t_user { get; set; }
         public virtual DbSet<SUC_Site> SUC_Site { get; set; }
-        public virtual DbSet<v_ClaTeaCurAssociative> v_ClaTeaCurAssociative { get; set; }
-        public virtual DbSet<v_SUC_Courseware> v_SUC_Courseware { get; set; }
-        public virtual DbSet<v_user> v_user { get; set; }
         public virtual DbSet<V_SortiePatition> V_SortiePatition { get; set; }
+        public virtual DbSet<v_user> v_user { get; set; }
     }
 }

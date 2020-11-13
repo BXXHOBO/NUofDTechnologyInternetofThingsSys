@@ -12,7 +12,6 @@ namespace SUC_Sys.Controllers
     public class RolesController : Controller
     {
         SUC_EntityBLL.BLL_Oper op = new SUC_EntityBLL.BLL_Oper();
-        BLL_Sef bLL_Sef = new BLL_Sef();
 
         // GET: /Roles/角色
 

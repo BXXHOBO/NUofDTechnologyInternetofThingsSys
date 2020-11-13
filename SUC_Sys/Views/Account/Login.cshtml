@@ -40,6 +40,14 @@
             -webkit-transition-delay: 99999s;
             -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
         }
+        .boardLogin .fontsysname {
+            width: 100%;
+            font-size: 25px;
+            color: #fff;
+            
+            max-width: 326px;
+            margin-bottom: 40px;
+        }
     </style>
 
 
@@ -47,17 +55,23 @@
 </head>
 <body >
     <div class="wp animsition">
+        
         <div class="boardLogin">
-            <a class="logo" style="font-size:28px;">
-               
-                @*<img src="~/image/logo.png" />*@
-                蜂群无人机集群作战系统系统
-            </a>
+            @*<a class="logo">
+
+            <img src="~/image/logo.png" />
+
+
+        </a>*@
+            
+            <div class="fontsysname">
+                <span >蜂群无人机集群作战系统</span>
+            </div>
             <form action="/Account/LoginOn1" method="post" id="login_form">
                 <div>
                     <div class="inpGroup">
                         <span class="loginIco1"></span>
-                        <input type="text" id="username"   name="username"  placeholder="请输入您的用户名">
+                        <input type="text" id="username" name="username" placeholder="请输入您的用户名">
                     </div>
                     <div class="prompt">
                         <p class="error">用户名错误或不存在</p>

@@ -175,43 +175,8 @@
                                 @Html.DropDownListFor(c => c.UserRoles, (List<SelectListItem>)ViewData["RolesTypeList"], new { @class = "col-xs-10 col-sm-5" })
                             </div>
                         </div>
-                        <div class="form-group" id="External">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">是否外聘教师</label>
-                            <div class="radio">
-                                <label style="margin-left: 20px;margin-right: 10px;">
-                                    @{
-                                        bool ExternalFlag = false;
-                                        if (string.IsNullOrEmpty(Model.ExternalType.ToString()))
-                                        {
-                                            ExternalFlag = true;
-                                        }
-                                        else
-                                        {
-                                            if (Model.ExternalType.ToString().Equals("0"))
-                                            {
-                                                ExternalFlag = true;
-                                            }
-                                            else
-                                            {
-                                                ExternalFlag = false;
-                                            }
-                                        }
-                                    }
-                                    @Html.RadioButton("ExternalType", "0", ExternalFlag, new { id = "e_unsure" })
-                                    否
-                                </label>
-                                <label style="margin-left: 0 !important;margin-right: 10px;">
-                                    @Html.RadioButton("ExternalType", "1", !ExternalFlag, new { id = "e_sure" })
-                                    是
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">所属教研室</label>
-                            <div class="col-sm-9">
-                                @Html.DropDownListFor(c => c.AuditOfficeCode, (List<SelectListItem>)ViewData["AuditOfficeList"], new { @class = "col-xs-10 col-sm-5" })
-                            </div>
-                        </div>
+                       
+                       
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">入职时间 </label>
                             <div class="col-sm-9">
@@ -460,14 +425,9 @@
             var telephone = $("#Telephone").val().trim();
             var s_male = $('input:radio[name="Sex"]:checked').val();                //性别
             var userRoles = $('#UserRoles').val();
-            var ExternalType = $('input:radio[name="ExternalType"]:checked').val()
-            var AuditOfficeCode = $('#AuditOfficeCode').val().trim();
+          
 
-            if (AuditOfficeCode == null ||AuditOfficeCode == "" || AuditOfficeCode == undefined) {
-                alert("所属教研室不能为空！");
-                $("#AuditOfficeCode").focus();
-                return;
-            }
+       
 
             if (userCode == null || userCode == "" || userCode == undefined) {
                 alert("用户账号不能为空！");
@@ -504,27 +464,27 @@
                     }
                 }
 
-                if (userRoles != "R00015") {
-                    ExternalType = "0";
-                } else {
-                    ExternalType = $('input:radio[name="ExternalType"]:checked').val()
-                    if (ExternalType == 1) {
-                        if (userCode.length == 7) {
-                            var checkwp = userCode.substring(2, 0);
-                            var checknum = userCode.substring(7, 2);
-                            var UserCodereg = /[0-9]{5}/;
-                            if (checkwp != "WP" && !UserCodereg.test(checknum)) {
-                                alert("输入信息格式错误")
-                                return;
-                            }
-                        } else if (userCode.length != 7) {
-                            console.log(userCode.length)
-                            alert("输入信息格式错误")
-                            return;
-                        }
-                    }
+                //if (userRoles != "R00015") {
+                //    ExternalType = "0";
+                //} else {
+                //    ExternalType = $('input:radio[name="ExternalType"]:checked').val()
+                //    if (ExternalType == 1) {
+                //        if (userCode.length == 7) {
+                //            var checkwp = userCode.substring(2, 0);
+                //            var checknum = userCode.substring(7, 2);
+                //            var UserCodereg = /[0-9]{5}/;
+                //            if (checkwp != "WP" && !UserCodereg.test(checknum)) {
+                //                alert("输入信息格式错误")
+                //                return;
+                //            }
+                //        } else if (userCode.length != 7) {
+                //            console.log(userCode.length)
+                //            alert("输入信息格式错误")
+                //            return;
+                //        }
+                //    }
 
-                }
+                //}
 
             } else {
                 newpassword = "";
@@ -577,9 +537,8 @@
                 "Telephone": telephone,
                 "Addr": $("#Addr").val(),
                 "Remark": $("#remark").val(),
-                "UserRoles": $("#UserRoles").val(),
-                "ExternalType": ExternalType,
-                "AuditOfficeCode": AuditOfficeCode
+                "UserRoles": $("#UserRoles").val()
+              
             }
             $.ajax({
                 url: "/User/EditByUserInfo?editFlag=" + isEdit,

@@ -32,14 +32,14 @@
                 <li class="active">用户管理</li>
             </ul><!-- /.breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
+            <!--<div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
                         <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
-            </div><!-- /.nav-search -->
+            </div>--><!-- /.nav-search -->
         </div>
 
         <div class="page-content">
@@ -229,8 +229,8 @@
                             d = "<a id=\"user_del" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;\" class=\"ace-icon fa fa-trash-o red\"   onclick=\"DeleteUserById(" + rows.UserId + ")\"></a>";
                             a = "<a id=\"user_add" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-check green\"  onclick=\"SaveUserById(" + grid.rowId + ")\"></a>";
                             c = "<a id=\"user_cancel" + grid.rowId + "\" href=\"#\" style=\"color:#f60;margin:5px;display:none;\" class=\"ace-icon fa fa-times red\"   onclick=\"CancelUserById(" + grid.rowId + ")\"></a>";
-                            f = "<a id=\"roles_filespower" + grid.rowId + "\" name='zzc' href=\"#\"  style=\"margin:5px;\" class=\"ace-icon fa fa-file-powerpoint-o\" onclick=\"PowerModel('" + rows.UserCode + "')\" title=\"文件夹权限设置\" ></a>";
-                            return e + d + a + c + f;
+                          
+                            return e + d + a + c ;
                         }
                     }
                 ],
@@ -479,7 +479,7 @@
         };
         //2020 - 10 - 28 - 16: 23
     </script>
-    <script>
+    @*<script>
         //树文件夹权限配置
         layui.extend({
             dtree: '{/}../layui_ext/dtree/dtree'
@@ -569,5 +569,5 @@
                 }
             });
         }
-    </script>
+    </script>*@
 }

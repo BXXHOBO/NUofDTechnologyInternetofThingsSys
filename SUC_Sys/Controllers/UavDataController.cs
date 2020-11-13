@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace SUC_Sys.Controllers
 {
+    //无人机设备信息
     public class UavDataController : BaseHandle
     {
         //
@@ -17,17 +18,34 @@ namespace SUC_Sys.Controllers
 
        
         private BLL_UavData bll = new BLL_UavData();
+        private BLL_UavSortieData sortiebll = new BLL_UavSortieData();
         //WechatPushHandler push = new WechatPushHandler();
         public ActionResult Index()
         {
-            return View();
+            t_user entity = (t_user)Session["Users"];
+            if (entity == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                return View();
+            }
         }
         [HttpGet]
         public  ActionResult Form()
         {
-            SUC_UavData data = new SUC_UavData();
-            data.UavSerialNO = "";
-            return View(data);
+            t_user entity = (t_user)Session["Users"];
+            if (entity == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                SUC_UavData data = new SUC_UavData();
+                data.UavSerialNO = "";
+                return View(data);
+            }
         }
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
@@ -171,6 +189,7 @@ namespace SUC_Sys.Controllers
             }
             model.UavSerialNO = uavdataInfo.UavSerialNO;
             model.WorkState = uavdataInfo.WorkState;
+            model.ImgPath = uavdataInfo.ImgPath;
             model.ProductDate = uavdataInfo.ProductDate;    
             model.Remark = uavdataInfo.Remark ?? "";
             ViewData["isAdd"] = isAdd;
@@ -253,6 +272,7 @@ namespace SUC_Sys.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        //获取工作的无人机
         public JsonResult GetFlightUav()
         {
             Common.ResultRes res = new Common.ResultRes();
@@ -275,6 +295,31 @@ namespace SUC_Sys.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
+        [AcceptVerbs(HttpVerbs.Get)]
+        //获取工作的无人机
+        public JsonResult GetFlightUavbyUavSerialNO(string uavSerialNo)
+        {
+            Common.ResultRes res = new Common.ResultRes();
+            BLL_UavData bll = new BLL_UavData();
+
+            List<SUC_UavSortieData> dt = sortiebll.GetFlightUavbyUavSerialNO(uavSerialNo);
+
+
+
+            if (bll != null)
+            {
+                res.IsSuccess = true;
+                res.ResultValue = dt;
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                res = new Common.ResultRes();
+                res.IsSuccess = true;
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [AcceptVerbs(HttpVerbs.Get)]
         [ValidateInput(false)]
         public JsonResult GetNumOfUavWorkInfo()//获取表的巡检飞机的数量
@@ -309,6 +354,54 @@ namespace SUC_Sys.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
-
+        /// <summary>
+        /// 保存图片
+        /// </summary>
+        /// <returns></returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
+        public JsonResult Upload()
+        {
+            Common.ResultRes res = new Common.ResultRes();
+            try
+            {
+                HttpPostedFileBase file = Request.Files["postFile"];
+                if (file.FileName == "")
+                {
+                    res.IsSuccess = false;
+                    res.Msg = "请选择导入文件";
+                }
+                else if (file.ContentLength > 0)
+                {
+                    #region
+                    string extensionName = file.FileName.Substring(file.FileName.LastIndexOf('.')).ToLower();
+                    if (!extensionName.Equals(".jpg") && !extensionName.Equals(".gif") && !extensionName.Equals(".png") && !extensionName.Equals(".bmp"))
+                    {
+                        res.IsSuccess = false;
+                        res.Msg = "导入图片格式不正确";
+                        return Json(res, JsonRequestBehavior.AllowGet);
+                    }
+                    string file_name = Guid.NewGuid().ToString() + extensionName;
+                    string fileNamePath = "~/upload/Icon/" + System.IO.Path.GetFileName(file_name);
+                    file.SaveAs(Server.MapPath(fileNamePath));
+                    res.IsSuccess = true;
+                    res.ResultValue = fileNamePath;
+                    #endregion
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException == null)
+                {
+                    res.Msg = e.Message;
+                }
+                else
+                {
+                    res.Msg = e.InnerException.Message;
+                }
+                res.IsSuccess = false;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
     }
 }

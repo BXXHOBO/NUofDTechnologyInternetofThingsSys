@@ -27,10 +27,6 @@ namespace SUC_DataEntity
         public string Remark { get; set; }
         public string UserRoles { get; set; }
         public string RoleName { get; set; }
-        public string AuditOfficeCode { get; set; }
-        public string AuditOfficeName { get; set; }
         public int Disabled { get; set; }
-        public string Expr1 { get; set; }
-        public Nullable<int> ExternalType { get; set; }
     }
 }

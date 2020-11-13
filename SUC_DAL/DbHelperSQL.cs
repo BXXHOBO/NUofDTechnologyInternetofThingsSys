@@ -18,7 +18,7 @@ namespace SUC_DAL
     {
         //数据库连接字符串(web.config来配置)，可以动态更改connectionString支持多数据库.		
         //public static string connectionString = "Data Source=.\\sql2012;Initial Catalog=AuthorityDemo;Persist Security Info=True;User ID=sa;Password=sa2016";
-        public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["TRM_SysConnectionString"].ToString();
+        public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["SUC_SYSConnectionString"].ToString();
 
         public DbHelperSQL()
         {

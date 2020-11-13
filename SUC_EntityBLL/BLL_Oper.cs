@@ -247,7 +247,6 @@ namespace SUC_EntityBLL
                     user.UserRoles = model.UserRoles;
                     user.ModifyTime = model.ModifyTime;
                     user.ModifyBy = model.ModifyBy;
-                    user.AuditOfficeCode = model.AuditOfficeCode;
                     user.Disabled = model.Disabled;
                     user.Remark = model.Remark;
                     if (_DataEntities.SaveChanges() > 0)
@@ -311,13 +310,7 @@ namespace SUC_EntityBLL
                 return _DataEntities.t_roles.Where(o => o.Disabled == 0).ToList();
             }
         }
-        public List<SUC_AuditOffice> GetAuditOffice()
-        {
-            using (var _DataEntities = new SUC_SYSContainer())
-            {
-                return _DataEntities.SUC_AuditOffice.Where(o => o.Disabled == 0).ToList();
-            }
-        }
+      
         /// <summary>
         /// 根据角色编号查询角色信息
         /// </summary>

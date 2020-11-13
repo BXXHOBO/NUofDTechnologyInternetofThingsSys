@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewBag.Title = "无人机数据信息";
+}
+
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="menu-icon fa fa-database"></i>
+                    <a href="#">仓库管理</a>
+                </li>
+                <li class="active">无人机信息管理</li>
+            </ul><!-- /.breadcrumb -->
+
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>无人机数据信息管理</h1>
+            </div><!-- /.page-header -->
+            <div class="row content_flex" style="margin-bottom:10px;">
+
+                <div class="col-xs-12">
+                    <input id="txt_keyword" placeholder="架次/创建人" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;" />
+                    @*<label>时间：</label>从
+                        <input id="startDate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:00:00' });" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;border-radius: 3px" />&nbsp;到
+                        <input id="endDate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:00:00' });" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;border-radius: 3px" />*@
+                    <button class="btn btn-primary btn-sm" id="btn_search" style="margin-bottom:3px;">查询</button>
+
+                    <button class="btn btn-primary btn-sm" id="NF-add" style="margin-bottom:3px;" onclick="btn_add()">添加</button>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div  style="overflow-x: scroll;">
+
+                    <table id="gridList"></table>
+
+                    <div id="gridPager"></div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script src="~/assets/js/bootstrap/bootstrap.js"></script>
+<script src="~/assets/js/layout/jquery.layout.js"></script>
+<script src="~/assets/js/jqgrid/grid.locale-cn.js"></script>
+<script src="~/assets/js/jqgrid/jqgrid.min.js"></script>
+<script src="~/assets/js/dialog/dialog.js"></script>
+<script src="~/assets/js/framework-ui.js"></script>
+
+<script>
+
+    $(function () {
+        gridList();
+
+    })
+    //操作栏按钮
+    var buttonFormatter = function (value, grid, rows, state) {
+
+        g = "<button onclick=\"btn_edit('" + rows.UavInfoId + "' )\" >修改</button>";
+        h = "<button onclick=\"btn_delete('" + rows.UavInfoId + "')\">删除</button>";
+        return g + h;
+    }
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/UavInfo/GetGridJson",
+            //height: $(window).height() - 128,
+            height: "100%",
+            width: 2000,
+            colNames: ['主键', '无人机序列号', '作业日期时间', '架次', '视频地址', '经度', '纬度', '高度(m)', '温度(℃)', '湿度(%RH)', '速度(m/s)', '压力(Pa)', '创建时间', '创建人', '更新时间', '更新人', '备注', '操作'],
+            colModel: [
+                { name: 'UavInfoId', index: 'UavInfoId', width: 55, hidden: true },
+                { name: 'UavSerialNO', index: 'UavSerialNO', width: 90, align: 'left' },
+                {
+                    name: 'OperationDate', index: 'OperationDate', width: 150,
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H-i:s', newformat: 'Y-m-d H-i:s' }
+                },
+                { name: 'Sortie', index: 'Sortie', width: 90, align: 'left' },
+                { name: 'VideoAddr', index: 'VideoAddr', width: 100, align: 'left' },
+                { name: 'Longitude', index: 'Longitude', width: 90, align: 'left' },
+                { name: 'Latitude', index: 'Latitude', width: 90, align: 'left' },
+                { name: 'Altitude', index: 'Altitude', width: 90, align: 'left' },
+                { name: 'Temperature', index: 'Temperature', width: 90, align: 'left' },
+                { name: 'Humidity', index: 'Humidity', width: 90, align: 'left' },
+                { name: 'Speed', index: 'Speed', width: 90, align: 'left' },
+                { name: 'AtmosPressure', index: 'AtmosPressure', width: 90, align: 'left' },
+                {
+                    name: 'Rec_CreateTime', index: 'Rec_CreateTime', width: 80, align: "left",
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H-i:s', newformat: 'Y-m-d H-i:s' }
+                },
+                { name: 'Rec_CreateBy', index: 'Rec_CreateBy', width: 80, align: "left" },
+                {
+                    name: 'Rec_ModifyTime', index: 'Rec_ModifyTime', width: 80, align: "left",
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H-i:s', newformat: 'Y-m-d H-i:s' }
+                },
+                { name: 'Rec_ModifyBy', index: 'Rec_ModifyBy', width: 150, sortable: false },
+                { name: 'Remark', index: 'Remark', width: 150, sortable: false },
+                {
+                    name: 'myac', index: '', width: 110, fixed: true, sortable: false, resize: false,
+                    formatter: buttonFormatter
+
+                }
+            ],
+            altRows: true,
+            multiselect: true,
+            viewrecords: true,
+            autowidth: false,
+            shrinkToFit: false,
+            autoScroll: true, //开启水平滚动条
+            rowList: [10, 20, 30],
+            pager: "#gridPager",
+            sortname: 'UavInfoId asc,Rec_CreateTime desc,Rec_ModifyTime desc',
+            viewrecords: true
+        });
+
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增信息",
+            url: "/UavInfo/Form",
+            width: "700px",
+            height: "510px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit(id) {
+        //var keyValue = $("#gridList").jqGridRowValue().UavInfoId;
+        var keyValue = id;
+        $.modalOpen({
+            id: "Form",
+            title: "修改信息",
+            url: "/UavInfo/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "510px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete(id) {
+
+
+        $.ajax({
+            url: "/UavInfo/DeleteForm",
+            data: { keyValue: id },
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+                console.log(data.message);
+                if (data.state == "success") {
+                    $.modalMsg(data.message, data.state);
+                    window.location.reload();
+
+                } else {
+                    $.modalAlert(data.message, data.state);
+                }
+
+            }
+        });
+
+
+    }
+
+
+
+</script>
+
+@*<div class="topPanel">
+        <div class="toolbar">
+            <div class="btn-group">
+                <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+            </div>
+            <div class="btn-group">
+                <a id="NF-add" class="btn btn-primary dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>新建信息表</a>
+            </div>
+            <div class="operate">
+                <ul class="nav nav-pills">
+                    <li class="first">已选中<span>1</span>项</li>
+                    <li><a id="NF-edit" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改信息</a></li>
+                    <li><a id="NF-delete" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除信息</a></li>
+                    <li class="split"></li>
+                </ul>
+                <a href="javascript:;" class="close"></a>
+            </div>
+            <script>$('.toolbar').authorizeButton()</script>
+        </div>
+        <div class="search">
+            <table>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <input id="txt_keyword" type="text" class="form-control" placeholder="架次/创建人" style="width: 200px;">
+                            <span class="input-group-btn">
+                                <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="gridPanel">
+        <table id="gridList"></table>
+        <div id="gridPager"></div>
+    </div>*@
+

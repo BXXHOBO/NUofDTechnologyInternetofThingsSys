@@ -16,9 +16,6 @@ namespace TRM_Sys.Controllers
     {
         SUC_EntityBLL.BLL_Oper op = new SUC_EntityBLL.BLL_Oper();
 
-        SUC_EntityBLL.BLL_AuditOffice office = new SUC_EntityBLL.BLL_AuditOffice();
-        BLL_Sef bLL_Sef = new BLL_Sef();
-
         // GET: User
         public ActionResult Index()
         {
@@ -61,7 +58,6 @@ namespace TRM_Sys.Controllers
             ViewData["editFlag"] = editFlag;
             t_user model = new t_user();
             ViewData["RolesTypeList"] = Load();
-            ViewData["AuditOfficeList"] = AuditLoad();
             ViewData["NewNo"] = "";
             if (id != null)
             {
@@ -83,25 +79,6 @@ namespace TRM_Sys.Controllers
                     sl.Value = item.RoleCode.ToString();
 
                     sl.Text = item.RoleName.ToString();
-
-                    lsl.Add(sl);
-                }
-            }
-            return lsl;
-        }
-        public List<SelectListItem> AuditLoad()
-        {
-            List<SelectListItem> lsl = new List<SelectListItem>();
-            List<SUC_AuditOffice> list = op.GetAuditOffice().ToList();
-            lsl.Add(new SelectListItem { Text = "请选择", Value = "" });
-            if (list != null && list.Count > 0)
-            {
-                foreach (var item in list)
-                {
-                    SelectListItem sl = new SelectListItem();
-                    sl.Value = item.AuditOfficeCode.ToString();
-
-                    sl.Text = item.AuditOfficeName.ToString();
 
                     lsl.Add(sl);
                 }
@@ -255,8 +232,6 @@ namespace TRM_Sys.Controllers
                 model.ModifyTime = DateTime.Now;
             }
             //产品基本资料
-            model.ExternalType = userInfo.ExternalType;     //是否外聘教师
-            model.AuditOfficeCode = userInfo.AuditOfficeCode;//属于哪个教研室
             model.UserName = userInfo.UserName ?? "";
             model.Email = userInfo.Email ?? "";
             model.Sex = userInfo.Sex ?? "0";
@@ -265,7 +240,6 @@ namespace TRM_Sys.Controllers
             model.Remark = userInfo.Remark ?? "";
             model.UserRoles = userInfo.UserRoles ?? "";
             model.HireDate = userInfo.HireDate;
-            model.AuditOfficeCode = userInfo.AuditOfficeCode ?? "";
             // model.OpenId = userInfo.OpenId ?? "";
             ViewData["isAdd"] = isAdd;
             try
@@ -352,135 +326,10 @@ namespace TRM_Sys.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>
-        /// 权限树的轮询显示
-        /// </summary>
-        /// <returns></returns>
-        public JsonResult SelectTree()
-        {
-           
-            string UserCode = Request["UserCode"];
-            BLL_User t_User = new BLL_User();
-            var y = t_User.SelectId(UserCode);
+       
+        
 
-            List<DtreeDataModel> dtree = new List<DtreeDataModel>();
-            List<SUC_Courseware> tRM_s = bLL_Sef.SelectSef1();
-
-            for (int i = 0; i < tRM_s.Count; i++)
-            {
-                string r;
-                if (y.CoursewareCode != "" && y.CoursewareCode != null)
-                {
-
-                    if (y.CoursewareCode.Contains(tRM_s[i].CoursewareCode))
-                    {
-                        r = "1";
-                    }
-                    else
-                    {
-                        r = "0";
-                    }
-
-                }
-                else
-                {
-                    r = "0";
-                }
-                DtreeDataModel d1 = new DtreeDataModel();
-                d1.id = tRM_s[i].CoursewareId.ToString() + "," + tRM_s[i].CoursewareCode;
-                d1.title = tRM_s[i].CoursewareName;
-                d1.IsWebPub = tRM_s[i].IsWebPub;
-                d1.checkArr.@checked = r;
-                if (bLL_Sef.SelectSefCount2(tRM_s[i].CoursewareId) > 0)
-                {
-                    d1.last = false;
-                    ForAssign(tRM_s[i].CoursewareId, d1, UserCode);
-                }
-                else
-                {
-                    d1.last = true;
-                }
-                d1.parentId = tRM_s[i].P_CoursewareCode;
-                dtree.Add(d1);
-            }
-
-
-
-            return Json(dtree);
-            //return Json(q, JsonRequestBehavior.AllowGet); 
-        }
-
-        /// <summary>
-        /// 查询子类，递归赋值
-        /// </summary>
-        /// <returns></returns>
-        public List<DtreeDataModel> ForAssign(Guid guid, DtreeDataModel model, string UserCode)
-        {
-            BLL_User t_User = new BLL_User();
-            var y = t_User.SelectId(UserCode);
-            List<DtreeDataModel> dtree = new List<DtreeDataModel>();
-            List<SUC_Courseware> tRM_s = bLL_Sef.SelectSefId3(guid);
-            for (int i = 0; i < tRM_s.Count; i++)
-            {
-                string r;
-                if (y.CoursewareCode != "" && y.CoursewareCode != null)
-                {
-                    if (y.CoursewareCode.Contains(tRM_s[i].CoursewareCode))
-                    {
-                        r = "1";
-                    }
-                    else
-                    {
-                        r = "0";
-                    }
-                }
-                else
-                {
-                    r = "0";
-                }
-                DtreeDataModel d1 = new DtreeDataModel();
-                d1.id = tRM_s[i].CoursewareId.ToString() + "," + tRM_s[i].CoursewareCode;
-                d1.title = tRM_s[i].CoursewareName;
-                d1.IsWebPub = tRM_s[i].IsWebPub;
-                d1.checkArr.@checked = r;
-                if (bLL_Sef.SelectSefCount2(tRM_s[i].CoursewareId) > 0)
-                {
-                    d1.last = false;
-                    ForAssign(tRM_s[i].CoursewareId, d1, UserCode);
-                }
-                else
-                {
-                    d1.last = true;
-                }
-                d1.parentId = tRM_s[i].P_CoursewareCode;
-                dtree.Add(d1);
-            }
-            model.children = dtree;
-            return dtree;
-        }
-
-
-        /// <summary>
-        /// 修改权限
-        /// </summary>
-        /// <returns></returns>
-        //public string UpdatePower()
-        //{
-        //    BLL_User bLL_User = new BLL_User();
-        //    string CodeId = Request["codeId"];
-        //    string Code = Request["Code"];
-        //    CodeId = CodeId.Substring(0, CodeId.LastIndexOf(","));
-
-        //    if (bLL_User.UpdateCoursewareCode(Code, CodeId) > 0)
-        //    {
-        //        return "修改成功";
-        //    }
-        //    else
-        //    {
-        //        return "修改失败";
-        //    }
-
-        //}
+       
 
         /// <summary>
         /// 判断是否是管理员
@@ -492,135 +341,11 @@ namespace TRM_Sys.Controllers
             return entity.IsAdmin;
         }
 
-        /// <summary>
-        /// 权限树的轮询显示
-        /// </summary>
-        /// <returns></returns>
-        //public JsonResult SelectTree()
-        //{
-           
-        //    string UserCode = Request["UserCode"];
-        //    BLL_User t_User = new BLL_User();
-        //    var y = t_User.SelectId(UserCode);
+       
 
-        //    List<DtreeDataModel> dtree = new List<DtreeDataModel>();
-        //    List<SUC_Courseware> tRM_s = bLL_Sef.SelectSef1();
-
-        //    for (int i = 0; i < tRM_s.Count; i++)
-        //    {
-        //        string r;
-        //        if (y.CoursewareCode != "" && y.CoursewareCode != null)
-        //        {
-
-        //            if (y.CoursewareCode.Contains(tRM_s[i].CoursewareCode))
-        //            {
-        //                r = "1";
-        //            }
-        //            else
-        //            {
-        //                r = "0";
-        //            }
-
-        //        }
-        //        else
-        //        {
-        //            r = "0";
-        //        }
-        //        DtreeDataModel d1 = new DtreeDataModel();
-        //        d1.id = tRM_s[i].CoursewareId.ToString() + "," + tRM_s[i].CoursewareCode;
-        //        d1.title = tRM_s[i].CoursewareName;
-        //        d1.IsWebPub = tRM_s[i].IsWebPub;
-        //        d1.checkArr.@checked = r;
-        //        if (bLL_Sef.SelectSefCount2(tRM_s[i].CoursewareId) > 0)
-        //        {
-        //            d1.last = false;
-        //            ForAssign(tRM_s[i].CoursewareId, d1, UserCode);
-        //        }
-        //        else
-        //        {
-        //            d1.last = true;
-        //        }
-        //        d1.parentId = tRM_s[i].P_CoursewareCode;
-        //        dtree.Add(d1);
-        //    }
+       
 
 
-
-        //    return Json(dtree);
-        //    //return Json(q, JsonRequestBehavior.AllowGet); 
-        //}
-
-        /// <summary>
-        /// 查询子类，递归赋值
-        /// </summary>
-        /// <returns></returns>
-        //public List<DtreeDataModel> ForAssign(Guid guid, DtreeDataModel model, string UserCode)
-        //{
-        //    BLL_User t_User = new BLL_User();
-        //    var y = t_User.SelectId(UserCode);
-        //    List<DtreeDataModel> dtree = new List<DtreeDataModel>();
-        //    List<SUC_Courseware> tRM_s = bLL_Sef.SelectSefId3(guid);
-        //    for (int i = 0; i < tRM_s.Count; i++)
-        //    {
-        //        string r;
-        //        if (y.CoursewareCode != "" && y.CoursewareCode != null)
-        //        {
-        //            if (y.CoursewareCode.Contains(tRM_s[i].CoursewareCode))
-        //            {
-        //                r = "1";
-        //            }
-        //            else
-        //            {
-        //                r = "0";
-        //            }
-        //        }
-        //        else
-        //        {
-        //            r = "0";
-        //        }
-        //        DtreeDataModel d1 = new DtreeDataModel();
-        //        d1.id = tRM_s[i].CoursewareId.ToString() + "," + tRM_s[i].CoursewareCode;
-        //        d1.title = tRM_s[i].CoursewareName;
-        //        d1.IsWebPub = tRM_s[i].IsWebPub;
-        //        d1.checkArr.@checked = r;
-        //        if (bLL_Sef.SelectSefCount2(tRM_s[i].CoursewareId) > 0)
-        //        {
-        //            d1.last = false;
-        //            ForAssign(tRM_s[i].CoursewareId, d1, UserCode);
-        //        }
-        //        else
-        //        {
-        //            d1.last = true;
-        //        }
-        //        d1.parentId = tRM_s[i].P_CoursewareCode;
-        //        dtree.Add(d1);
-        //    }
-        //    model.children = dtree;
-        //    return dtree;
-        //}
-
-
-        /// <summary>
-        /// 修改权限
-        /// </summary>
-        /// <returns></returns>
-        public string UpdatePower()
-        {
-            BLL_User bLL_User = new BLL_User();
-            string CodeId = Request["codeId"];
-            string Code = Request["Code"];
-            CodeId = CodeId.Substring(0, CodeId.LastIndexOf(","));
-
-            if (bLL_User.UpdateCoursewareCode(Code, CodeId) > 0)
-            {
-                return "修改成功";
-            }
-            else
-            {
-                return "修改失败";
-            }
-
-        }
 
         /// <summary>
         /// 判断是否是管理员

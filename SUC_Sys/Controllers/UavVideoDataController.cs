@@ -1,5 +1,7 @@
-﻿using SY_DataEntity;
-using SY_EntityBLL;
+﻿
+using Common;
+using SUC_DataEntity;
+using SUC_EntityBLL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,17 +13,15 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using ZFine.Code;
-using ZFine.Domain.Entity.SystemManage;
 namespace ZFine.Web.Areas.SYManage.Controllers
 {
-    public class UavVideoDataController : ControllerBase
+    public class UavVideoDataController : Controller
     {
         //
         // GET: /SYManage/UavVideoData/
         private BLL_UavInfo bll = new BLL_UavInfo();
         [HttpGet]
-        public override ActionResult Index()
+        public ActionResult Index()
         {
 
             return View();
@@ -55,7 +55,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
 
 
         [HttpGet]
-        public override ActionResult Form()
+        public ActionResult Form()
         {
 
             //按架次获取
@@ -135,9 +135,9 @@ namespace ZFine.Web.Areas.SYManage.Controllers
             //ViewData["lastlongitude"] = model.Longitude;
             //ViewData["lastlatitude"] = model.Latitude;
             
-            SY_EntityBLL.BLL_UavSortieData sortiebll = new SY_EntityBLL.BLL_UavSortieData();
-            List<Cld_UavSortieData> dt = sortiebll.GetUavListByNUMandS(UavSerialNO,sortie);
-            Cld_UavSortieData sortiemodel = sortiebll.GetUavSortieByNUMandS(UavSerialNO, sortie);
+            BLL_UavSortieData sortiebll = new BLL_UavSortieData();
+            List<SUC_UavSortieData> dt = sortiebll.GetUavListByNUMandS(UavSerialNO,sortie);
+            SUC_UavSortieData sortiemodel = sortiebll.GetUavSortieByNUMandS(UavSerialNO, sortie);
  
 
            
@@ -161,7 +161,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
             //}
         }
         [HttpGet]
-        public override ActionResult Details()
+        public ActionResult Details()
         {
           
             return View();
@@ -175,8 +175,8 @@ namespace ZFine.Web.Areas.SYManage.Controllers
           {
               Common.ResultRes res = new Common.ResultRes();
               int time = int.Parse(currentTime);
-              SY_EntityBLL.BLL_UavInfo bllData = new SY_EntityBLL.BLL_UavInfo();
-              Cld_UavInfo Model1 = bllData.GetUavListBysortiefirst(UavSerialNO,Sortie);
+              BLL_UavInfo bllData = new BLL_UavInfo();
+              SUC_UavInfo Model1 = bllData.GetUavListBysortiefirst(UavSerialNO,Sortie);
               DateTime datetime = DateTime.Parse(Model1.Rec_CreateTime.ToString());
               string defaultYear = datetime.Year.ToString("d4");
               string defaultMonth = datetime.Month.ToString("d2");
@@ -202,7 +202,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
               }
               string resultdate = defaultYear + "-" + defaultMonth + "-" + day1 + " " + Hour1 + ":" + Min1 + ":" + Sec1;
               DateTime date1 = Convert.ToDateTime(resultdate);
-              Cld_UavInfo Model = bllData.GetDataListbyCreateTime(date1, Sortie);
+              SUC_UavInfo Model = bllData.GetDataListbyCreateTime(date1, Sortie);
 
               if (bll != null)
               {
@@ -220,9 +220,9 @@ namespace ZFine.Web.Areas.SYManage.Controllers
           public ActionResult GetGridJson(Pagination pagination, string keyword)
           {
 
-              SY_EntityBLL.BLL_UavSortieData sortiebll = new SY_EntityBLL.BLL_UavSortieData();
+              BLL_UavSortieData sortiebll = new BLL_UavSortieData();
 
-              List<Cld_UavSortieData> q = sortiebll.GetUavLatestList(pagination, keyword);
+              List<SUC_UavSortieData> q = sortiebll.GetUavLatestList(pagination, keyword);
               var data = new
               {
                   rows = q,

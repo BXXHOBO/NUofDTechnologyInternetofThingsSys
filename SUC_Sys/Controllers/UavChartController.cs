@@ -1,5 +1,4 @@
-﻿using SY_DataEntity;
-using SY_EntityBLL;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +7,12 @@ using System.Web.Mvc;
 
 namespace ZFine.Web.Areas.SYManage.Controllers
 {
-    public class UavChartController : ControllerBase
+    public class UavChartController : Controller
     {
         //
         // GET: /SYManage/UavChart/
 
-        public override ActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

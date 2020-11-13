@@ -1,0 +1,212 @@
+﻿
+@model SUC_DataEntity.SUC_UavInfo
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZAAxXEex1RGOosDj5IFIY0bbeuWGmaAF"></script>
+    <script src="~/assets/js/DistanceTool_min.js"></script>
+    <link href="~/assets/css/mapstyle.css" rel="stylesheet" />
+    <style>
+        em {
+            font-style: normal;
+            color: blue;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "SimHei";
+        }
+
+        /* END EXT*/
+    </style>
+
+</head>
+<body>
+    <div>
+        <input type="hidden" id="uavSerialNO" value="@ViewData["uavSerialNO"] " />
+        <input type="hidden" id="sortie" value="@ViewData["sortie"] " />
+
+        <div id="pointdata" style="visibility:hidden">
+            <span class="longitude blue">
+                <em>经度:</em>
+                <span id="longitude" style="color: blue;"></span>
+            </span>
+            <span class="latitude white">
+                <em>纬度:</em>
+                <span id="latitude" style="color: blue;"></span>
+            </span>
+        </div>
+
+        <div id="mouselng" style="visibility:hidden"></div>
+        <div id="mouselat" style="visibility:hidden"></div>
+        <div style="width:1500px;height:800px;border:1px solid gray" id="container">
+        </div>
+        <div id="allmap">
+        </div>
+
+
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+
+    var map = new BMap.Map("container", { mapType: BMAP_HYBRID_MAP });
+    map.centerAndZoom(new BMap.Point(108.286157, 25.865544), 12);
+    map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
+    map.addControl(new BMap.OverviewMapControl());// 缩略图控件
+    var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+    map.addControl(ctrl_nav);//添加标准地图控件(左上角的放大缩小左右拖拽控件)
+
+    map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+    map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+    map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+    map.enableKeyboard(); //启用键盘上下左右键移动地图
+    map.enableContinuousZoom();   // 开启连续缩放效果
+    map.enableInertialDragging(); // 开启惯性拖拽效果
+
+    //添加地图类型控件
+    map.addControl(new BMap.MapTypeControl({
+        mapTypes: [
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]
+    }));
+
+    //实时显示地图坐标 strat
+    map.addEventListener("mousemove", GetlngAndlat);
+
+
+    setInterval("GetllDataAll()", "2000");
+    function GetlngAndlat(e) {
+        if (e.point.lng != null) {
+            document.getElementById("mouselng").innerHTML = e.point.lng;
+            document.getElementById("mouselat").innerHTML = e.point.lat;
+        }
+    }
+    //实时显示地图坐标 end
+
+    //测量距离 strat
+    function openGetDistance() {
+        var myDis = new BMapLib.DistanceTool(map);//map为上面已经初始化好的地图实例
+        myDis.open();
+    }
+    //测量距离 end
+
+
+    //左右击鼠标给地图上放marker strat 放标注
+    var marker_num = 0;
+    var isAddListen = -1;
+    function PutInMarker() {
+        //右键标记
+        if (isAddListen == -1) {
+            //k添加右键点击的监听事件
+            map.addEventListener("rightclick", putmarker);
+            isAddListen = 0;
+        }
+    }
+
+    var g_rightP = new BMap.Point(0, 0);
+    function putmarker(e) {
+        //放标注
+        var p1 = new BMap.Point(e.point.lng, e.point.lat);
+        g_rightP = p1;
+        var myIcon = new BMap.Icon("/image/red.png", new BMap.Size(24, 24));
+        var marker = new BMap.Marker(p1, { icon: myIcon });  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+
+        marker_num++;//标注索引，这个是个全局变量
+        var whichCar = window.external.setWhichCar(marker_num);
+        var label = new BMap.Label(whichCar + "号-坐标" + marker_num + ":" +
+        "(" + e.point.lng + "," + e.point.lat + ")", { offset: new BMap.Size(20, -10) });
+        marker.setLabel(label);
+    }
+    //左右击鼠标给地图上放marker end
+
+
+    //清除所有标注 start
+    function ClearAllMarkers() {
+        map.clearOverlays();
+        marker_num = 0;
+        isAddListen = -1;
+    }
+    //清除所有标注 end
+
+
+
+    //关闭监听事件，恢复对地图的操作 start
+    function CloseListener() {
+        map.removeEventListener("rightclick", putmarker);
+    }
+    //关闭监听事件，恢复对地图的操作 end
+
+    //坐标反查 start
+    function FindPosition(CurLng, CurLat) {
+        //百度地图API功能，经度，纬度
+        var point = new BMap.Point(CurLng, CurLat);
+        map.centerAndZoom(point, 20);
+    }
+    //坐标反查 end
+
+
+
+    //获取测试坐标数组2 start
+    function GetTest2GPS() {
+        var text = '{"Point":[{"x":"116.380960","y":"39.913280"},{"x":"116.380961","y":"39.913281"},{"x":"116.380962","y":"39.913282"},{"x":"116.380963","y":"39.913283"}]}'
+        window.external.LocateInfo(text);
+        return text;
+    }
+
+
+    var opts = {
+        width: 0, // 信息窗口宽度
+        height: 0, // 信息窗口高度
+        title: "飞行信息", // 信息窗口标题
+        enableMessage: true, //设置允许信息窗发送短息
+        message: ""
+    }
+    function GetllDataAll() {
+        var UavSerialNO = $("#uavSerialNO").val();
+        var Sortie = $("#sortie").val();
+        var opts = {
+            width: 0, // 信息窗口宽度
+            height: 0, // 信息窗口高度
+            title: "飞行信息", // 信息窗口标题
+            enableMessage: true, //设置允许信息窗发送短息
+            message: ""
+        }
+        $.ajax({
+            url: "/UavCloud/GetUavUandSInfoGet",
+            dataType: 'json',
+            data: { "UavSerialNO": UavSerialNO, "Sortie": Sortie },
+            type: "GET",
+            async: true,
+            success: function (data) {
+                $("#longitude").html(data.ResultValue.Longitude);
+                $("#latitude").html(data.ResultValue.Latitude);
+
+
+                //map.clearOverlays();
+                var new_point4 = new BMap.Point(data.ResultValue.Longitude, data.ResultValue.Latitude);
+                var myIcon4 = new BMap.Icon("/assets/images/Baidu/RedPoint.png", new BMap.Size(18, 14));//这个是你要显示坐标的图片的相对路径
+                var marker4 = new BMap.Marker(new_point4, { icon: myIcon4 });  // 创建标注
+                map.addOverlay(marker4);
+                //      // 将标注添加到地图中
+                map.panTo(new_point4);
+                var infoWindow = new BMap.InfoWindow("高度:" + data.ResultValue.Altitude + "<br>经度:" + data.ResultValue.Longitude + "<br>纬度:" + data.ResultValue.Latitude, opts); // 创建信息窗口对象
+                map.openInfoWindow(infoWindow, new_point4); //开启信息窗口
+            }
+        });
+    }
+
+</script>

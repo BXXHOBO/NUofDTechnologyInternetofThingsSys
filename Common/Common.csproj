@@ -67,13 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AjaxResult.cs" />
-    <Compile Include="BoolChecked.cs" />
+    <Compile Include="CommandInfo.cs" />
     <Compile Include="Connected Services\WeChartInterfaceApi\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="DtreeDataModel.cs" />
     <Compile Include="EnDecrypt.cs" />
     <Compile Include="EpsDict.cs" />
     <Compile Include="ExcelHelper.cs" />

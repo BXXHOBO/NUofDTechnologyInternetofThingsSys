@@ -17,6 +17,7 @@ namespace SUC_DataEntity
         public System.Guid UavDataId { get; set; }
         public string UavSerialNO { get; set; }
         public string WorkState { get; set; }
+        public string ImgPath { get; set; }
         public Nullable<System.DateTime> ProductDate { get; set; }
         public string Remark { get; set; }
         public Nullable<int> Disabled { get; set; }

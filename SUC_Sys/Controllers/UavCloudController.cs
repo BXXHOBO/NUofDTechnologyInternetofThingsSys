@@ -1,5 +1,7 @@
-﻿using SY_DataEntity;
-using SY_EntityBLL;
+﻿
+using Common;
+using SUC_DataEntity;
+using SUC_EntityBLL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,13 +10,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ZFine.Code;
-using ZFine.Domain.Entity.SystemManage;
 using ZFine.Web.Areas.Interface;
 
 namespace ZFine.Web.Areas.SYManage.Controllers
 {
-    public class UavCloudController : ControllerBase
+    public class UavCloudController : Controller
     {
        
         //
@@ -26,7 +26,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
         WechatPushHandler push = new WechatPushHandler();
         //string connString = "server=58.247.122.34,65432;uid=sa;pwd=_Password;database=ZFine";
         [HttpGet]
-        public override ActionResult Index()
+        public ActionResult Index()
         {
           
             return View();
@@ -49,8 +49,8 @@ namespace ZFine.Web.Areas.SYManage.Controllers
             ViewData["canshu2"] = Request.QueryString["canshu2"];
             string UavSerialNO = Request.QueryString["canshu1"];
             string Sortie = Request.QueryString["canshu2"];
-            List<Cld_UavSortieData> dt = bll.GetUavListByNUMandS(UavSerialNO, Sortie);
-            Cld_UavSortieData sortiemodel = bll.GetUavSortieByNUMandS(UavSerialNO, Sortie);
+            List<SUC_UavSortieData> dt = bll.GetUavListByNUMandS(UavSerialNO, Sortie);
+            SUC_UavSortieData sortiemodel = bll.GetUavSortieByNUMandS(UavSerialNO, Sortie);
 
 
              if (dt != null)
@@ -90,7 +90,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
 
             //List<Cld_UavSortieData> q = sortiebll.GetLatestList(pagination,date1,keyword);
 
-            List<Cld_UavSortieData> q = sortiebll.GetUavFirstList(pagination, keyword);
+            List<SUC_UavSortieData> q = sortiebll.GetUavFirstList(pagination, keyword);
             var data = new
             {
                 rows = q,
@@ -101,20 +101,20 @@ namespace ZFine.Web.Areas.SYManage.Controllers
             return Content(data.ToJson());
         }
         [HttpGet]
-        [HandlerAuthorize]
-        public override ActionResult Details()
+       // [HandlerAuthorize]
+        public  ActionResult Details()
         {
             return View();
         }
 
         [HttpGet]
-        public override ActionResult Form()
+        public  ActionResult Form()
         {
 
        
  
             //实时数据
-            Cld_UavInfo model = bll.GetLastMonitorData();
+            SUC_UavInfo model = bll.GetLastMonitorData();
             return View(model); 
            
         }
@@ -126,9 +126,9 @@ namespace ZFine.Web.Areas.SYManage.Controllers
             Common.ResultRes res = new Common.ResultRes();
             BLL_UavInfo bll = new BLL_UavInfo();
 
-            List<Cld_UavInfo> dt = bll.GetUavListByUandS(UavSerialNO,Sortie);
-            SY_EntityBLL.BLL_UavInfo bllData = new SY_EntityBLL.BLL_UavInfo();
-            Cld_UavInfo ParameterSetModel = bllData.GetInfoByUavSerialNOandSortie(UavSerialNO, Sortie);
+            List<SUC_UavInfo> dt = bll.GetUavListByUandS(UavSerialNO,Sortie);
+            BLL_UavInfo bllData = new BLL_UavInfo();
+            SUC_UavInfo ParameterSetModel = bllData.GetInfoByUavSerialNOandSortie(UavSerialNO, Sortie);
             
 
             if (dt != null)
@@ -150,9 +150,9 @@ namespace ZFine.Web.Areas.SYManage.Controllers
              Common.ResultRes res = new Common.ResultRes();
              BLL_UavInfo bll = new BLL_UavInfo();
               
-             List<Cld_UavInfo> dt = bll.GetDataList();
-             SY_EntityBLL.BLL_UavInfo bllData = new SY_EntityBLL.BLL_UavInfo();
-             Cld_UavInfo ParameterSetModel = bllData.GetLastMonitorData();
+             List<SUC_UavInfo> dt = bll.GetDataList();
+             BLL_UavInfo bllData = new BLL_UavInfo();
+             SUC_UavInfo ParameterSetModel = bllData.GetLastMonitorData();
             
            
              if (bll != null)
@@ -181,7 +181,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
              cmd.ExecuteNonQuery();
              conn.Close();
 
-             Cld_UavSortieData model;
+             SUC_UavSortieData model;
              model = sortiebll.GetData();
             
              string desp = "设备：" + model.UavSerialNO + "\r\n\r\n" +
@@ -204,11 +204,11 @@ namespace ZFine.Web.Areas.SYManage.Controllers
          {
              Common.ResultRes res = new Common.ResultRes();
            
-             SY_EntityBLL.BLL_UavInfo bllData = new SY_EntityBLL.BLL_UavInfo();
-             Cld_UavInfo ParameterSetModel = bllData.GetUavLastTimeByUandS(UavSerialNO, Sortie);
+             BLL_UavInfo bllData = new BLL_UavInfo();
+             SUC_UavInfo ParameterSetModel = bllData.GetUavLastTimeByUandS(UavSerialNO, Sortie);
              BLL_UavInfo bll = new BLL_UavInfo();
 
-             List<Cld_UavInfo> dt = bll.GetDataList();
+             List<SUC_UavInfo> dt = bll.GetDataList();
 
              if (dt != null)
              {

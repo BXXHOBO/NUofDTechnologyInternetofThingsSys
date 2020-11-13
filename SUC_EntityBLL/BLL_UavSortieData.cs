@@ -102,7 +102,7 @@ namespace SUC_EntityBLL
         //// 实时数据
         //public List<SUC_UavSortieData> GetLatestData(DateTime date1)
         //{
-        //    using (var _DataEntities = new SYEntities())
+        //    using (var _DataEntities = new SUC_SYSContainer())
         //    {
 
         //        var tempData = _DataEntities.SUC_UavSortieData.Where(p => date1 < p.Rec_CreateTime && p.Disabled == 0).OrderBy(u => u.Rec_CreateTime).ToList();
@@ -139,6 +139,17 @@ namespace SUC_EntityBLL
                 var Data = _DataEntities.SUC_UavSortieData.Where(p => p.UavSerialNO == UavSerialNO&&p.Sortie == sortie && p.Disabled == 0).OrderBy(u => u.Rec_CreateTime).FirstOrDefault();
                 return Data;
             }
+        }
+        //根据序列号查询正在飞行的架次
+       public List<SUC_UavSortieData> GetFlightUavbyUavSerialNO(string UavSerialNO)
+        {
+            using (var _DataEntities = new SUC_SYSContainer())
+            {
+                _DataEntities.Configuration.ProxyCreationEnabled = false;
+                var Data = _DataEntities.SUC_UavSortieData.Where(p => p.UavSerialNO == UavSerialNO && p.UavState == "1" && p.Disabled == 0).OrderBy(u => u.Rec_CreateTime).ToList();
+                return Data;
+            }
+
         }
 
         public List<SUC_UavSortieData> GetUavListByNUMandS(string UavSerialNO, string sortie)

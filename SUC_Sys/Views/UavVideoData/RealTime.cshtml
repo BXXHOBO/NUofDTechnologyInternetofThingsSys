@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewBag.Title = "实时视频列表";
+}
+
+
+@*<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">*@
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="menu-icon fa fa-database"></i>
+                    <a href="#">仓库管理</a>
+                </li>
+                <li class="active">无人机实时视频列表</li>
+            </ul><!-- /.breadcrumb -->
+
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>无人机实时视频列表</h1>
+            </div><!-- /.page-header -->
+            <div class="row content_flex" style="margin-bottom:10px;">
+
+                <div class="col-xs-12">
+                    <input id="txt_keyword" placeholder="架次/无人机序列号" style="width: 187px;color:#858585;padding: 3px 4px;height: 30px;border:1px solid #D5D5D5;" />
+
+                    <button class="btn btn-primary btn-sm" id="btn_search" style="margin-bottom:3px;">查询</button>
+
+                    @*<button class="btn btn-primary btn-sm" id="NF-add" style="margin-bottom:3px;" onclick="btn_add()">添加</button>*@
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div style="overflow-x: scroll;">
+
+                    <table id="gridList"></table>
+
+                    <div id="gridPager"></div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+
+
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script src="~/assets/js/bootstrap/bootstrap.js"></script>
+<script src="~/assets/js/layout/jquery.layout.js"></script>
+<script src="~/assets/js/jqgrid/grid.locale-cn.js"></script>
+<script src="~/assets/js/jqgrid/jqgrid.min.js"></script>
+<script src="~/assets/js/dialog/dialog.js"></script>
+<script src="~/assets/js/framework-ui.js"></script>
+
+
+<script>
+    $(function () {
+        gridList();
+
+    })
+    //操作栏按钮
+    var buttonFormatter = function (value, grid, rows, state) {
+
+        g = "<button onclick=\"VideoPlay('" + rows.UavSerialNO + "','" + rows.Sortie + "' )\" >监控</button>";
+        h = "<button onclick=\"MapShow('" + rows.UavSerialNO + "','" + rows.Sortie + "')\">地图</button>";
+        i = "<button onclick=\"BtList('" + rows.UavSortieId + "')\">修改</button>";
+        return g + h + i;
+    }
+    //历史数据表
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/UavVideoData/GetGridJson",
+            postData: {
+                "UavState": "1"
+            },
+            height: $(window).height() - 128,
+            width: "100%",
+            colNames: ['主键', '无人机序列号', '架次', '实时视频地址', '工作状态', '历史视频地址', '作业开始时间', '作业结束时间', '作业地点', '工作内容', '创建时间', '操作'],
+            colModel: [
+                { name: 'UavSortieId', index: 'UavSortieId', width: 55, hidden: true },
+                { name: 'UavSerialNO', index: 'UavSerialNO', width: 90, align: 'left' },
+                { name: 'Sortie', index: 'Sortie', width: 90, align: 'left' },
+                { name: 'VideoAddr', index: 'VideoAddr', width: 100, align: 'left' },
+                { name: 'UavState', index: 'UavState', width: 90, align: 'left' },
+                { name: 'HistoryAddr', index: 'HistoryAddr', width: 100, align: 'left' },
+                {
+                    name: 'InitialOperTime', index: 'InitialOperTime', width: 120, align: "left",
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H-i:s', newformat: 'Y-m-d H-i:s' }
+                },
+                {
+                    name: 'OperationEndTime', index: 'OperationEndTime', width: 120, align: "left",
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H-i:s', newformat: 'Y-m-d H-i:s' }
+                },
+                { name: 'OperateAddr', index: 'OperateAddr', width: 100, align: 'left' },
+                { name: 'WorkContents', index: 'WorkContents', width: 100, align: 'left' },
+                {
+                    name: 'Rec_CreateTime', index: 'Rec_CreateTime', width: 120, align: "left",
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H-i:s', newformat: 'Y-m-d H-i:s' }
+                },
+                {
+                    name: 'myac', index: '', width: 110, fixed: true, sortable: false, resize: false,
+                    formatter: buttonFormatter
+
+                }
+
+                //{
+                //    name: 'flag', width: 50, formatter: function (cellvalue, options, row) {
+                //        return '<a href="#" id="VideoPlay" onclick="VideoPlay()"><i class=\"icon ion-videocamera\"></i></a>';
+
+                //    }
+                //},
+                //{
+                //    name: 'flag', width: 50, formatter: function (cellvalue, options, row) {
+                //        return '<a href="#" id="MapShow" onclick="MapShow()"><i class=\"icon ion-earth\"></i></a>';
+
+                //    }
+                //},
+                //{
+                //    name: 'flag', width: 50, formatter: function (cellvalue, options, row) {
+                //        return '<a href="#" id="BtList" onclick="BtList()"><i class=\"icon ion-ios-list\"></i></a>';
+                //    }
+                //}
+
+            ],
+
+            altRows: true,
+            rowList: [10, 20, 30],
+            pager: "#gridPager",
+            sortname: 'UavSortieId asc,UavSerialNO desc',
+            viewrecords: true
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+
+    }
+
+
+    function Search() {
+
+        var sortie = $("#sortie").val();
+        var id = $("#idnum").val();
+        if (id == 1) {
+            window.open("UavCloud/Form?canshu1=" + sortie + "&canshu2=1");
+        }
+        if (id == 2)//历史信息
+        {
+            var sortie = $("#sortie").val();
+            $.ajax({
+                url: "/UavVideoData/GetUavInfoGet?sortie=" + sortie,
+                dataType: 'json',
+                type: "GET",
+                success: function (data) {
+                    if (data.ResultValue.Sortie != null) {
+                        window.open("/UavVideoData/Form?canshu1=" + sortie + "&canshu2=2");
+                    }
+
+                }
+            });
+
+        }
+
+    }
+
+    function BtList(id) {
+        var keyValue = id;
+
+        $.modalOpen({
+            id: "Form",
+            title: "修改信息",
+            url: "/UavSortieData/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "510px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+
+    function VideoPlay(uavSerialNO, sortie) {
+
+        var UavSerialNO = uavSerialNO;
+        var Sortie = sortie;
+
+        $.ajax({
+            url: "/UavVideoData/GetUavUandSInfoGet",
+            data: { "UavSerialNO": UavSerialNO, "Sortie": Sortie },
+            dataType: 'json',
+            type: "GET",
+            success: function (data) {
+                if (data.ResultValue.Sortie != null && data.ResultValue.UavSerialNO != null) {
+                    window.open("/UavVideoData/RealTimeForm?canshu1=" + UavSerialNO + "&canshu2=" + Sortie);
+                }
+
+            }
+        });
+
+    }
+    function MapShow(uavSerialNO, sortie) {
+
+        var UavSerialNO = uavSerialNO;
+        var Sortie = sortie;
+        $.ajax({
+            url: "/UavVideoData/GetUavUandSInfoGet",
+            data: { "UavSerialNO": UavSerialNO, "Sortie": Sortie },
+            dataType: 'json',
+            type: "GET",
+            success: function (data) {
+                if (data.ResultValue.Sortie != null && data.ResultValue.UavSerialNO != null) {
+                    var UavSerialNO = data.ResultValue.UavSerialNO;
+                    var Sortie = data.ResultValue.Sortie;
+                    window.open("/Baidu/Details?canshu1=" + UavSerialNO + "&canshu2=" + Sortie);
+                }
+
+            }
+        });
+
+    }
+
+</script>

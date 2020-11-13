@@ -15,12 +15,9 @@ namespace SUC_DataEntity
     public partial class t_user
     {
         public string UserId { get; set; }
-        public string CoursewareCode { get; set; }
         public string UserCode { get; set; }
         public string UserName { get; set; }
         public string PassWord { get; set; }
-        public string AuditOfficeCode { get; set; }
-        public Nullable<int> ExternalType { get; set; }
         public Nullable<System.DateTime> HireDate { get; set; }
         public string DepNo { get; set; }
         public string Email { get; set; }

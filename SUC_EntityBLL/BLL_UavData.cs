@@ -51,6 +51,8 @@ namespace SUC_EntityBLL
                 return Data;
             }
         }
+
+
         public List<SUC_UavData> GetUavListByWorkState()
         {
             using (var _DataEntities = new SUC_SYSContainer())
@@ -128,6 +130,7 @@ namespace SUC_EntityBLL
                 {
                     uavdata.UavSerialNO = model.UavSerialNO;
                     uavdata.WorkState = model.WorkState;
+                    uavdata.ImgPath = model.ImgPath;
                     uavdata.ProductDate = model.ProductDate;             
                     uavdata.Remark = model.Remark;
                     uavdata.Rec_CreateTime = model.Rec_CreateTime;

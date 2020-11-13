@@ -69,20 +69,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL_AuditOffice.cs" />
-    <Compile Include="BLL_Class.cs" />
-    <Compile Include="BLL_ClaTeaCurAssociative.cs" />
-    <Compile Include="BLL_Courseware.cs" />
     <Compile Include="BLL_Menu.cs" />
     <Compile Include="BLL_Oper.cs" />
     <Compile Include="BLL_Order.cs" />
-    <Compile Include="BLL_Sef.cs" />
-    <Compile Include="BLL_Teacher.cs" />
     <Compile Include="BLL_t_role_menuZzc.cs" />
     <Compile Include="BLL_UavData.cs" />
     <Compile Include="BLL_UavInfo.cs" />
     <Compile Include="BLL_UavSortieData.cs" />
     <Compile Include="BLL_User.cs" />
+    <Compile Include="BLL_UserDataGet.cs" />
     <Compile Include="Enum\SiteDataEnum.cs" />
     <Compile Include="Helper\BLL_CodeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

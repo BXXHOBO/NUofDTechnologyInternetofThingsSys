@@ -11,23 +11,41 @@ using System.Web.Mvc;
 
 namespace SUC_Sys.Controllers
 {
-    public class UavSortieDataController : Controller
+    public class UavSortieDataController : BaseHandle
     {
         //
         // GET: /SYManage/UavSortieData/
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            t_user entity = (t_user)Session["Users"];
+            if (entity == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                return View();
+            }
+        }
         private BLL_UavSortieData bll = new BLL_UavSortieData();
         [HttpGet]
         public  ActionResult Form()
         {
-            SUC_UavSortieData data = new SUC_UavSortieData();
-            data.UavSerialNO = "";
-            return View(data);
+            t_user entity = (t_user)Session["Users"];
+            if (entity == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                SUC_UavSortieData data = new SUC_UavSortieData();
+                data.UavSerialNO = "";
+                return View(data);
+            }
         }
+       
+
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
             List<SUC_UavSortieData> q = bll.GetList(pagination, keyword);
@@ -63,20 +81,21 @@ namespace SUC_Sys.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(SUC_UavSortieData uavsortiedataEntity, string keyValue)
         {
-            ResultRes res = new ResultRes();
+            //ResultRes res = new ResultRes();
             Submit(uavsortiedataEntity, keyValue);
-            res.ResultValue = "操作成功！";
-            return Json(res, JsonRequestBehavior.AllowGet);
-           
+            //res.ResultValue = "操作成功！";
+            //return Json(res, JsonRequestBehavior.AllowGet);
+            return Success("操作成功。");
         }
         [HttpPost] 
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            ResultRes res = new ResultRes();
+            //ResultRes res = new ResultRes();
             Delete(keyValue);
-            res.ResultValue = "删除成功！";
-            return Json(res, JsonRequestBehavior.AllowGet);
+            //res.ResultValue = "删除成功！";
+            //return Json(res, JsonRequestBehavior.AllowGet);
+            return Success("删除成功!");
         }
         //删除数据
         public string Delete(string id)
@@ -218,7 +237,7 @@ namespace SUC_Sys.Controllers
                 res.IsSuccess = true;
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-
+        //根据序列号和架次信息获取数据
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
         public JsonResult GetAddrInfo(string UavSerialNO,string Sortie)
@@ -240,5 +259,7 @@ namespace SUC_Sys.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+
+        
     }
 }

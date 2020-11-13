@@ -29,7 +29,7 @@
             margin: 0 auto;
             background-image: url(../../Content/static/img/warcraft.31b0f82f.jpg);
             margin: 0.5% auto;
-            background-size: 100% 100%;
+            background-size: cover;
         }
 
         .detailinfo {
@@ -38,6 +38,8 @@
             line-height: 35px;
             text-align: center;
             font-size: 20px;
+            white-space:nowrap;
+            overflow:hidden;
         }
 
         .engstate {
@@ -54,21 +56,10 @@
             border-radius: 10px;
             background: rgba(0, 231, 231, 0.6);
         }
-        /*发动机状态 engstate */
-        /*电量 quantity */
-        .quantity {
-            width: 80%;
-            /*background-color: #08CDD3;*/
-        }
-        /*结构完好度 commence */
-        /*截弹量 cutcap */
-        /*刀浆可用性 availability */
-        /*综合评估建设 assess */
-
         /*滚动条开始*/
         .robodetailt {
             width: 100%;
-            height: 80%;
+            height: 74%;
             margin: 5px auto;
             overflow-y: scroll
         }
@@ -82,9 +73,12 @@
                 color: #05B7DE;
                 /*border: none;*/
                 background: url(../../image/down.png) !important;
+                background-size:100%;
             }
                 .robodetailt::-webkit-scrollbar-button:vertical:increment {
                     background: url(../../image/up.png) !important;
+                    background-size: 100%;
+                    background-repeat:no-repeat;
                 }
 
             .robodetailt::-webkit-scrollbar-track {
@@ -104,27 +98,31 @@
                 /* background-color: #13CE66; */
             }
         /*滚动条结束*/
+        .name:first-child{
+            /*background:#00F5FC;*/
+            margin-top:30px;
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 </head>
 <body>
     <div id="#app" style="height:100%;overflow:hidden">
         <div class="row nav">
-            <div class="col-xs-3" style="height: 105px;" onclick="skip()">
+            <div class="col-xs-3" style="height: 100px;" onclick="skip()">
                 <img src="~/image/8998994.png" alt="Alternate Text" />
             </div>
-            <div class="col-xs-6" style="height: 105px;">
-                <div class="col-xs-offset-3 col-xs-7" style="height:70px;line-height:70px;margin:20px 140px;text-align:center;display:flex">
-                    <div class="box_title col-xs-1" style="height: 70px;border-right: none;left:0;padding:0;position:absolute">
+            <div class="col-xs-6" style="height: 100px;">
+                <div style="width:auto;position:page;margin:20px auto;display:flex">
+                    <div class="box_title" style="width:5%;height: 70px;border-right: none;margin-left:auto">
                     </div>
-                    <div class="col-xs-10" style="width:100%;height: 60px;background: none;text-align:center">
-                        <span class="" style="font-size: 28px;">蜂群无人机集群作战系统</span>
+                    <div class="" style="width:auto;height: 70px;line-height:70px;text-align:center;white-space:nowrap;overflow:hidden">
+                        <span class="" style="font-size: 28px;">&nbsp;蜂群无人机集群作战系统&nbsp;</span>
                     </div>
-                    <div class="box_title col-xs-1" style="height: 70px;border-left: none;right:0;position:absolute">
+                    <div class="box_title" style="width:5%;height: 70px;border-left: none;margin-right: auto">
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3" style="height: 105px;">
+            <div class="col-xs-3" style="height: 100px;">
                 <span id="dateTime" class="col-xs-offset-1" style="font-size:20px;line-height:110px;"></span>
                 <a href="" class=" btn btn-danger col-xs-offset-1 " id="logout" style="">退出系统</a>
                 <a href="#" id="setting" class="btn col-xs-offset-1" onclick="tosetting()" style="">
@@ -132,34 +130,36 @@
                 </a>
             </div>
         </div>
-        <div style="width: 100%;height: 8px;background: linear-gradient(to right,#050F2A,#00F5FC,#050F2A);"></div>
-        <div class="robodetailt" style="">
-            <div class="" style="width:96%;height:80%;margin:0 auto;">
-                <div style="display: flex;margin:10px auto;">
-                    <div class="box_title detailinfo" style="width:75px;">
-                        <span>序号</span>
-                    </div>
-                    <div class="box_title detailinfo" style="width:190px;margin-left:15px">
-                        <span>发动机状态</span>
-                    </div>
-                    <div class="box_title detailinfo" style="width:190px;margin-left:15px">
-                        <span>电量</span>
-                    </div>
-                    <div class="box_title detailinfo" style="width:190px;margin-left:15px">
-                        <span>结构完好度</span>
-                    </div>
-                    <div class="box_title detailinfo" style="width:190px;margin-left:15px">
-                        <span>截弹量</span>
-                    </div>
-                    <div class="box_title detailinfo" style="width:190px;margin-left:15px">
-                        <span>刀浆可用性</span>
-                    </div>
-                    <div class="box_title detailinfo" style="width:190px;margin-left:15px">
-                        <span>综合评估建设</span>
-                    </div>
+        <div style="width: 100%;height: 7px;background: linear-gradient(to right,#050F2A,#00F5FC,#050F2A);"></div>
+        <div style="width: 96%; height: 40px; margin: 0 auto;">
+            <div class="uavInfo" style="display: flex;margin:10px auto;width:100%;">
+                <div class="box_title detailinfo" style="width:5.7%;">
+                    <span>序号</span>
                 </div>
+                <div class="box_title detailinfo" style="width:14.4%;margin-left:1.05%">
+                    <span>发动机状态</span>
+                </div>
+                <div class="box_title detailinfo" style="width:14.4%;margin-left:1.1%">
+                    <span>电量</span>
+                </div>
+                <div class="box_title detailinfo" style="width:14.4%;margin-left:1.1%">
+                    <span>结构完好度</span>
+                </div>
+                <div class="box_title detailinfo" style="width:14.4%;margin-left:1.1%">
+                    <span>截弹量</span>
+                </div>
+                <div class="box_title detailinfo" style="width:14.4%;margin-left:1.1%">
+                    <span>刀浆可用性</span>
+                </div>
+                <div class="box_title detailinfo" style="width:14.4%;margin-left:1.1%">
+                    <span>综合评估建设</span>
+                </div>
+            </div>
+        </div>
+        <div class="robodetailt" style="">
+            <div class="" style="width:96%;height:;margin:0 2%;">
 
-                <div class="testTable" style="width:100%;height:100%;position:relative;" >
+                <div class="testTable" style="width:100%;height:100%;position:relative;">
 
                 </div>
 
@@ -194,21 +194,53 @@
     function decideintact() {
         let engstate = document.getElementsByClassName('engstate')
         let assess = document.getElementsByClassName('assess')
-        //console.log(engstate)
-        //console.log(assess)
+        let p_quantity = document.getElementsByClassName('p_quantity')
+        let quantity = document.getElementsByClassName('quantity')
+
+        let p_commence = document.getElementsByClassName('p_commence')
+        let commence = document.getElementsByClassName('commence')
+
+        let p_cutcap = document.getElementsByClassName('p_cutcap')
+        let cutcap = document.getElementsByClassName('cutcap')
+
+        let p_availability = document.getElementsByClassName('p_availability')
+        let availability = document.getElementsByClassName('availability')
+
         for (let i = 0; i < assess.length; i++) {
             //发动机状态
             if (engstate[i].children[0].innerHTML == "完好") {
                 engstate[i].className = engstate[i].className + " intact";
             } else if (engstate[i].children[0].innerHTML == "故障") {
                 engstate[i].className = engstate[i].className + " unintact";
+            } else if (engstate[i].children[0].innerHTML == "离线") {
+                engstate[i].className = engstate[i].className + " offline";
             }
             //综合评估建设
             if (assess[i].children[0].innerHTML == "继续作战") {
                 assess[i].className = assess[i].className + " intact";
             } else if (assess[i].children[0].innerHTML == "建议返航") {
                 assess[i].className = assess[i].className + " unintact";
+            } else if (assess[i].children[0].innerHTML == "建议回收") {
+                assess[i].className = assess[i].className + " offline";
             }
+            let bg_p_quantity = p_quantity[i].innerHTML.split("%")[0]
+            let bg_p_commence = p_commence[i].innerHTML.split("%")[0]
+            let bg_p_cutcap = p_cutcap[i].innerHTML.split("%")[0]
+            let bg_p_availability = p_availability[i].innerHTML.split("%")[0]
+            if (bg_p_quantity >= 0 && bg_p_quantity <= 20) {
+                quantity[i].style.backgroundColor = "#AFA477";
+            }
+            if (bg_p_commence >= 0 && bg_p_commence <= 20) {
+                commence[i].style.backgroundColor = "#AFA477";
+            }
+            if (bg_p_cutcap >= 0 && bg_p_cutcap <= 20) {
+                cutcap[i].style.backgroundColor = "#AFA477";
+            }
+            if (bg_p_availability >= 0 && bg_p_availability <= 20) {
+                availability[i].style.backgroundColor = "#AFA477";
+            }
+
+
         }
 
     }
@@ -225,38 +257,38 @@
         var orderBody = '';
         let tab = sidenav;
         $.each(tab, function (index, val) {
-            orderBody += '<div style="display:flex;margin:5px auto;">\
-                <div class="detailinfo serial" style = "">\
+            orderBody += '<div class="name" style="display:flex;margin:0.38% auto;">\
+                <div class="detailinfo serial" style = "width:5.8%">\
                     <span>' + val.num + '</span>\
                 </div >\
-                <div class="engstate detailinfo" style="margin-left:15px;">\
+                <div class="engstate detailinfo" style="margin-left:1.1%;width:14.7%;margin-left:1.1%;">\
                     <span class="p_engstate">' + val.engstate + '</span>\
                 </div>\
-                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);">\
-                    <div class="skills quantity" style="width:' + val.quantity + '%"></div>\
-                    <div style="">\
-                        <span>' + val.quantity + '%</span>\
+                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);width:14.7%;margin-left:1.1%;">\
+                    <div class="skills quantity" style="width:' + val.quantity + '%;"></div>\
+                    <div style="width:14.7%;">\
+                        <span class="p_quantity">' + val.quantity + '%</span>\
                     </div>\
                 </div>\
-                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);">\
-                    <div class="skills quantity" style="width:' + val.commence + '%"></div>\
-                    <div style="">\
-                        <span>' + val.commence + '%</span>\
+                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);width:14.7%;margin-left:1.1%;">\
+                    <div class="skills commence" style="width:' + val.commence + '%;"></div>\
+                    <div style="width:14.7%;">\
+                        <span class="p_commence">' + val.commence + '%</span>\
                     </div>\
                 </div>\
-                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);">\
-                    <div class="skills quantity" style="width:' + val.cutcap + '%"></div>\
-                    <div style="">\
-                        <span>' + val.cutcap + '%</span>\
+                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);width:14.7%;margin-left:1.1%;">\
+                    <div class="skills cutcap" style="width:' + val.cutcap + '%;"></div>\
+                    <div style="width:14%;">\
+                        <span class="p_cutcap">' + val.cutcap + '%</span>\
                     </div>\
                 </div>\
-                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);">\
-                    <div class="skills quantity" style="width:' + val.availability + '%"></div>\
-                    <div style="">\
-                        <span>' + val.availability + '%</span>\
+                <div class="progress_detailt detailinfo" style="background-color: rgba(0, 40, 40, 0.6);width:14.7%;margin-left:1.1%;">\
+                    <div class="skills availability" style="width:' + val.availability + '%;"></div>\
+                    <div style="width:14.7%;">\
+                        <span class="p_availability">' + val.availability + '%</span>\
                     </div>\
                 </div>\
-                <div class="assess detailinfo" style="margin-left:15px;">\
+                <div class="assess detailinfo" style="margin-left:1.1%;width:14.7%;">\
                     <span>' + val.assess + '</span></div></div >'
         })
         $('.testTable').append(orderBody);
@@ -268,10 +300,10 @@
             num: '01',
             machinetype: 'warcraft01.jpg',
             engstate: '完好',
-            quantity: '80.5',
-            commence: '70.9',
-            cutcap: '70.1',
-            availability: '70.9',
+            quantity: '100',
+            commence: '100',
+            cutcap: '100',
+            availability: '100',
             assess: '继续作战',
         },
         {
@@ -299,9 +331,9 @@
             machinetype: 'warcraft04.jpg',
             engstate: '故障',
             quantity: '50',
-            commence: '10',
-            cutcap: '70',
-            availability: '70',
+            commence: '30',
+            cutcap: '20',
+            availability: '20',
             assess: '建议返航',
         },
         {
@@ -309,7 +341,7 @@
             machinetype: 'warcraft05.jpg',
             engstate: '完好',
             quantity: '40',
-            commence: '70',
+            commence: '89',
             cutcap: '80',
             availability: '70',
             assess: '继续作战',
@@ -318,10 +350,10 @@
             num: '06',
             machinetype: 'warcraft06.jpg',
             engstate: '故障',
-            quantity: '80',
-            commence: '70',
-            cutcap: '70',
-            availability: '70',
+            quantity: '30',
+            commence: '10',
+            cutcap: '20',
+            availability: '40',
             assess: '建议返航',
         },
         {
@@ -340,8 +372,8 @@
             engstate: '故障',
             quantity: '40',
             commence: '70',
-            cutcap: '40',
-            availability: '70',
+            cutcap: '20',
+            availability: '20',
             assess: '建议返航',
         },
         {
@@ -358,10 +390,10 @@
             num: '10',
             machinetype: 'warcraft10.jpg',
             engstate: '故障',
-            quantity: '80',
-            commence: '60',
-            cutcap: '70',
-            availability: '80',
+            quantity: '39',
+            commence: '48',
+            cutcap: '20',
+            availability: '21',
             assess: '建议返航',
         },
         {
@@ -379,7 +411,7 @@
             machinetype: 'warcraft12.jpg',
             engstate: '故障',
             quantity: '70',
-            commence: '40',
+            commence: '10',
             cutcap: '70',
             availability: '20',
             assess: '建议返航',
@@ -388,8 +420,8 @@
             num: '13',
             machinetype: 'warcraft12.jpg',
             engstate: '故障',
-            quantity: '60',
-            commence: '50',
+            quantity: '30',
+            commence: '20',
             cutcap: '60',
             availability: '40',
             assess: '建议返航',
@@ -398,7 +430,7 @@
             num: '14',
             machinetype: 'warcraft12.jpg',
             engstate: '故障',
-            quantity: '90',
+            quantity: '20',
             commence: '80',
             cutcap: '70',
             availability: '50',
@@ -418,10 +450,10 @@
             num: '16',
             machinetype: 'warcraft06.jpg',
             engstate: '故障',
-            quantity: '80',
+            quantity: '10',
             commence: '70',
-            cutcap: '70',
-            availability: '70',
+            cutcap: '30',
+            availability: '50',
             assess: '建议返航',
         },
         {
@@ -441,7 +473,7 @@
             quantity: '40',
             commence: '70',
             cutcap: '40',
-            availability: '70',
+            availability: '19',
             assess: '建议返航',
         },
         {
@@ -449,7 +481,7 @@
             machinetype: 'warcraft09.jpg',
             engstate: '完好',
             quantity: '60',
-            commence: '70',
+            commence: '40',
             cutcap: '50',
             availability: '70',
             assess: '继续作战',
@@ -459,9 +491,29 @@
             machinetype: 'warcraft10.jpg',
             engstate: '故障',
             quantity: '80',
-            commence: '60',
-            cutcap: '70',
+            commence: '23',
+            cutcap: '15',
             availability: '80',
+            assess: '建议返航',
+        },
+        {
+            num: '21',
+            machinetype: 'warcraft10.jpg',
+            engstate: '离线',
+            quantity: '0',
+            commence: '0',
+            cutcap: '0',
+            availability: '0',
+            assess: '建议回收',
+        },
+        {
+            num: '22',
+            machinetype: 'warcraft10.jpg',
+            engstate: '故障',
+            quantity: '20',
+            commence: '20',
+            cutcap: '20',
+            availability: '19',
             assess: '建议返航',
         }
     ]

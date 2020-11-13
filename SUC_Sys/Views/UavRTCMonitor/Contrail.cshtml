@@ -1,0 +1,650 @@
+﻿@{
+    ViewBag.Title = "Contrail";
+
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>实时云飞机监控</title>
+
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/UavCloudimg/logo.ico">
+    <link href="~/Content/css/app.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/mapstyle.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="~/Content/js/charts/echarts.min.js"></script>
+    <script src="~/Content/js/jquery/jquery-1.11.0.js"></script>
+
+    <style type="text/css">
+
+
+        body {
+            width: 100%;
+            height: 100%;
+            min-height: 800px;
+            font-family: "SimHei", arial, sans-serif;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+            body.bg05 {
+                background-color: #050427;
+                width: 100%;
+                height: 100%;
+            }
+
+        .wrapper {
+            position: absolute;
+            top: 80px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            min-height: 555px;
+        }
+
+        .container-fluid {
+            height: 100%;
+            min-height: 100%;
+            position: relative;
+        }
+
+        .header {
+            margin: 0 auto;
+            width: 100%;
+            height: 90px;
+            max-width: 1920px;
+            background: url("/Content/img/uavrtime/b-1_03.png") center no-repeat;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            max-width: 1920px;
+            background: url("/Content/img/uavrtime/d-1_03.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .container-fluid {
+            margin-top: 2%;
+            height: 90%;
+            min-height: 100%;
+        }
+
+        .col-lg-6 {
+            width: 70%;
+        }
+
+        .col-lg-3 {
+            width: 30%;
+        }
+
+
+        .dataTitle {
+            color: #FFFFFF;
+            letter-spacing: 5px;
+            font-weight: bold;
+            font-size: 0.4vw;
+            margin: 5px 3px;
+            cursor: default;
+        }
+
+        .dataTitle1 {
+            color: #FFFFFF;
+            letter-spacing: 5px;
+            font-weight: bold;
+            font-size: 0.5vw;
+            margin: 5px 3px;
+            cursor: default;
+        }
+
+        .dataTitle > span {
+            margin-left: 3px;
+        }
+
+
+        .instr {
+            background-image: url('/Content/img/UavCloudimg/back.png');
+            background-size: 100% 100%;
+            border-radius: 4px;
+            border: none;
+            background-position: 0 10px;
+            background-repeat: no-repeat;
+        }
+
+        em {
+            font-style: normal;
+            font-size: 0.4vw;
+            color: white;
+        }
+
+        .boxsize {
+            padding: 15px;
+            height: 100%;
+            min-height: 100px;
+            background: url("/Content/img/uavrtime/k01_03.png") center no-repeat;
+            background-size: 100% 100%;
+            box-sizing: border-box;
+            line-height: 0.85vw;
+        }
+
+        .boxsize1 {
+            padding: 15px;
+            height: 100%;
+            min-height: 100px;
+            background-size: 100% 100%;
+            box-sizing: border-box;
+            line-height: 0.85vw;
+        }
+
+        .boxsize2 {
+            padding: 15px;
+            height: 100%;
+            min-height: 150px;
+            background: url("/Content/img/uavrtime/k02_05.png") center no-repeat;
+            background-size: 100% 100%;
+            box-sizing: border-box;
+        }
+
+        .boxsize2-wrapper-1 {
+            height: 95%;
+        }
+
+        .boxsize-wrapper-4 {
+            height: 30%;
+        }
+
+        .boxsize-wrapper-5 {
+            height: 40%;
+        }
+    </style>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=67jMQ5DmYTe1TLMBKFUTcZAR"></script>
+    <link href="https://unpkg.com/video.js@6.2.5/dist/video-js.min.css" rel="stylesheet">
+    <script src="~/Content/js/datepicker/WdatePicker.js"></script>
+</head>
+
+<body class="bg05">
+
+    <header class=" header">
+        <div style="text-align: center; line-height: 100px; ">
+            <span style="color: white; font-size: 3vw;">实时云飞机监控</span>
+        </div>
+
+    </header>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row fill-h">
+
+
+                <div class="col-lg-3 fill-h">
+                    <div class="xpanel-wrapper boxsize-wrapper-4">
+                        <div class="boxsize">
+                            <div class="fill-h" id="provinceMap">
+                                <div style=" text-align: right; margin-top: 3%;">
+                                    <span style="color: white; font-size:2vw">
+                                        年度巡检架次
+                                    </span>
+                                </div>
+                                <div style="margin-left:1em; margin-top: 12%; ">
+                                    <span style="color: #00BFFF; font-size: 5vw" id="linenumber"></span>
+                                    <span style="color: white; font-size: 1.5vw"> 次</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xpanel-wrapper boxsize-wrapper-4">
+                        <div class="boxsize">
+
+                            <div class="fill-h">
+                                <div style=" text-align: right; margin-top: 3%;">
+                                    <span style="color: white; font-size:2vw">
+                                        实时飞行信息
+                                    </span>
+                                </div>
+                                <div style="margin-left:1em; margin-top: 12%; ">
+                                    <span style="color: #00BFFF; font-size: 5vw; " id="worknumber"></span>
+                                    <span style="color: white; font-size: 1.5vw"> 架 </span>
+                                    <span style="color: white; font-size: 1.5vw">无人机  </span>
+                                    <span style="color: white; font-size: 1.5vw">    正在巡检</span>
+                                    <span>
+                                        <img src="~/Content/img/uavrtime/f01_06.png" />
+                                    </span>
+                                    <span>
+                                        <img src="~/Content/img/uavrtime/f01_06.png" />
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="xpanel-wrapper boxsize-wrapper-5">
+                        <div class="boxsize1">
+                            <div class="fill-h" id="cityMap">
+                                <div id="piechart" style=" width:260px;height :260px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 fill-h">
+                    <div class="xpanel-wrapper boxsize2-wrapper-1">
+                        <div class="boxsize2">
+
+                            <input id="result_" type="hidden" />
+                            <div style="width:100%;height:100%;border:1px solid gray" id="container">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                @*<div class=" footer"> </div>*@
+                <div>
+                    <a style="float:right;" onclick='toggleFullScreen();' /><i class="icon ion-arrow-expand"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="~/Content/js/UavCloudjs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/UavCloudjs/echarts-3.8.5.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/UavCloudjs/echarts-map-world.js"></script>
+    <script type="text/javascript" src="~/Content/js/UavCloudjs/echarts-map-china.js"></script>
+    <script type="text/javascript" src="~/Content/js/UavCloudjs/echarts-china-provinces/jiangsu.js"></script>
+    <script type="text/javascript" src="~/Content/js/UavCloudjs/echarts-china-cities/jiang1_su1_su1_zhou1.js"></script>
+    <script type="text/javascript" src="~/Content/js/UavCloudjs/echarts-china-counties/jiang1su1_su1zhou1_kun1shan1shi4.js"></script>
+
+    <script type="text/javascript">
+        options = {
+            autoplay: true,
+            muted: true
+        };
+
+
+        //百度地图开始
+        var map = new BMap.Map("container", { mapType: BMAP_HYBRID_MAP });
+        map.centerAndZoom(new BMap.Point(106.239071, 38.49201), 5);
+        map.addControl(new BMap.ScaleControl()); //添加比例尺控件(左下角显示的比例尺控件)
+        map.addControl(new BMap.OverviewMapControl());// 缩略图控件
+        var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+        //map.addControl(ctrl_nav);//添加标准地图控件(左上角的放大缩小左右拖拽控件)
+
+        map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+        //map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard(); //启用键盘上下左右键移动地图
+        map.enableContinuousZoom();   // 开启连续缩放效果
+        map.enableInertialDragging(); // 开启惯性拖拽效果
+
+
+        //实时显示地图坐标 strat
+        map.addEventListener("mousemove", GetlngAndlat);
+
+
+
+        function GetlngAndlat(e) {
+            if (e.point.lng != null) {
+                $("#mouselng").html(e.point.lng);
+                $("#mouselat").html(e.point.lat);
+               // document.getElementById("mouselng").innerHTML = e.point.lng;
+               // document.getElementById("mouselat").innerHTML = e.point.lat;
+            }
+        }
+
+
+        //测量距离 strat
+        function openGetDistance() {
+            var myDis = new BMapLib.DistanceTool(map);//map为上面已经初始化好的地图实例
+            myDis.open();
+        }
+        //测量距离 end
+
+
+        //左右击鼠标给地图上放marker strat 放标注
+        var marker_num = 0;
+        var isAddListen = -1;
+        function PutInMarker() {
+            //右键标记
+            if (isAddListen == -1) {
+                //k添加右键点击的监听事件
+                map.addEventListener("rightclick", putmarker);
+                isAddListen = 0;
+            }
+        }
+
+
+
+        //清除所有标注 start
+        function ClearAllMarkers() {
+            map.clearOverlays();
+            marker_num = 0;
+            isAddListen = -1;
+        }
+        //清除所有标注 end
+
+
+        //关闭监听事件，恢复对地图的操作 start
+        function CloseListener() {
+            map.removeEventListener("rightclick", putmarker);
+        }
+        //关闭监听事件，恢复对地图的操作 end
+
+        //坐标反查 start
+        function FindPosition(CurLng, CurLat) {
+            //百度地图API功能，经度，纬度
+            var point = new BMap.Point(CurLng, CurLat);
+            map.centerAndZoom(point, 20);
+        }
+
+        //获取测试坐标数组2 start
+        function GetTest2GPS() {
+            var text = '{"Point":[{"x":"116.380960","y":"39.913280"},{"x":"116.380961","y":"39.913281"},{"x":"116.380962","y":"39.913282"},{"x":"116.380963","y":"39.913283"}]}'
+            window.external.LocateInfo(text);
+            return text;
+        }
+        function getFDate(date) {
+            var d = eval('new ' + date.substr(1, date.length - 2));
+            var ar_date = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+            var ar_time = [d.getHours(), d.getMinutes(), d.getSeconds()];
+            for (var i = 0; i < ar_date.length; i++) ar_date[i] = dFormat(ar_date[i]);
+            for (var i = 0; i < ar_time.length; i++) ar_time[i] = dFormat(ar_time[i]);
+            return ar_date.join('-') + ' ' + ar_time.join(':');
+        }
+        function dFormat(i) {
+            return i < 10 ? "0" + i.toString() : i;
+        }
+
+        //function GetFlightUavData() {
+
+        //    $.ajax({
+        //        url: "/UavData/GetFlightUav",
+        //        dataType: 'json',
+        //        type: "GET",
+        //        async: true,
+        //        success: function (data) {
+
+        //            if (data.IsSuccess) {
+        //                if (data.ResultValue != null) {
+
+        //                    $.each(data.ResultValue, function (index, element) {
+
+        //                        var myIcon2 = new BMap.Icon("/Content/img/uavrtime/b_03.png", new BMap.Size(18, 18));//这个是你要显示坐标的图片的相对路径
+        //                        var ggPoint = new BMap.Point(element.Longitude, element.Latitude);
+        //                        var marker2 = new BMap.Marker(ggPoint, { icon: myIcon2 });
+        //                        map.addOverlay(marker2);
+
+
+        //                    });
+        //                }
+        //            }
+        //        }
+        //    });
+        //}
+        //GetFlightUavData();
+        var localSearch = new BMap.LocalSearch(map);
+        //localSearch.enableAutoViewport(); //允许自动调节窗体大小
+
+
+        function GettheWorkUavData() {
+            $.ajax({
+                url: "/UavRTCMonitor/GetUavWorkAddrInfo",
+                dataType: 'json',
+                type: "GET",
+                async: true,
+                success: function (data) {
+
+                    if (data.IsSuccess) {
+                        if (data.ResultValue != null) {
+
+                            $.each(data.ResultValue, function (index, element) {
+                                if (element.OperateAddr != null) {
+                                    var keyword = element.OperateAddr;
+                                    localSearch.setSearchCompleteCallback(function (searchResult) {
+                                        var poi = searchResult.getPoi(0);
+                                        document.getElementById("result_").value = poi.point.lng + "," + poi.point.lat;
+                                        var myIcon = new BMap.Icon("/Content/img/uavrtime/b_03.png", new BMap.Size(18, 18));//这个是你要显示坐标的图片的相对路径
+                                        var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat), { icon: myIcon });  // 创建标注，为要查询的地方对应的经纬度
+                                        map.addOverlay(marker);
+                                        var content = keyword + "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
+                                        var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
+                                        //marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
+                                    });
+                                    localSearch.search(keyword);
+                                }
+
+                            });
+                        }
+                    }
+                }
+            });
+        }
+        GettheWorkUavData();
+
+
+
+        //百度地图结束
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement && // alternative standard method
+                !document.mozFullScreenElement && !document.webkitFullscreenElement) {// current working methods
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+            }
+        }
+
+
+
+
+        function getFDate(date) {
+            var d = eval('new ' + date.substr(1, date.length - 2));
+            var ar_date = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+            var ar_time = [d.getHours(), d.getMinutes(), d.getSeconds()];
+            for (var i = 0; i < ar_date.length; i++) ar_date[i] = dFormat(ar_date[i]);
+            for (var i = 0; i < ar_time.length; i++) ar_time[i] = dFormat(ar_time[i]);
+            return ar_date.join('-') + ' ' + ar_time.join(':');
+        }
+        function dFormat(i) {
+            return i < 10 ? "0" + i.toString() : i;
+        }
+
+
+        var myChart = echarts.init(document.getElementById('piechart'));
+
+        option = {
+            //title: {
+            //    text: '无人机',
+            //    textStyle: {
+            //        fontSize: '25',
+            //        fontWeight: 'bold',
+            //        color: '#FFFFFF'
+            //    },
+            //    x: 'center'
+            //},
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                textStyle: {
+                    color: '#FFFFFF'
+                },
+                x: 'left',
+                data: ['巡检', '空闲', '故障']
+            },
+            color: ['#00BFFF', '#4169E1', '#708090'],
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold',
+                                color: '#FFFFFF'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: [
+                        { value: [], name: '巡检' },
+                        { value: [], name: '空闲' },
+                        { value: [], name: '故障' }
+                    ]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+
+
+        function getajaxdata() {
+
+            var i=0;
+            $.ajax({
+                type: "post",
+                url: "/UAVDRManage/Ajax.ashx",
+                data: { w: "GetUavWorkStateInfo" },
+                timeout: 5000,
+                dataType: "json",
+                async: true,//默认设置为true，所有请求均为异步请求
+                //cache：true,//默认为true（当dataType为script时，默认为false）设置为false将不会从浏览器缓存中加载请求信息。
+                success: function (data) {
+                    console.log(data.dataitems1);
+                    console.log(data.dataitems2);
+                    console.log(data.dataitems3);
+
+                    var optionhasvalue = {
+                        //title: {
+                        //    text: '无人机',
+                        //    textStyle: {
+                        //        fontSize: '25',
+                        //        fontWeight: 'bold',
+                        //        color: '#FFFFFF'
+                        //    },
+                        //    x: 'center'
+                        //},
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            textStyle: {
+                                color: '#FFFFFF'
+                            },
+                            x: 'left',
+                            data: ['巡检', '空闲', '故障']
+                        },
+                        color: ['#00BFFF', '#4169E1', '#708090'],
+                        series: [
+                            {
+                                name: '访问来源',
+                                type: 'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '30',
+                                            fontWeight: 'bold',
+                                            color: '#FFFFFF'
+                                        }
+                                    }
+                                },
+
+                                labelLine: {
+                                    normal: {
+                                        show: false
+
+                                    }
+
+                                },
+                                data: [
+                                    { value: data.dataitems1, name: '巡检' },
+                                    { value: data.dataitems2, name: '空闲' },
+                                    { value: data.dataitems3, name: '故障' }
+                                ]
+                            }
+                        ]
+                    };
+                    myChart.setOption(optionhasvalue);
+                }
+            });
+
+        }
+        getajaxdata();
+        function LineNuberGet() {
+
+            $.ajax({
+                url: "/UavRTCMonitor/GetLineNumberInfo",
+                dataType: 'json',
+                type: "GET",
+                success: function (data) {
+                    $("#linenumber").html(data.ResultValue);
+
+                }
+            });
+        }
+        LineNuberGet();
+        function UavWorkNumGet() {
+
+            $.ajax({
+                url: "/UavRTCMonitor/GetNumOfUavWorkInfo",
+                dataType: 'json',
+                type: "GET",
+                success: function (data) {
+                    $("#worknumber").html(data.ResultValue);
+
+                }
+            });
+        }
+        UavWorkNumGet();
+
+    </script>
+</body>
+
+</html>

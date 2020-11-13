@@ -157,14 +157,13 @@ img {
 }
 
 .progress_detailt {
-    width: 190px;
+    width: 14%;
     border: 1px solid rgba(96, 255, 242, 0.6);
     display: flex;
-    margin-left: 15px
 }
 
     .progress_detailt div:nth-child(2) {
-        width: 190px;
+        width: 14%;
         text-align: center;
         position: absolute;
         line-height: 35px;
@@ -200,22 +199,8 @@ img {
 .unintact {
     background-color: #AFA477;
 }
-
-.quantity {
-    width: 80%;
-    /*background-color: #08CDD3;*/
+.offline {
+    background-color: #808080;
 }
 
-.commence {
-    width: 70%;
-    background-color: #08CDD3;
-}
 
-.cutcap {
-    width: 70%;
-    background-color: #08CDD3;
-}
-
-.availability {
-    background-color: #08CDD3;
-}

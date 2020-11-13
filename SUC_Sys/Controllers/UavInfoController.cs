@@ -12,25 +12,41 @@ using System.Web.Mvc;
 namespace SUC_Sys.Controllers
 {
    
-    public class UavInfoController : Controller
+    public class UavInfoController : BaseHandle
     {
 
         //[HttpGet]
         //[HandlerAuthorize]
-       
-        //public override ActionResult Index()
-        //{
 
-        //    return View();
-        //}
+        public  ActionResult Index()
+        {
+            t_user entity = (t_user)Session["Users"];
+            if (entity == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+
+                return View();
+            }
+        }
         private BLL_UavInfo bll = new BLL_UavInfo();
         [HttpGet]
      
         public  ActionResult Form()
         {
-            SUC_UavInfo data = new SUC_UavInfo();
-            data.UavSerialNO = "";
-            return View(data);
+            t_user entity = (t_user)Session["Users"];
+            if (entity == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                SUC_UavInfo data = new SUC_UavInfo();
+                data.UavSerialNO = "";
+                return View(data);
+            }
         }
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
@@ -71,9 +87,9 @@ namespace SUC_Sys.Controllers
             ResultRes res = new ResultRes();
 
             Submit(uavinfoEntity, keyValue);
-            res.ResultValue = "操作成功！";
-            return Json(res, JsonRequestBehavior.AllowGet);
-            //return Success("操作成功。");
+            //res.ResultValue = "操作成功！";
+            //return Json(res, JsonRequestBehavior.AllowGet);
+            return Success("操作成功。");
         }
         [HttpPost]
        
@@ -82,9 +98,9 @@ namespace SUC_Sys.Controllers
         {
             ResultRes res = new ResultRes();
             Delete(keyValue);
-            res.ResultValue = "删除成功！";
-            return Json(res, JsonRequestBehavior.AllowGet);
-            //return Success("删除成功。");
+            //res.ResultValue = "删除成功！";
+            //return Json(res, JsonRequestBehavior.AllowGet);
+            return Success("删除成功。");
         }
         //删除数据
         public string Delete(string id)

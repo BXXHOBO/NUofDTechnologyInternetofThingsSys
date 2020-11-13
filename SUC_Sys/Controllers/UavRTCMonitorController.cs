@@ -1,5 +1,6 @@
-﻿using SY_DataEntity;
-using SY_EntityBLL;
+﻿
+using SUC_DataEntity;
+using SUC_EntityBLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace ZFine.Web.Areas.SYManage.Controllers
 {
-    public class UavRTCMonitorController : ControllerBase
+    public class UavRTCMonitorController : Controller
     {
         //
         // GET: /SYManage/UavRTCMonitor/
@@ -17,14 +18,24 @@ namespace ZFine.Web.Areas.SYManage.Controllers
         //{
         //    return View();
         //}
+        private BLL_UavData bllDate = new BLL_UavData();
         private BLL_UavSortieData bll = new BLL_UavSortieData();
         [HttpGet]
-        public override ActionResult Form()
+        public ActionResult Form()
         {
            
             return View();
         }
+        public ActionResult Index()
+        {
 
+            return View();
+        }
+        public ActionResult Contrail()
+        {
+
+            return View();
+        }
         [AcceptVerbs(HttpVerbs.Get)]
         [ValidateInput(false)]
         public JsonResult GetUavWorkAddrInfo()//获取架次表的巡检飞机的地址
@@ -50,7 +61,7 @@ namespace ZFine.Web.Areas.SYManage.Controllers
 
             //List<Cld_UavSortieData> wbList = bll.GetLatestData(date1);
 
-            List<Cld_UavSortieData> wbList = bll.GetUavWorkData();
+            List<SUC_UavSortieData> wbList = bll.GetUavWorkData();
             if (wbList != null)
             {
                 res.IsSuccess = true;
@@ -65,6 +76,30 @@ namespace ZFine.Web.Areas.SYManage.Controllers
             }
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        [ValidateInput(false)]
+        public JsonResult GetLineNumberInfo()//获取表的总行数值
+        {
+            Common.ResultRes res = new Common.ResultRes();
+            List<SUC_UavSortieData> pipelist = new List<SUC_UavSortieData>();
+            var wbList = bll.GetUavListById().Distinct().ToList();
+            int nums = wbList.Count;
+            res.ResultValue = nums;
+            res.IsSuccess = true;
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        [ValidateInput(false)]
+        public JsonResult GetNumOfUavWorkInfo()//获取表的巡检飞机的数量
+        {
+            Common.ResultRes res = new Common.ResultRes();
+            List<SUC_UavData> list = new List<SUC_UavData>();
+            var wbList = bllDate.GetUavListByUavWork().Distinct().ToList();
+            int nums = wbList.Count;
+            res.ResultValue = nums;
+            res.IsSuccess = true;
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
     }
 }

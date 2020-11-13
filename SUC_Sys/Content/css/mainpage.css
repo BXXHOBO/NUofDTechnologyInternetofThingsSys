@@ -1,0 +1,252 @@
+.content{
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    height: 660px;
+}
+.slidebarContainer{
+    box-sizing: border-box;
+    width: 100%;
+    height: 660px;
+    outline: none;
+    border:none;
+}
+.navbar-header{
+    background-color: transparent;
+}
+
+.navbar.navbar-default{
+    border: none;
+}
+
+.carousel-item {
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.companyMap{
+    box-sizing: border-box;
+    margin-right:auto;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .companyMap {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+ .companyMap {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .companyMap {
+    width: 1170px;
+  }
+}
+
+.mapTitle{
+    box-sizing: border-box;
+    width: 50%;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.mapTitle>div{
+    line-height: 80px;
+    vertical-align: middle;
+}
+
+.line{
+    box-sizing: inherit;
+    margin: 0 auto;
+    font-weight: bolder;
+    float: left;
+    width: 27%;
+}
+
+.line>hr{
+    box-sizing: border-box;
+    border: 1px solid #525252;
+    background-color: #525252;
+    margin: 0;
+    margin-top: 37px;
+    margin-bottom: 37px;
+}
+
+.lineFont{
+    width: 46%;
+    font-weight: bolder;
+    font-size: 25px;
+    float: left;
+    text-align: center;
+}
+
+@media (max-width: 755px){
+    .lineFont{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 445px){
+    .lineFont{
+        font-size: 10px;
+    }
+}
+
+.mapImg{
+    width: 100%;
+    height: 498px;
+}
+
+.mapImg>div{
+    width: 100%;
+    height: 100%;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.patent{
+    background: -webkit-gradient(linear, 0% 0%, 100% 100%,from(#0268ec), to(#01326f));
+    height: 300px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.mapTag{
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+}
+
+.tagHold{
+    box-sizing: border-box;
+    height: 280px;
+    width: 200px;
+    background-color: rgba(245, 245, 245, 0.06);
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hoverTag{
+    box-sizing: border-box;
+    height: 280px;
+    width: 200px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index:10;
+}
+
+.patentFont{
+    height: 70px;
+    width: 100%;
+    font-weight: 50px;
+    font-size: 21px;
+    line-height: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.tagContainer{
+    width: 100%;
+    height: 210px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+    box-sizing: border-box;
+}
+
+.pictag{
+    box-sizing: border-box;
+    position: absolute;
+    margin: 0;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
+    box-shadow: 0 6px 20px rgba(36, 36, 36, 0.76);
+    text-align: center;
+    line-height: 170px;
+    color: black;
+    font-weight: bold;
+    font-size:15px;
+}
+.certificate{
+    width: 100%;
+    height: 100%;
+    border:none;
+    outline: none;
+}
+.co{
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.coLogo{
+    width: 70px;
+    height: 70px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.lamps{
+    position: absolute;
+    cursor: pointer;
+}
+
+.lamp1{
+    margin-left: 168px;
+    margin-top: 20px;
+}
+.lamp2{
+    margin-left: 471px;
+    margin-top: 48px;
+}
+.lamp3{
+    margin-left: 117px;
+    margin-top: 63px;
+}
+.lamp4{
+    margin-left: 812px;
+    margin-top: 78px;
+}
+.national{
+    position: absolute;
+    margin-left: 837px;
+    margin-top:-45px;
+}
+.international{
+    position: absolute;
+    margin-left: 100px;
+    margin-top: 45px;
+}
+.mapImg{
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
