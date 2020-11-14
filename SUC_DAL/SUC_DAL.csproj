@@ -52,8 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\SUC_DAL.dll" />
-    <Content Include="bin\Debug\SUC_DAL.pdb" />
     <Content Include="obj\Debug\SUC_DAL.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\SUC_DAL.dll" />
     <Content Include="obj\Debug\SUC_DAL.pdb" />
@@ -63,8 +61,6 @@
     <None Include="obj\Debug\SUC_DAL.csproj.CoreCompileInputs.cache" />
     <None Include="obj\Debug\SUC_DAL.csprojAssemblyReference.cache" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Release\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

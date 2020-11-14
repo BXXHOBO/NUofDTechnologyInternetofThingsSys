@@ -55,6 +55,10 @@
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -109,9 +113,6 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -1092,6 +1093,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="image\804微型站.png" />
     <Content Include="image\808微型站.png" />
+    <Content Include="image\8998994.png" />
     <Content Include="image\ANALYSIS.png" />
     <Content Include="image\bg01.png" />
     <Content Include="image\bgtitle.png" />
@@ -1338,6 +1340,7 @@
     <Content Include="image\sylogo.png" />
     <Content Include="image\timg.gif" />
     <Content Include="image\up.png" />
+    <Content Include="image\videosBg.png" />
     <Content Include="image\year.png" />
     <Content Include="image\yellow.png" />
     <Content Include="image\园区站.png" />

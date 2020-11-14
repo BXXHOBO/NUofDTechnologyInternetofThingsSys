@@ -10,6 +10,7 @@ using System.Web.Script.Serialization;
 using Common;
 using SUC_DataEntity;
 using Newtonsoft.Json;
+using SUC_EntityBLL;
 
 namespace SUC_Sys.Controllers
 {
@@ -38,9 +39,6 @@ namespace SUC_Sys.Controllers
 
 
         }
-       
-
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -54,10 +52,32 @@ namespace SUC_Sys.Controllers
 
             return View();
         }
-       
-       
-       
-       
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetMachine()
+        {
+            Common.ResultRes res = new Common.ResultRes();
+            BLL_Machine bll = new BLL_Machine();
+            List<SUC_Machine> dt = bll.GetMachineList();
+            if (bll != null)
+            {
+                res.IsSuccess = true;
+                res.ResultValue = dt;
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                res = new Common.ResultRes();
+                res.IsSuccess = true;
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+        //[AcceptVerbs(HttpVerbs.Get)]
+
+
+
+
 
 
     }

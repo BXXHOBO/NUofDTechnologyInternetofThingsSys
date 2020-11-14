@@ -26,6 +26,7 @@ namespace SUC_DataEntity
         public Nullable<decimal> Humidity { get; set; }
         public string Speed { get; set; }
         public string AtmosPressure { get; set; }
+        public Nullable<int> UavState { get; set; }
         public string Remark { get; set; }
         public Nullable<int> Disabled { get; set; }
         public Nullable<System.DateTime> Rec_CreateTime { get; set; }

@@ -15,7 +15,7 @@ namespace SUC_DataEntity
     public partial class SUC_Machine
     {
         public System.Guid MachineId { get; set; }
-        public string AuditOfficeCode { get; set; }
+        public string UavSerialNO { get; set; }
         public string MachineName { get; set; }
         public string MachineCode { get; set; }
         public string MachineTypeCode { get; set; }

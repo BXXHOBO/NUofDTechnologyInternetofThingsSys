@@ -22,7 +22,6 @@
             background-image: url(../../image/bj02.png);
             background-size: cover;
         }
-
         .roboinfo {
             width: 99%;
             height: 98%;
@@ -31,11 +30,7 @@
             background-size: 100% 100%;
         }
 
-        #setting {
-            border: 1px solid #00F5FC;
-            border-radius: 10px;
-            background: rgba(0, 231, 231, 0.6);
-        }
+        
         /*滚动条*/
         .box_scroll::-webkit-scrollbar-button {
             color: #05B7DE;
@@ -48,19 +43,87 @@
                 background: url(../../image/up.png) !important;
                 background-size: cover;
             }
+        
         .video-box {
-            width:77%;
+            width:100%;
             height: 100%;
             min-height: 170px;
             background-size: 100% 100%;
+            position:relative
         }
             .video-box video {
                 position: absolute;
-                width: 77%;
+                width: 100%;
                 height: 100%;
                 min-height: 170px;
                 background-size: 100% 100%;
             }
+        #my-video-source{
+            width:50%;
+        }
+        .header_box {
+            width: auto;
+            position: page;
+            margin: 4% auto;
+            display: flex
+        }
+        .box_scroll div {
+            width: 95%;
+            height: 23%;
+            margin-bottom: 2%;
+            background-size: 100% 100%;
+        }
+        .header_title {
+            width: auto;
+            height: 10vh;
+            line-height: 10vh;
+            text-align: center;
+            font-size: 2.5vw;
+            white-space:nowrap;
+            overflow:hidden;
+        }
+
+        .header_left {
+            width: 3%;
+            height: 10vh;
+            border-right: none;
+            margin-left: auto
+        }
+
+        .header_right {
+            width: 3%;
+            height: 10vh;
+            border-left: none;
+            margin-right: auto
+        }
+
+        #dateTime {
+            font-size: 1.5vw;
+            line-height: 15vh;
+        }
+        #logout {
+            border-radius: 10px;
+            border: 1px solid #00F5FC;
+            background: rgba(0, 231, 231, 0.6);
+            width: 5vw;
+            font-size: 1vw;
+        }
+        #logout,
+        #setting {
+            height: 5vh;
+            text-align: center;
+            color: #FFFFFF;
+            line-height: 5vh;
+            display: inline-block;
+            margin-left: 1.5vw;
+            text-decoration:none;
+        }
+        #my-video{
+            width:100%;
+            height:100%;
+            background:url(../../image/videosBg.png) ;
+            background-size:100% 100%;
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
     <link href="~/assets/css/app.css" rel="stylesheet" />
@@ -70,48 +133,32 @@
 </head>
 <body>
     <div id="#app" style="height:100%">
-        <div class="row nav">
-            <div class="col-xs-3" style="height: 100px;" onclick="skip()">
+        <div class="row nav" style="height: 15vh;">
+            <div class="col-xs-3" style="height: 15vh;" onclick="skip()">
                 <img src="~/image/8998994.png" alt="Alternate Text" />
             </div>
-            <div class="col-xs-6" style="height: 100px;">
-                <div style="width:auto;position:page;margin:20px auto;display:flex">
-                    <div class="box_title" style="width:5%;height: 70px;border-right: none;margin-left:auto">
+            <div class="col-xs-6" style="height: 15vh;">
+                <div class="header_box" style="">
+                    <div class="box_title header_left">
                     </div>
-                    <div class="" style="width:auto;height: 70px;line-height:70px;text-align:center;">
-                        <span class="" style="font-size: 28px;">&nbsp;蜂群无人机集群作战系统&nbsp;</span>
+                    <div class="header_title" style="">
+                        <span class="" style="">&nbsp;蜂群无人机集群作战系统&nbsp;</span>
                     </div>
-                    <div class="box_title" style="width:5%;height: 70px;border-left: none;margin-right: auto">
+                    <div class="box_title header_right">
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3" style="height: 100px;">
-                <span id="dateTime" class="col-xs-offset-1" style="font-size:20px;line-height:110px;"></span>
-                <a href="/Account/LoginOut" class=" btn btn-danger col-xs-offset-1 " id="logout" style="">退出系统</a>
-                <a href="#" id="setting" class="btn col-xs-offset-1" onclick="tosetting()" style="">
-                    <span class="glyphicon glyphicon-cog"></span>
+            <div class="col-xs-3 " style="height: 15vh;">
+                <span id="dateTime" class="" style=""></span>
+                <a href=""  id="logout"  class=""  style="">退出系统</a>
+                <a href="#" id="setting" class="" onclick="tosetting()" style="">
+                    <span class="glyphicon glyphicon-cog" style=""></span>
                 </a>
             </div>
         </div>
-        <div style="width: 100%;height: 8px;background: linear-gradient(to right,#050F2A,#00F5FC,#050F2A);"></div>
-        @*<div style="width:100%;height:80%;margin:10px auto;">
-                <div style="width:98%;height:100%;margin:0 auto;position:relative">
-                    <div class="box_title" style="width:22.5%;height:100%;float:left;">
-                        <div class="box_scroll" style="">
-                        </div>
-=======
-        <div style="width: 100%;height: 7px;background: linear-gradient(to right,#050F2A,#00F5FC,#050F2A);"></div>
-        @*<div style="width:100%;height:80%;margin:10px auto;"> 
-            <div style="width:98%;height:100%;margin:0 auto;position:relative">
-                <div class="box_title" style="width:22.5%;height:100%;float:left;">
-                    <div class="box_scroll" style="">
->>>>>>> 86039ec3b1309f7b4196a88985b799314f12bc58
-                    </div>
-                </div>
-            </div>*@
-        <div class="" style="width:98%;height:80%;margin:10px auto;position:relative">
-
-
+        <div style="width: 100%;height: 1%;background: linear-gradient(to right,#050F2A,#00F5FC,#050F2A);"></div>
+        
+        <div class="" style="width:98%;height:78%;margin:1% auto;position:relative">
             @*左侧导航栏*@
             <div class="box_title" style="width:22.5%;height:100%;float:left;">
                 <div class="box_scroll" style="">
@@ -120,13 +167,10 @@
                 </div>
             </div>
             @*右侧信息栏*@
-        <div class="box_title" style="width:77%;height:100%;float:right;">
-
-
-            
+            <div class="box_title" style="width:77%;height:100%;float:right;">
                 <div class="xpanel">
                     <div class="fill-h" id="scatterMap">
-                        <div id="video-box" class="video-box">
+                        <div id="video-box" class="video-box" style="width: 100%; height: 100%;">
 
                             <video id='my-video' class='video-js vjs-big-play-centered' preload="auto" data-setup='{"controls":true,"loop": true,"autoplay": true}'>
 
@@ -138,79 +182,79 @@
                         </div>
                     </div>
                 </div>
-                
 
 
-                @*<div class="roboinfo" style="background-image: url(../../image/robotInfo/warcraft02.jpg);">
-                <div class="box_title box_content">
-                    <div class="" style="width:96%;margin:9px auto;height:70px;display:flex">
-                        <div class="box_title" style="width:60px;height:100%;line-height:60px;text-align:center">
-                            <span id="num" style="font-size:28px">01</span>
+
+            @*<div class="roboinfo" style="background-image: url(../../image/robotInfo/warcraft02.jpg);">
+            <div class="box_title box_content">
+                <div class="" style="width:96%;margin:9px auto;height:70px;display:flex">
+                    <div class="box_title" style="width:60px;height:100%;line-height:60px;text-align:center">
+                        <span id="num" style="font-size:28px">01</span>
+                    </div>
+                    <div class="robotype" style="width: 130px;margin-left: 12px;">
+                        <div class="box_title" style="height: 30px;line-height:30px;">
+                            <span style="font-size:16px">发动机状态</span>
                         </div>
-                        <div class="robotype" style="width: 130px;margin-left: 12px;">
-                            <div class="box_title" style="height: 30px;line-height:30px;">
-                                <span style="font-size:16px">发动机状态</span>
-                            </div>
-                            <div id="engstate" class="" style="">
-                                <span id="p_engstate">完好</span>
-                            </div>
+                        <div id="engstate" class="" style="">
+                            <span id="p_engstate">完好</span>
                         </div>
-                        <div class="robotype">
-                            <div class="box_title" style="height: 30px;">
-                                <span>电量</span>
-                            </div>
-                            <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
-                                <div class="skills quantity" style=""></div>
-                                <div style="">
-                                    <span id="p_quantity">80%</span>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="robotype">
+                        <div class="box_title" style="height: 30px;">
+                            <span>电量</span>
                         </div>
-                        <div class="robotype">
-                            <div class="box_title" style="height: 30px;">
-                                <span>结构完好度</span>
-                            </div>
-                            <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
-                                <div class="skills commence"></div>
-                                <div style="">
-                                    <span id="p_commence">70%</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="robotype">
-                            <div class="box_title" style="height: 30px;">
-                                <span>截弹量</span>
-                            </div>
-                            <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
-                                <div class="skills cutcap"></div>
-                                <div style="">
-                                    <span id="p_cutcap">70%</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="robotype">
-                            <div class="box_title" style="height: 30px;">
-                                <span>刀浆可用性</span>
-                            </div>
-                            <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
-                                <div class="skills availability" style=""></div>
-                                <div style="">
-                                    <span id="p_availability">70%</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="robotype">
-                            <div class="box_title" style="height: 30px;">
-                                <span>综合评估建设</span>
-                            </div>
-                            <div id="assess" class="" style="">
-                                <span id="p_assess">继续作战</span>
+                        <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                            <div class="skills quantity" style=""></div>
+                            <div style="">
+                                <span id="p_quantity">80%</span>
                             </div>
                         </div>
                     </div>
+                    <div class="robotype">
+                        <div class="box_title" style="height: 30px;">
+                            <span>结构完好度</span>
+                        </div>
+                        <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                            <div class="skills commence"></div>
+                            <div style="">
+                                <span id="p_commence">70%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="robotype">
+                        <div class="box_title" style="height: 30px;">
+                            <span>截弹量</span>
+                        </div>
+                        <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                            <div class="skills cutcap"></div>
+                            <div style="">
+                                <span id="p_cutcap">70%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="robotype">
+                        <div class="box_title" style="height: 30px;">
+                            <span>刀浆可用性</span>
+                        </div>
+                        <div class="progress" style="height: 30px;background-color: rgba(0, 20, 20, 0.4);">
+                            <div class="skills availability" style=""></div>
+                            <div style="">
+                                <span id="p_availability">70%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="robotype">
+                        <div class="box_title" style="height: 30px;">
+                            <span>综合评估建设</span>
+                        </div>
+                        <div id="assess" class="" style="">
+                            <span id="p_assess">继续作战</span>
+                        </div>
+                    </div>
                 </div>
-            </div>*@
             </div>
+        </div>*@
+        </div>
         </div>
     </div>
 
@@ -289,11 +333,12 @@
             type: "GET",
             async: true,
             success: function (data) {
-               
+                console.log(data);
                 console.log(data.ResultValue[0].VideoAddr);
                 document.getElementById("video-box").innerHTML="";
                 //document.getElementById("my-video").src = data.ResultValue[0].VideoAddr;
-                sourceDom = $("<video id=\"my-video\" class=\"video-js vjs-big-play-centered\" style=\"width:110em;height:57em;\" preload=\"auto\" data-setup=\'{\"controls\":true,\"loop\": true,\"autoplay\": true}\' muted loop autoplay controls>" + "<source  src=\"" + data.ResultValue[0].VideoAddr + "\" type =\"video/mp4\" >"+"</video>");
+                sourceDom = $("<video id=\"my-video\" class=\"video-js vjs-big-play-centered\" preload=\"auto\" data-setup=\'{\"controls\":true,\"loop\": true,\"autoplay\": true}\' muted loop autoplay controls>" + "<source  src=\"" + data.ResultValue[0].HistoryAddr + "\" type =\"video/mp4\" >" + "</video>");
+                //sourceDom = $("<video id=\"my-video\" class=\"video-js vjs-big-play-centered\" style=\"width:100%;height:100%;\" preload=\"auto\" data-setup=\'{\"controls\":true,\"loop\": true,\"autoplay\": true}\' muted loop autoplay controls>" + "<source  src=\"" + data.ResultValue[0].VideoAddr + "\" type =\"video/mp4\" >"+"</video>");
                 console.log(sourceDom);
                 $("#video-box").append(sourceDom);
                 $("#video-box").show();
@@ -357,14 +402,14 @@
             async: true,
             success: function (data) {
                 uavDeviceInfo = data.ResultValue;
-               
+                
                 for (var i = 0; i < uavDeviceInfo.length; i++) {
                     var ImgPath = data.ResultValue[i].ImgPath;
                     ImgPath = ImgPath.replace("~/", "../../");
-                    orderBody += '<div onclick="showinfo(' + i + ')" style="background-image:url(' + ImgPath + ') !important;">\
-                    <div style = "height:25px" ></div >\
-                        <div class="box_ra" style="width:50px;height:50px;">\
-                            <span style="font-size:28px">' + uavDeviceInfo[i].UavSerialNO+ '</span>\
+                    orderBody += '<div class="box_title" onclick="showinfo(' + i + ')" style="background-image:url(' + ImgPath + ') !important;">\
+                    <div style = "height:4vh" ></div >\
+                        <div class="box_ra" style="width:10vw;height:7vh;line-height:7vh;">\
+                            <span style="font-size:1.5vw">' + uavDeviceInfo[i].UavSerialNO+ '</span>\
                         </div>\
                     </div >'
 

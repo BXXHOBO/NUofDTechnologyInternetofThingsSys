@@ -10,7 +10,7 @@
             <PropertyRef Name="MachineId" />
           </Key>
           <Property Name="MachineId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="AuditOfficeCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="UavSerialNO" Type="nvarchar" MaxLength="100" />
           <Property Name="MachineName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MachineCode" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MachineTypeCode" Type="nvarchar" MaxLength="100" />
@@ -137,6 +137,7 @@
           <Property Name="Humidity" Type="decimal" Precision="18" Scale="5" />
           <Property Name="Speed" Type="nvarchar" MaxLength="50" />
           <Property Name="AtmosPressure" Type="nvarchar" MaxLength="100" />
+          <Property Name="UavState" Type="int" />
           <Property Name="Remark" Type="nvarchar" MaxLength="3000" />
           <Property Name="Disabled" Type="int" />
           <Property Name="Rec_CreateTime" Type="datetime" />
@@ -379,7 +380,7 @@
             <PropertyRef Name="MachineId" />
           </Key>
           <Property Name="MachineId" Type="Guid" Nullable="false" />
-          <Property Name="AuditOfficeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UavSerialNO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MachineName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MachineCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MachineTypeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -476,6 +477,7 @@
           <Property Name="Humidity" Type="Decimal" Precision="18" Scale="5" />
           <Property Name="Speed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AtmosPressure" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UavState" Type="Int32" />
           <Property Name="Remark" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
           <Property Name="Disabled" Type="Int32" />
           <Property Name="Rec_CreateTime" Type="DateTime" Precision="3" />
@@ -679,7 +681,7 @@
                 <ScalarProperty Name="MachineTypeCode" ColumnName="MachineTypeCode" />
                 <ScalarProperty Name="MachineCode" ColumnName="MachineCode" />
                 <ScalarProperty Name="MachineName" ColumnName="MachineName" />
-                <ScalarProperty Name="AuditOfficeCode" ColumnName="AuditOfficeCode" />
+                <ScalarProperty Name="UavSerialNO" ColumnName="UavSerialNO" />
                 <ScalarProperty Name="MachineId" ColumnName="MachineId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -760,6 +762,7 @@
                 <ScalarProperty Name="Rec_CreateTime" ColumnName="Rec_CreateTime" />
                 <ScalarProperty Name="Disabled" ColumnName="Disabled" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UavState" ColumnName="UavState" />
                 <ScalarProperty Name="AtmosPressure" ColumnName="AtmosPressure" />
                 <ScalarProperty Name="Speed" ColumnName="Speed" />
                 <ScalarProperty Name="Humidity" ColumnName="Humidity" />

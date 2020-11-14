@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL_Machine.cs" />
     <Compile Include="BLL_Menu.cs" />
     <Compile Include="BLL_Oper.cs" />
     <Compile Include="BLL_Order.cs" />

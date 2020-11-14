@@ -31,7 +31,7 @@ img {
 
 .box_title {
     box-shadow: 0px 0px 20px rgba(96, 255, 242, 0.4) inset;
-    border: 2px solid rgba(96, 255, 242, 0.75);
+    border: 2px solid rgba(93,194,254, 1);
     background: rgba(0, 20, 20, 0.6);
 }
 
@@ -39,8 +39,63 @@ img {
     border-radius: 10px;
     border: 1px solid #00F5FC;
     background: rgba(0, 231, 231, 0.6);
+
+    width: 5vw;
+    height: 5vh;
+    font-size: 1vw;
+   
+}
+#logout,
+#setting {
+    height: 5vh;
+    text-align: center;
+    color: #FFFFFF;
+    line-height: 5vh;
+    display: inline-block;
+    margin-left: 1.5vw;
+    text-decoration: none;
+    overflow:hidden;
+}
+#setting {
+    border: 1px solid #00F5FC;
+    border-radius: 10px;
+    background: rgba(0, 231, 231, 0.6);
+    font-size: 1.33vw;
+    width: 4vw;
+}
+.header_box {
+    width: auto;
+    position: page;
+    margin: 4% auto;
+    display: flex
 }
 
+.header_title {
+    width: auto;
+    height: 10vh;
+    line-height: 10vh;
+    text-align: center;
+    font-size: 2.5vw;
+}
+
+.header_left {
+    width: 3%;
+    height: 10vh;
+    border-right: none;
+    margin-left: auto
+}
+
+.header_right {
+    width: 3%;
+    height: 10vh;
+    border-left: none;
+    margin-right: auto
+}
+
+#dateTime {
+    font-size: 1.5vw;
+    line-height: 15vh;
+}
 .test {
     height: 100%;
     background: #08CDD3;
@@ -56,13 +111,13 @@ img {
 
     .box_scroll div {
         width: 95%;
-        height: 125px;
-        margin-bottom: 10px;
-        background-size: cover
+        height: 23%;
+        margin-bottom: 2%;
+        background-size: 100% 100%;
     }
 
         .box_scroll div:first-child {
-            margin-top: 10px
+            margin-top: 2%
         }
 
     .box_scroll::-webkit-scrollbar {
@@ -166,7 +221,7 @@ img {
         width: 14%;
         text-align: center;
         position: absolute;
-        line-height: 35px;
+        line-height: 6vh;
         /*background: #ff0000*/
     }
 
